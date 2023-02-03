@@ -29,7 +29,7 @@ public class Instructions {
                     + "systems and we apologise if you are not able to take part.";
             break;
         case 1:
-        	i="In this first part of four, you will have a simple task to do.<br><br>"
+        	i="In this experiment, you will have a simple task to do.<br><br>"
                     + "You will see several yellow circles inside a box. "
                     + "Inside each circle will be a number. <br><br>"
                     + "You can move them around using your mouse, or drag them with your finger if "
@@ -37,7 +37,9 @@ public class Instructions {
                     + "of the box in sequence. "
                     + "Please start by dragging 1 all the way to the bottom. "
                     + "This will make it disappear. Then drag 2 to the bottom, then 3, "
-                    + "and so on.<br><br>Click below to practise the task.";
+                    + "and so on.<br><br>Sometimes the circles will jump to a "
+                    + "different position on the screen. Just keep going if this happens."
+                    + "<br><br>Click below to practise the task.";
 
             break;
         case 2:

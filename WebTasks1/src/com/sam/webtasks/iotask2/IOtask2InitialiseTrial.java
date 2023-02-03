@@ -39,6 +39,36 @@ public class IOtask2InitialiseTrial {
 			block.surpriseTest = block.surpriseTests.get(block.currentTrial);
 		}
 
+		// set up repositions
+		if (block.rePosition > 0) {
+			for (int i = block.nCircles + 1; i < (block.totalCircles-block.nCircles); i++) { 
+				block.rePositions.add(i);
+			}
+			
+			if (block.rePositions.size() == 0) { //not enough circles to set up the repositions
+				for (int i = 1; i < (block.totalCircles-block.nCircles); i++) { 
+					block.rePositions.add(i);
+				}
+			}
+
+			// shuffle repositions
+			for (int i = 0; i < block.rePositions.size(); i++) {
+				Collections.swap(block.rePositions, i, Random.nextInt(block.rePositions.size()));
+			}
+
+			// trim to the collect length
+			while (block.rePositions.size() > block.rePosition) {
+				block.rePositions.remove(block.rePositions.size()-1);
+			}
+
+			// sort into ascending order
+			Collections.sort(block.rePositions);
+		} else {
+			block.rePositions.add(-1);
+		}
+
+		
+		
 		// set up target directions
 		ArrayList<Integer> targetDirections = new ArrayList<Integer>();
 		ArrayList<Integer> possibleTargetPositions = new ArrayList<Integer>();

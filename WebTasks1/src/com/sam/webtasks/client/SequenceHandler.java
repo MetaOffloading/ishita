@@ -75,31 +75,23 @@ public class SequenceHandler {
 			//PHP.logData("start", startdata, true);
 			//break;
 			case 1:
-//				ProgressBar.Initialise();
-//				ProgressBar.Show();
-//				ProgressBar.SetProgress(0, 24);
-//				SequenceHandler.SetPosition(26);
-//				SequenceHandler.Next();
-				ClickPage.Run(Instructions.Get(0), "Next");
-				SetQuestOrder.Run();
-				break;
-			case 2:
 				ClickPage.Run(Instructions.Get(1), "Next");
 				break;					
-			case 3:
+			case 2:
 				IOtask2Block block1 = new IOtask2Block();
 				
 				block1.totalCircles = 10;
 				block1.nTargets = 0;
 				block1.blockNum = 1;
 				block1.logDragData = true;
+				block1.rePosition = 1;
 				
 				block1.Run();
 				break;
-			case 4:
+			case 3:
 				ClickPage.Run(Instructions.Get(2), "Next");
 				break;
-			case 5:
+			case 4:
 				IOtask2Block block2 = new IOtask2Block();
 				
 				block2.totalCircles = 10;
@@ -107,13 +99,14 @@ public class SequenceHandler {
 				block2.offloadCondition = Names.REMINDERS_NOTALLOWED;
 				block2.blockNum = 2;
 				block2.logDragData = true;
+				block2.rePosition = 1;
 				
 				block2.Run();
 				break;
-			case 6:
+			case 5:
 				ClickPage.Run(Instructions.Get(3), "Next");
 				break;
-			case 7:
+			case 6:
 				IOtask2Block block3 = new IOtask2Block();
 				
 				block3.nTargets = 6;
@@ -121,19 +114,20 @@ public class SequenceHandler {
 				block3.offloadCondition = Names.REMINDERS_NOTALLOWED;
 				block3.blockNum = 3;
 				block3.logDragData = true;
+				block3.rePosition = 1;
 				
 				block3.Run();
 				break;
-			case 8:
+			case 7:
 				Slider.Run(Instructions.Get(4), "0%", "100%");
 				break;
-			case 9:
+			case 8:
 				PHP.logData("slider1", ""+Slider.getSliderValue(), true);
 				break;
-			case 10:
+			case 9:
 				ClickPage.Run(Instructions.Get(5), "Next");
 				break;
-			case 11:
+			case 10:
 				IOtask2Block block4 = new IOtask2Block();
 				
 				block4.nTargets = 6;
@@ -142,19 +136,20 @@ public class SequenceHandler {
 				block4.blockNum = 4;
 				block4.logDragData = true;
 				block4.showTargetFeedback = false;
+				block4.rePosition = 1;
 				
 				block4.Run();
 				break;	
-			case 12:
+			case 11:
 				ClickPage.Run(Instructions.Get(6), "Next");
 				break;
-			case 13:
+			case 12:
 				ClickPage.Run(Instructions.Get(61), "Next");
 				break;
-			case 14:
+			case 13:
 				ClickPage.Run(Instructions.Get(62), "Next");
 				break;
-			case 15:
+			case 14:
 				IOtask2Block block5 = new IOtask2Block();
 				
 				block5.nTargets = 6;
@@ -163,13 +158,14 @@ public class SequenceHandler {
 				block5.blockNum = 5;
 				block5.logDragData = true;
 				block5.showTargetFeedback = false;
+				block5.rePosition = 1;
 				
 				block5.Run();
 				break;				
-			case 16:
+			case 15:
 				ClickPage.Run(Instructions.Get(7), "Next");
 				break;
-			case 17:
+			case 16:
 				IOtask2Block block6 = new IOtask2Block();
 				
 				block6.nTargets = 6;
@@ -178,16 +174,17 @@ public class SequenceHandler {
 				block6.blockNum = 6;
 				block6.logDragData = true;
 				block6.showTargetFeedback = false;
+				block6.rePosition = 1;
 				
 				block6.Run();
 				break;	
-			case 18:
+			case 17:
 				ClickPage.Run(Instructions.Get(8), "Next");
 				break;	
-			case 19:
+			case 18:
 				ProgressBar.Initialise();
 				ProgressBar.Show();
-				ProgressBar.SetProgress(0, 24);
+				ProgressBar.SetProgress(0, 16);
 				
 				IOtask2Block block7 = new IOtask2Block();
 				
@@ -200,92 +197,15 @@ public class SequenceHandler {
 				block7.blockNum = 7;
 				block7.logDragData = true;
 				block7.showTargetFeedback = false;
+				block7.rePosition = 1;
 				
 				block7.Run();
 				break;
-			case 20:
-				ClickPage.Run(Instructions.Get(9),  "Next");
+			case 19:
+				ProgressBar.Hide();
+				ClickPage.Run("The end", "nobutton");
 				break;
-			case 21:
-				RunNextQuestionnaire.Run(SetQuestOrder.questOrder.get(0));
-				break;
-			case 22:
-				ProgressBar.Increment();
-				RunNextQuestionnaire.Run(SetQuestOrder.questOrder.get(1));
-				break;
-			case 23:
-				ProgressBar.Increment();
-				RunNextQuestionnaire.Run(SetQuestOrder.questOrder.get(2));
-				break;
-			case 24:
-				ProgressBar.Increment();
-				RunNextQuestionnaire.Run(SetQuestOrder.questOrder.get(3));
-				break;
-			case 25:
-				ProgressBar.Increment();
-				RunNextQuestionnaire.Run(SetQuestOrder.questOrder.get(4));
-				break;
-			case 26:
-				ProgressBar.Increment();
-				RunNextQuestionnaire.Run(SetQuestOrder.questOrder.get(5));
-				break;
-			case 27:
-				ProgressBar.Increment();
-				ClickPage.Run(Instructions.Get(10),  "Next");
-				break;
-			case 28:
-				ICAR5.Run();
-				break;
-			case 29:
-				ProgressBar.Increment();
-				SequenceHandler.Next();
-				break;
-			case 30:
-				ClickPage.Run(Instructions.Get(11), "Next");
-				break;
-			case 31:
-				TimeBlock.Init();
-				TimeBlock.blockDuration=-10;
-				TimeBlock.clockVisible=false;
-				TimeBlock.offloadButtonVisible=false;
-				TimeBlock.targetInstructionInterval = -1;
-				TimeBlock.blockNumber=-1;
-				TimeBlock.Run();
-				break;
-			case 32:
-				if ((TimeBlock.nBackNonMatchCorr==0)|(TimeBlock.nBackMatchCorr==0)) {
-					SequenceHandler.SetPosition(SequenceHandler.GetPosition()-3);
-					
-					ClickPage.Run("Your accuracy was too low", "Try again");
-				} else {
-					ClickPage.Run(Instructions.Get(12), "Next");
-				}
-				break;
-			case 33:
-				TimeBlock.Init();
-				TimeBlock.blockDuration=-100;
-				TimeBlock.clockVisible=false;
-				TimeBlock.offloadButtonVisible=false;
-				TimeBlock.targetInstructionInterval = -1;
-				TimeBlock.blockNumber=-1;
-				TimeBlock.Run();
-				break;
-			case 34:
-				
-				// log data and check that it saves
-				String data = TimeStamp.Now() + ",";
-				data = data + SessionInfo.participantID + ",";
-				data = data + SessionInfo.gender + ",";
-				data = data + SessionInfo.age + ",";
-				data = data + Counterbalance.getCounterbalancingCell();
-
-				PHP.UpdateStatus("finished");
-				PHP.logData("finish", data, true);
-				break;
-			case 35:
-				ProgressBar.Increment();
-				ClickPage.Run(Instructions.Get(13), "nobutton");
-				break;
+			
 			}
 			break;
 
