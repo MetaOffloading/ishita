@@ -37,9 +37,15 @@ public class Instructions {
                     + "of the box in sequence. "
                     + "Please start by dragging 1 all the way to the bottom. "
                     + "This will make it disappear. Then drag 2 to the bottom, then 3, "
-                    + "and so on.<br><br>Sometimes the circles will jump to a "
-                    + "different position on the screen. Just keep going if this happens."
-                    + "<br><br>Click below to practise the task.";
+                    + "and so on.";
+        	
+        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
+        		i=i+"<br><br>Sometimes the circles will jump to "
+                        + "different positions on the screen. This will happen once each time you do the task. "
+                        + "Just ignore this and keep going.";
+        	}
+        	
+        	i=i + "<br><br>Click below to practise the task.";
 
             break;
         case 2:
@@ -82,8 +88,16 @@ public class Instructions {
                     + "different part of the box. For example, if a circle initially appeared in blue, you "
                     + "could immediately drag it next to the blue (left) side of the box. Then, when "
                     + "you get to that circle in the sequence its location would remind you where it is supposed "
-                    + "to go.<br><br>Please now try the task again, using this strategy to help you.<br><br>"
-                    + "From now on, there will be no more error feedback.";
+                    + "to go.<br><br>Please now try the task again, using this strategy to help you.";
+            break;
+        case 51:
+        	i="Now that you have had some practice using this strategy, we would like you to tell us "
+                    + "how <b>confident</b> you are that you can accurately perform the task "
+                    + "<b>when you use reminders</b>.<br><br>"
+                    + "Please use the scale below to indicate what percentage of "
+                    + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
+                    + "would mean that you always get every single one correct. 0% would mean that you can never "
+                    + "get any of them correct.";
             break;
         case 6:
         	i = "From now on, you will score points every time you drag one of the special circles "  
@@ -112,7 +126,8 @@ public class Instructions {
         			+ "how many points the special circles are worth, before you make your choice.<br><br>"
         			+ "Please make your decisions carefully to make sure you score as many points as possible. This "
         			+ "will give you the best chance to earn the additional £1 bonus payment.<br><br>"
-        			+ "Click below for some more practice.";
+        			+ "Click below for some more practice. From now on you will not receive any feedback about "
+        			+ "whether you have dragged the special circles to the correct side or not.";
         	break;
         case 7:
         	i = "There is one last element to this task, which is that on a random number of blocks, "
@@ -134,45 +149,78 @@ public class Instructions {
                     + "circles appear. This is not a bug, but intended to speed things up a little.<br><br>"
                     + "You can start the main experiment when you are ready.";
             break;
+        case 81:
+        	i="You have now completed more than half of the experiment. We would now like you to estimate "
+                    + "how <b>accurate</b> you were when you performed the task just now.<br><br>"
+                    + "Please use the scale below to indicate what percentage of "
+                    + "the special circles you correctly dragged to the instructed side of the square, "
+                    + "<b>when you used your own memory</b>. 100% "
+                    + "would mean that you got every single one correct. 0% would mean that you did not "
+                    + "get any of them correct.";
+            break;
+        case 82:
+        	i="Now please estimate you accurate you were just now <b>when you used reminders</b>.";
+            break;
         case 9:
-			i = "You have now completed the first part of four, thank you. The remaining parts "
-			        + "are much shorter. In the second part, we ask you to complete several "
-					+ "brief questionnaires.<br><br>"
-					+ "Please start the first questionnaire when you are ready.";
+			i = "In the next part you will do the "
+					+ "same task again except for one change. <br><br>";
+			
+			if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
+        		i=i+"While you were doing the task before, the circles sometimes jumped to "
+                        + "different position on the screen. This will no longer happen, they will always stay in "
+                        + "the same position unless you move them. So this means that any reminders you set will "
+                        + "stay in position until you need them.";
+        	} else {
+        		i=i+"While you are doing the task, the circles will sometimes jump to different positions on "
+        				+ "the screen. This will happen once each time you do the task. "
+        				+ "When this happens, you will lose the benefit of any reminders you set previously "
+        				+ "but they will still be helpful at other times. ";
+        	}
+					
+			i = i + "<br><br>Please click below to try this, <b>without</b> using reminders.";
 			break;
         case 10:
-        	i = "You have now completed the second part of four, thank you. "
-        	        + "In the third part, we ask you to complete a short reasoning test.<br><br>"
-					+ "Please start when you are ready.";
-        	break;
+        	i="Now we would like you to tell us "
+                    + "how <b>confident</b> you are that you can accurately perform this version of the "
+                    + "task "
+                    + "<b>when you use your own memory</b>, like you did just now.<br><br>"
+                    + "Please use the scale below to indicate what percentage of "
+                    + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
+                    + "would mean that you always get every single one correct. 0% would mean that you can never "
+                    + "get any of them correct.";
+            break;
         case 11:
-        	i = "You have now completed the third part of four, thank you. "
-        	        + "In the fourth and last part, you will see a sequence of letters, one by one.<br><br>If the letter "
-					+ "matches the one you saw <b>two letters ago</b>, please press the <b>X</b> key. "
-					+ "Otherwise, press the <b>Z</b> key.<br><br>For example, if you saw the sequence "
-					+ "O A O S P, you would press Z Z X Z Z.<br><br>For the first two letters in the block, you can "
-					+ "also simply press the Z key.<br><br>Please respond as quickly "
-					+ "and as accurately as possible. You will practice this now.";
-			break;
+        	i="Now please try the task <b>using reminders</b>.";
+        	break;
         case 12:
-        	i="You will now complete a slightly longer block of this task. Please keep in mind that "
-        	        + "if the letter matches the one you saw <b>two letters ago</b>, you need to press the <b>X</b> key. "
-					+ "Otherwise, press the <b>Z</b> key.<br><br>Please respond as quickly "
-					+ "and as accurately as possible.";
-			break;
+        	i="Please tell us "
+                    + "how <b>confident</b> you are that you can accurately perform this version of the "
+                    + "task "
+                    + "<b>when you use reminders</b>, like you did just now.<br><br>"
+                    + "Please use the scale below to indicate what percentage of "
+                    + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
+                    + "would mean that you always get every single one correct. 0% would mean that you can never "
+                    + "get any of them correct.";
+            break;
         case 13:
-			i = "You have now completed the experiment. Thank you for taking part.<br><br>"
-					+ "In the present study we tried to understand how people choose to set "
-					+ "reminders. Previous studies have shown that the simple act of "
-					+ "using a reminder may improve our memory for subsequent information. "
-					+ "In this study, we want to study the cognitive mechanisms behind "
-					+ "this phenomenon. In particular, we are interested in understanding "
-					+ "how confidence in your own memory might guide your decision to ask for "
-					+ "a reminder.<br><br>"
-					+ "Please click on the link below to receive your payment:<br><br>"
-					+ "<b><a href=\"https://app.prolific.co/submissions/complete?cc=4DC3A396\">"
-					+ "CLICK HERE</a></b>";
-			break;
+        	i="Now the experiment will continue for real. As you did before, you should decide each time "
+        			+ "whether you will score more points with or without reminders. This is the last part of the "
+        			+ "experiment.";
+        	break;
+        case 14:
+        	i="You have now finished the task. Last of all, we would now like you to estimate "
+                    + "how <b>accurate</b> you were when you performed the task "
+                    + "<b>in the second half of the experiment</b>.<br><br>"
+                    + "Please use the scale below to indicate what percentage of "
+                    + "the special circles you correctly dragged to the instructed side of the square, "
+                    + "<b>when you used your own memory</b>. 100% "
+                    + "would mean that you got every single one correct. 0% would mean that you did not "
+                    + "get any of them correct.";
+            break;
+        case 15:
+        	i="Now please estimate you accurate you were <b>in the second "
+        			+ "half of the experiment when you used reminders</b>.";
+            break;
 		}
 
 		return(i);	
