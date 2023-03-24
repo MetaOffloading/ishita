@@ -221,6 +221,18 @@ public class Instructions {
         	i="Now please estimate you accurate you were <b>in the second "
         			+ "half of the experiment when you used reminders</b>.";
             break;
+        case 16:
+			i = "You have now completed the experiment. Thank you for taking part.<br><br>"
+					+ "In the present study we tried to understand how people choose to set "
+					+ "reminders. Previous studies have shown that the simple act of "
+					+ "using a reminder may improve our memory for subsequent information. "
+					+ "In this study, we want to study the cognitive mechanisms behind "
+					+ "this phenomenon. In particular, we are interested in understanding "
+					+ "how confidence in your own memory might guide your decision to ask for "
+					+ "a reminder.<br><br>"
+					+ "Please click on the link below to receive your payment:<br><br>"
+					+ "<b><a href=\"https://app.prolific.co/submissions/complete?cc=C1ISPGGF\">"
+					+ "CLICK HERE</a></b>";
 		}
 
 		return(i);	

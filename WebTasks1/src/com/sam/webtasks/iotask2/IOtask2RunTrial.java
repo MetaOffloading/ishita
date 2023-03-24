@@ -736,7 +736,13 @@ public class IOtask2RunTrial {
 						
 						//re-randomise circle positions 
 						if (block.rePositions.size()>0) {
+							int circleNum = clickedCircle + IOtask2BlockContext.getCircleAdjust();
+							
 							if (IOtask2BlockContext.getCompletedCircles() == block.rePositions.get(0)) {
+								String data = "" + IOtask2BlockContext.getBlockNum() + "," + circleNum + ",";
+								data = data + IOtask2BlockContext.getTrialNum();
+								
+								PHP.logData("switchPos",  data,  false);
 
 								block.rePositions.remove(0);
 
@@ -884,11 +890,32 @@ public class IOtask2RunTrial {
 							final Date endTime = new Date();
 
 							int duration = (int) (endTime.getTime() - trialStart.getTime());
+							
+							String overwr = "";
+							if (IOtask2BlockContext.getContext().standard24block == true | IOtask2BlockContext.getContext().standard16block == true) {
+								overwr = "," + IOtask2BlockContext.currentOverwriteChoice() + ",";
+							} else {
+								overwr = ",";
+							}
+							String ntar = "";
+							if (IOtask2BlockContext.getContext().standard16block==true) {
+								if (IOtask2BlockContext.currentOverwriteChoice()==0) {
+									ntar = "0,";
+								} else {
+									ntar = IOtask2BlockContext.getContext().nTargets + ",";
+								}
+							} else {
+								ntar = IOtask2BlockContext.getContext().nTargets + ",";
+							}
 
 							final String data = IOtask2BlockContext.getBlockNum() + ","
-									+ IOtask2BlockContext.getTrialNum() + "," + IOtask2BlockContext.currentTargetValue()
-									+ "," + IOtask2BlockContext.getnHits() + ","
-									+ IOtask2BlockContext.getReminderChoice() + "," + duration;
+									+ IOtask2BlockContext.getTrialNum() + ","
+									+ IOtask2BlockContext.currentTargetValue() + "," 
+									+ IOtask2BlockContext.getnHits() + ","
+									+ IOtask2BlockContext.getReminderChoice() + overwr
+									+ ntar
+									+ IOtask2BlockContext.getTotalPoints() + ","
+									+ duration;
 
 							new Timer() {
 								public void run() {

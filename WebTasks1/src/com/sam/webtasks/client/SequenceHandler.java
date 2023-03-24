@@ -226,7 +226,7 @@ public class SequenceHandler {
 				Slider.Run(Instructions.Get(82), "0%", "100%");
 				break;
 			case 25:
-				PHP.logData("postdictionExt2", ""+Slider.getSliderValue(), true);
+				PHP.logData("postdictionExt1", ""+Slider.getSliderValue(), true);
 				break;
 			case 26:
 				ClickPage.Run(Instructions.Get(9), "Next");
@@ -240,6 +240,7 @@ public class SequenceHandler {
 				block8.blockNum = 8;
 				block8.logDragData = true;
 				block8.showTargetFeedback = true;
+				block8.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
 				//flip the reliability order
 				block8.rePosition = (int) Math.pow(Counterbalance.getFactorLevel("reliabilityOrder")-1, 2);
 				
@@ -249,7 +250,7 @@ public class SequenceHandler {
 				Slider.Run(Instructions.Get(10), "0%", "100%");
 				break;
 			case 29:
-				PHP.logData("predictionInt1",  ""+Slider.getSliderValue(), true);
+				PHP.logData("predictionInt2",  ""+Slider.getSliderValue(), true);
 				break;
 			case 30:
 				ClickPage.Run(Instructions.Get(11), "Next");
@@ -263,6 +264,7 @@ public class SequenceHandler {
 				block9.blockNum = 9;
 				block9.logDragData = true;
 				block9.showTargetFeedback = true;
+				block9.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
 				block9.rePosition = (int) Math.pow(Counterbalance.getFactorLevel("reliabilityOrder")-1, 2);
 				
 				block9.Run();
@@ -271,7 +273,7 @@ public class SequenceHandler {
 				Slider.Run(Instructions.Get(12), "0%", "100%");
 				break;
 			case 33:
-				PHP.logData("predictionExt1",  ""+Slider.getSliderValue(), true);
+				PHP.logData("predictionExt2",  ""+Slider.getSliderValue(), true);
 				break;
 			case 34:
 				ClickPage.Run(Instructions.Get(13), "Next");
@@ -287,9 +289,10 @@ public class SequenceHandler {
 				block10.updateProgressText = true;
 				block10.updateProgress = true;
 				block10.countdownTimer = true;
-				block10.blockNum = 7;
+				block10.blockNum = 10;
 				block10.logDragData = true;
 				block10.showTargetFeedback = false;
+				block10.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
 				block10.rePosition = (int) Math.pow(Counterbalance.getFactorLevel("reliabilityOrder")-1, 2);
 				
 				block10.Run();
@@ -308,6 +311,17 @@ public class SequenceHandler {
 				PHP.logData("postdictionExt2", ""+Slider.getSliderValue(), true);
 				break;
 			case 40:
+				String data2 = TimeStamp.Now() + ",";
+				data2 = data2 + SessionInfo.participantID + ",";
+				data2 = data2 + Counterbalance.getFactorLevel("counterbtargetvals") + ",";
+				data2 = data2 + Counterbalance.getFactorLevel("reliabilityOrder") + ",";
+				data2 = data2 + SessionInfo.gender + ",";
+				data2 = data2 + SessionInfo.age;
+				
+				PHP.UpdateStatus("finished");
+				PHP.logData("finish", data2, true);
+				break;
+			case 41:
 				ClickPage.Run("The end", "nobutton");
 				break;
 			
