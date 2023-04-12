@@ -37,16 +37,7 @@ public class Instructions {
                     + "of the box in sequence. "
                     + "Please start by dragging 1 all the way to the bottom. "
                     + "This will make it disappear. Then drag 2 to the bottom, then 3, "
-                    + "and so on.";
-        	
-        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
-        		i=i+"<br><br>Sometimes the circles will jump to "
-                        + "different positions on the screen. This will happen once each time you do the task. "
-                        + "Just ignore this and keep going.";
-        	}
-        	
-        	i=i + "<br><br>Click below to practise the task.";
-
+                    + "and so on.<br><br>Click below to practice the task.";
             break;
         case 2:
 			i="Now you will continue the same task, but sometimes there will be something else to "
@@ -74,10 +65,28 @@ public class Instructions {
 	        			+ "just try to remember as many as you can.<br><br>"
 	        			+ "Click below to practise the task.";
             break;
+        case 31:
+        	i = "";
+        	
+        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
+        		i=i+"Sometimes when you are doing the task the circles will jump to "
+                        + "different positions on the screen. This will only happen one time out every <b>four</b> times"
+                        + " that you do the task, so it will only happen occasionally.<br><br>"
+                        + "Click below to see an example of this.";
+        	} else {
+        		i=i+"Click below to practice again.";
+        	}
+        	
+        	break;
         case 4:
         	i="Now that you have had some practice with the experiment, we would like you to tell us "
-                    + "how <b>confident</b> you are that you can accurately perform the task.<br><br>"
-                    + "Please use the scale below to indicate what percentage of "
+                    + "how <b>confident</b> you are that you can accurately perform the task.<br><br>";
+        	
+        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
+        		i = i + "Remember that on 25% of trials, the circles will no longer jump to different positions on the screen.";
+        	} 
+        	
+            i = i + "<br><br>Please use the scale below to indicate what percentage of "
                     + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
                     + "would mean that you always get every single one correct. 0% would mean that you can never "
                     + "get any of them correct.";
@@ -171,33 +180,51 @@ public class Instructions {
                         + "the same position unless you move them. So this means that any reminders you set will "
                         + "stay in position until you need them.";
         	} else {
-        		i=i+"While you are doing the task, the circles will sometimes jump to different positions on "
-        				+ "the screen. This will happen once each time you do the task. "
-        				+ "When this happens, you will lose the benefit of any reminders you set previously "
-        				+ "but they will still be helpful at other times. ";
+        		i=i+"Sometimes when you are doing the task the circles will jump to "
+                        + "different positions on the screen. This will only happen one time out every <b>four</b> times"
+                        + "that you do the task, so it will only happen occasionally.<br><br>"
+                        + "When this does happen, you will lose the benefit of any reminders you set previously "
+                        + "but they will still be helpful at other times.<br><br>"
+                        + "Click below to see an example of this.";
         	}
 					
 			i = i + "<br><br>Please click below to try this, <b>without</b> using reminders.";
 			break;
         case 10:
         	i="Now we would like you to tell us "
-                    + "how <b>confident</b> you are that you can accurately perform this version of the "
-                    + "task "
-                    + "<b>when you use your own memory</b>, like you did just now.<br><br>"
-                    + "Please use the scale below to indicate what percentage of "
+                    + "how <b>confident</b> you are that you can accurately perform the task from now on.<br><br>";
+        	
+        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
+        		i = i + "Remember that the circles will no longer jump to different positions on the screen.";
+        	} else {
+        		i = i + "Remember that the circles will jump to different positions on the screen <b>on 25% of trials</b>.";
+        	}
+        	
+        	i= i + "<br><br>Please use the scale below to indicate what percentage of "
                     + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
                     + "would mean that you always get every single one correct. 0% would mean that you can never "
                     + "get any of them correct.";
             break;
         case 11:
         	i="Now please try the task <b>using reminders</b>.";
+        	
+        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_FIRST) {
+        		i = i + "You will see another example of what happens when the circles jump to new positions on the screen.<br><br>"
+        				+ "In the real experiment this will happen <b>on 25% of trials</b>.";
+        	}
         	break;
         case 12:
         	i="Please tell us "
-                    + "how <b>confident</b> you are that you can accurately perform this version of the "
-                    + "task "
-                    + "<b>when you use reminders</b>, like you did just now.<br><br>"
-                    + "Please use the scale below to indicate what percentage of "
+                    + "how <b>confident</b> you are that you can accurately perform the task from now on "
+                    + "<b>when you use reminders</b>.<br><br>";
+        	
+        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
+        		i = i + "Remember that the circles will no longer jump to different positions on the screen.";
+        	} else {
+        		i = i + "Remember that the circles will jump to different positions on the screen <b>on 25% of trials</b>.";
+        	}
+                    
+             i=i + "<br><br>Please use the scale below to indicate what percentage of "
                     + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
                     + "would mean that you always get every single one correct. 0% would mean that you can never "
                     + "get any of them correct.";
