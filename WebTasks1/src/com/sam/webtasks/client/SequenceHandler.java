@@ -68,12 +68,6 @@ public class SequenceHandler {
 			/***********************************************************************
 			 * The code here defines the main sequence of events in the experiment *
 			 **********************************************************************/
-			//case 1:
-			//String startdata = TimeStamp.Now() + ",";
-			//startdata = startdata + SessionInfo.participantID;
-			
-			//PHP.logData("start", startdata, true);
-			//break;
 			case 1:
 				ClickPage.Run(Instructions.Get(1), "Next");
 				break;					
@@ -134,7 +128,7 @@ public class SequenceHandler {
 				block31.offloadCondition = Names.REMINDERS_NOTALLOWED;
 				block31.blockNum = 31;
 				block31.logDragData = true;
-				block31.rePosition = Counterbalance.getFactorLevel("reliabilityOrder");
+				block31.rePosition = Counterbalance.getFactorLevel("reliability");
 				
 				block31.Run();
 				break;	
@@ -142,7 +136,7 @@ public class SequenceHandler {
 				Slider.Run(Instructions.Get(4), "0%", "100%");
 				break;
 			case 11:
-				PHP.logData("predictionInt1", ""+Slider.getSliderValue(), true);
+				PHP.logData("predictionInt", ""+Slider.getSliderValue(), true);
 				break;
 			case 12:
 				ClickPage.Run(Instructions.Get(5), "Next");
@@ -156,26 +150,41 @@ public class SequenceHandler {
 				block4.blockNum = 4;
 				block4.logDragData = true;
 				block4.showTargetFeedback = false;
-				block4.rePosition = Counterbalance.getFactorLevel("reliabilityOrder");
 				
 				block4.Run();
 				break;	
 			case 14:
-				Slider.Run(Instructions.Get(51), "0%", "100%");
+				ClickPage.Run(Instructions.Get(51),  "Next");
 				break;
 			case 15:
-				PHP.logData("predictionExt1",  ""+Slider.getSliderValue(), true);
-				break;
+				IOtask2Block block41 = new IOtask2Block();
+				
+				block41.nTargets = 6;
+				block41.totalCircles = 15;
+				block41.offloadCondition = Names.REMINDERS_MANDATORY_TARGETONLY;
+				block41.blockNum = 41;
+				block41.logDragData = true;
+				block41.showTargetFeedback = false;
+				block41.rePosition = Counterbalance.getFactorLevel("reliability");
+				
+				block41.Run();
+				break;		
 			case 16:
-				ClickPage.Run(Instructions.Get(6), "Next");
+				Slider.Run(Instructions.Get(52), "0%", "100%");
 				break;
 			case 17:
-				ClickPage.Run(Instructions.Get(61), "Next");
+				PHP.logData("predictionExt",  ""+Slider.getSliderValue(), true);
 				break;
 			case 18:
-				ClickPage.Run(Instructions.Get(62), "Next");
+				ClickPage.Run(Instructions.Get(6), "Next");
 				break;
 			case 19:
+				ClickPage.Run(Instructions.Get(61), "Next");
+				break;
+			case 20:
+				ClickPage.Run(Instructions.Get(62), "Next");
+				break;
+			case 21:
 				IOtask2Block block5 = new IOtask2Block();
 				
 				block5.nTargets = 6;
@@ -184,14 +193,13 @@ public class SequenceHandler {
 				block5.blockNum = 5;
 				block5.logDragData = true;
 				block5.showTargetFeedback = false;
-				block5.rePosition = Counterbalance.getFactorLevel("reliabilityOrder");
 				
 				block5.Run();
 				break;				
-			case 20:
+			case 22:
 				ClickPage.Run(Instructions.Get(7), "Next");
 				break;
-			case 21:
+			case 23:
 				IOtask2Block block6 = new IOtask2Block();
 				
 				block6.nTargets = 6;
@@ -200,17 +208,16 @@ public class SequenceHandler {
 				block6.blockNum = 6;
 				block6.logDragData = true;
 				block6.showTargetFeedback = false;
-				block6.rePosition = Counterbalance.getFactorLevel("reliabilityOrder");
 				
 				block6.Run();
 				break;	
-			case 22:
+			case 24:
 				ClickPage.Run(Instructions.Get(8), "Next");
 				break;	
-			case 23:
+			case 25:
 				ProgressBar.Initialise();
 				ProgressBar.Show();
-				ProgressBar.SetProgress(0, 32);
+				ProgressBar.SetProgress(0, 16);
 				
 				IOtask2Block block7 = new IOtask2Block();
 				
@@ -223,117 +230,35 @@ public class SequenceHandler {
 				block7.blockNum = 7;
 				block7.logDragData = true;
 				block7.showTargetFeedback = false;
-				block7.rePosition = Counterbalance.getFactorLevel("reliabilityOrder");
+				block7.rePosition = Counterbalance.getFactorLevel("reliability");
 				
 				block7.Run();
 				break;
-			case 24:
+			case 26:
 				ProgressBar.Hide();
 				Slider.Run(Instructions.Get(81), "0%", "100%");
 				break;
-			case 25:
-				PHP.logData("postdictionInt1", ""+Slider.getSliderValue(), true);
-				break;
-			case 26:
-				Slider.Run(Instructions.Get(82), "0%", "100%");
-				break;
 			case 27:
-				PHP.logData("postdictionExt1", ""+Slider.getSliderValue(), true);
+				PHP.logData("postdictionInt", ""+Slider.getSliderValue(), true);
 				break;
 			case 28:
-				ClickPage.Run(Instructions.Get(9), "Next");
+				Slider.Run(Instructions.Get(82), "0%", "100%");
 				break;
 			case 29:
-				IOtask2Block block8 = new IOtask2Block();
-				
-				block8.nTargets = 6;
-				block8.totalCircles = 15;
-				block8.offloadCondition = Names.REMINDERS_NOTALLOWED;
-				block8.blockNum = 8;
-				block8.logDragData = true;
-				block8.showTargetFeedback = true;
-				block8.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
-				//flip the reliability order
-				block8.rePosition = (int) Math.pow(Counterbalance.getFactorLevel("reliabilityOrder")-1, 2);
-				
-				block8.Run();
-				break;	
+				PHP.logData("postdictionExt", ""+Slider.getSliderValue(), true);
+				break;
 			case 30:
-				Slider.Run(Instructions.Get(10), "0%", "100%");
-				break;
-			case 31:
-				PHP.logData("predictionInt2",  ""+Slider.getSliderValue(), true);
-				break;
-			case 32:
-				ClickPage.Run(Instructions.Get(11), "Next");
-				break;
-			case 33:
-				IOtask2Block block9 = new IOtask2Block();
-				
-				block9.nTargets = 6;
-				block9.totalCircles = 15;
-				block9.offloadCondition = Names.REMINDERS_MANDATORY_TARGETONLY;
-				block9.blockNum = 9;
-				block9.logDragData = true;
-				block9.showTargetFeedback = true;
-				block9.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
-				block9.rePosition = (int) Math.pow(Counterbalance.getFactorLevel("reliabilityOrder")-1, 2);
-				
-				block9.Run();
-				break;
-			case 34:
-				Slider.Run(Instructions.Get(12), "0%", "100%");
-				break;
-			case 35:
-				PHP.logData("predictionExt2",  ""+Slider.getSliderValue(), true);
-				break;
-			case 36:
-				ClickPage.Run(Instructions.Get(13), "Next");
-				break;
-			case 37:
-				ProgressBar.Show();
-				ProgressBar.SetProgress(16, 32);
-				IOtask2Block block10 = new IOtask2Block();
-				
-				block10.nTargets = 6;
-				block10.totalCircles = 15;
-				block10.standard16block = true;
-				block10.updateProgressText = true;
-				block10.updateProgress = true;
-				block10.countdownTimer = true;
-				block10.blockNum = 10;
-				block10.logDragData = true;
-				block10.showTargetFeedback = false;
-				block10.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
-				block10.rePosition = (int) Math.pow(Counterbalance.getFactorLevel("reliabilityOrder")-1, 2);
-				
-				block10.Run();
-				break;
-			case 38:
-				ProgressBar.Hide();
-				Slider.Run(Instructions.Get(14), "0%", "100%");
-				break;
-			case 39:
-				PHP.logData("postdictionInt2", ""+Slider.getSliderValue(), true);
-				break;
-			case 40:
-				Slider.Run(Instructions.Get(15), "0%", "100%");
-				break;
-			case 41:
-				PHP.logData("postdictionExt2", ""+Slider.getSliderValue(), true);
-				break;
-			case 42:
 				String data2 = TimeStamp.Now() + ",";
 				data2 = data2 + SessionInfo.participantID + ",";
 				data2 = data2 + Counterbalance.getFactorLevel("counterbtargetvals") + ",";
-				data2 = data2 + Counterbalance.getFactorLevel("reliabilityOrder") + ",";
+				data2 = data2 + Counterbalance.getFactorLevel("reliability") + ",";
 				data2 = data2 + SessionInfo.gender + ",";
 				data2 = data2 + SessionInfo.age;
 				
 				PHP.UpdateStatus("finished");
 				PHP.logData("finish", data2, true);
 				break;
-			case 43:
+			case 31:
 				ClickPage.Run("The end", "nobutton");
 				break;
 			

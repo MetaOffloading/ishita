@@ -18,10 +18,10 @@ public class Instructions {
                     + "<br><br>Please close any programs "
                     + "that could cause distraction (e.g. email clients) and "
                     + "maximise the size of this window.<br><br>This experiment will take "
-                    + "approximately 35 minutes. Please only continue when you think "
-                    + "you will be free from distractions for the next 35 minutes.<br><br>"
+                    + "approximately 20 minutes. Please only continue when you think "
+                    + "you will be free from distractions for the next 20 minutes.<br><br>"
                     + "As compensation for completing "
-                    + "this experiment, you will receive £3.90 via the Prolific "
+                    + "this experiment, you will receive £3 via the Prolific "
                     + "system.<br><br>You may withdraw at any time without penalty, simply by "
                     + "closing your browser window. If you are having difficulty "
                     + "running the experiment we recommend that you try using Google "
@@ -68,7 +68,7 @@ public class Instructions {
         case 31:
         	i = "";
         	
-        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
+        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
         		i=i+"Sometimes when you are doing the task the circles will jump to "
                         + "different positions on the screen. This will only happen one time out every <b>four</b> times"
                         + " that you do the task, so it will only happen occasionally.<br><br>"
@@ -82,8 +82,8 @@ public class Instructions {
         	i="Now that you have had some practice with the experiment, we would like you to tell us "
                     + "how <b>confident</b> you are that you can accurately perform the task.<br><br>";
         	
-        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
-        		i = i + "Remember that on 25% of trials, the circles will no longer jump to different positions on the screen.";
+        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
+        		i = i + "Remember that on 25% of trials, the circles will jump to different positions on the screen.";
         	} 
         	
             i = i + "<br><br>Please use the scale below to indicate what percentage of "
@@ -100,10 +100,29 @@ public class Instructions {
                     + "to go.<br><br>Please now try the task again, using this strategy to help you.";
             break;
         case 51:
+        	i = "";
+        	
+        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
+        		i=i+"Click below to practice again. This time, the circles will jump to new positions at "
+        				+ "a certain point. This means that you will lose the benefit "
+        				+ "of any reminders that you set, but you should still set reminders by dragging the special "
+        				+ "circles next to the side where they need to go.";
+        	} else {
+        		i=i+"Click below to practice again.";
+        	}
+        	
+        	break;
+        	
+        case 52:
         	i="Now that you have had some practice using this strategy, we would like you to tell us "
                     + "how <b>confident</b> you are that you can accurately perform the task "
-                    + "<b>when you use reminders</b>.<br><br>"
-                    + "Please use the scale below to indicate what percentage of "
+                    + "<b>when you use reminders</b>.<br><br>";
+        	
+        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
+        		i = i + "Remember that on 25% of trials, the circles will jump to different positions on the screen.";
+        	} 
+        	
+        	i=i     + "<br><br>Please use the scale below to indicate what percentage of "
                     + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
                     + "would mean that you always get every single one correct. 0% would mean that you can never "
                     + "get any of them correct.";
@@ -159,7 +178,7 @@ public class Instructions {
                     + "You can start the main experiment when you are ready.";
             break;
         case 81:
-        	i="You have now completed more than half of the experiment. We would now like you to estimate "
+        	i="You have now finished the experiment. We would like you to estimate "
                     + "how <b>accurate</b> you were when you performed the task just now.<br><br>"
                     + "Please use the scale below to indicate what percentage of "
                     + "the special circles you correctly dragged to the instructed side of the square, "
@@ -170,85 +189,8 @@ public class Instructions {
         case 82:
         	i="Now please estimate you accurate you were just now <b>when you used reminders</b>.";
             break;
+        
         case 9:
-			i = "In the next part you will do the "
-					+ "same task again except for one change. <br><br>";
-			
-			if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
-        		i=i+"While you were doing the task before, the circles sometimes jumped to "
-                        + "different position on the screen. This will no longer happen, they will always stay in "
-                        + "the same position unless you move them. So this means that any reminders you set will "
-                        + "stay in position until you need them.";
-        	} else {
-        		i=i+"Sometimes when you are doing the task the circles will jump to "
-                        + "different positions on the screen. This will only happen one time out every <b>four</b> times"
-                        + "that you do the task, so it will only happen occasionally.<br><br>"
-                        + "When this does happen, you will lose the benefit of any reminders you set previously "
-                        + "but they will still be helpful at other times.<br><br>"
-                        + "Click below to see an example of this.";
-        	}
-					
-			i = i + "<br><br>Please click below to try this, <b>without</b> using reminders.";
-			break;
-        case 10:
-        	i="Now we would like you to tell us "
-                    + "how <b>confident</b> you are that you can accurately perform the task from now on.<br><br>";
-        	
-        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
-        		i = i + "Remember that the circles will no longer jump to different positions on the screen.";
-        	} else {
-        		i = i + "Remember that the circles will jump to different positions on the screen <b>on 25% of trials</b>.";
-        	}
-        	
-        	i= i + "<br><br>Please use the scale below to indicate what percentage of "
-                    + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
-                    + "would mean that you always get every single one correct. 0% would mean that you can never "
-                    + "get any of them correct.";
-            break;
-        case 11:
-        	i="Now please try the task <b>using reminders</b>.";
-        	
-        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_FIRST) {
-        		i = i + "You will see another example of what happens when the circles jump to new positions on the screen.<br><br>"
-        				+ "In the real experiment this will happen <b>on 25% of trials</b>.";
-        	}
-        	break;
-        case 12:
-        	i="Please tell us "
-                    + "how <b>confident</b> you are that you can accurately perform the task from now on "
-                    + "<b>when you use reminders</b>.<br><br>";
-        	
-        	if(Counterbalance.getFactorLevel("reliabilityOrder")==ExtraNames.RELIABLE_SECOND) {
-        		i = i + "Remember that the circles will no longer jump to different positions on the screen.";
-        	} else {
-        		i = i + "Remember that the circles will jump to different positions on the screen <b>on 25% of trials</b>.";
-        	}
-                    
-             i=i + "<br><br>Please use the scale below to indicate what percentage of "
-                    + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
-                    + "would mean that you always get every single one correct. 0% would mean that you can never "
-                    + "get any of them correct.";
-            break;
-        case 13:
-        	i="Now the experiment will continue for real. As you did before, you should decide each time "
-        			+ "whether you will score more points with or without reminders. This is the last part of the "
-        			+ "experiment.";
-        	break;
-        case 14:
-        	i="You have now finished the task. Last of all, we would now like you to estimate "
-                    + "how <b>accurate</b> you were when you performed the task "
-                    + "<b>in the second half of the experiment</b>.<br><br>"
-                    + "Please use the scale below to indicate what percentage of "
-                    + "the special circles you correctly dragged to the instructed side of the square, "
-                    + "<b>when you used your own memory</b>. 100% "
-                    + "would mean that you got every single one correct. 0% would mean that you did not "
-                    + "get any of them correct.";
-            break;
-        case 15:
-        	i="Now please estimate you accurate you were <b>in the second "
-        			+ "half of the experiment when you used reminders</b>.";
-            break;
-        case 16:
 			i = "You have now completed the experiment. Thank you for taking part.<br><br>"
 					+ "In the present study we tried to understand how people choose to set "
 					+ "reminders. Previous studies have shown that the simple act of "

@@ -586,6 +586,9 @@ public class IOtask2Block {
 	
 	// use this to specify surprise tests across a block
 	public ArrayList<Integer> surpriseTests = new ArrayList<Integer>();
+	
+	// use this to specify reposition trials
+	public ArrayList<Integer> repositionTrials = new ArrayList<Integer>();
 
 	// ???????
 	public int completedCircles = 0;
