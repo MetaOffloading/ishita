@@ -40,36 +40,33 @@ public class IOtask2InitialiseTrial {
 		}
 
 		// set up repositions
+		block.rePositions.clear();
+		
 		if (block.rePosition > 0) {
 			boolean doRepositions = true;
+			int firstRepos = block.nCircles+1;
+			int lastRepos = block.totalCircles-block.nCircles;
 
 			if (block.standard16block) {
 				doRepositions = false;
-
-				if (block.currentTrial==1) {
+				
+				if (block.rePositionTrials.contains(block.currentTrial)) {
 					doRepositions = true;
-				}
-
-				if (block.currentTrial==5) {
-					doRepositions = true;
-				}
-
-				if (block.currentTrial==9) {
-					doRepositions = true;
-				}
-
-				if (block.currentTrial==13) {
-					doRepositions = true;
+					
+					if (block.overwriteChoice.get(block.currentTrial)==0) {
+						firstRepos = 3; //could reposition from number 3 onwards
+						lastRepos = block.nCircles-1;
+					}
 				}
 			}
-
+			
 			if (doRepositions) {	
-				for (int i = block.nCircles + 1; i < (block.totalCircles-block.nCircles); i++) { 
+				for (int i = firstRepos; i < lastRepos; i++) { 
 					block.rePositions.add(i);
 				}
 
 				if (block.rePositions.size() == 0) { //not enough circles to set up the repositions
-					for (int i = 1; i < (block.totalCircles-block.nCircles); i++) { 
+					for (int i = 1; i < lastRepos; i++) { 
 						block.rePositions.add(i);
 					}
 				}
@@ -92,9 +89,7 @@ public class IOtask2InitialiseTrial {
 		} else {
 			block.rePositions.add(-1);
 		}
-
-
-
+		
 		// set up target directions
 		ArrayList<Integer> targetDirections = new ArrayList<Integer>();
 		ArrayList<Integer> possibleTargetPositions = new ArrayList<Integer>();

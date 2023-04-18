@@ -133,15 +133,22 @@ public class SequenceHandler {
 				block31.Run();
 				break;	
 			case 10:
-				Slider.Run(Instructions.Get(4), "0%", "100%");
+				if (Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
+					ClickPage.Run(Instructions.Get(32), "Next");
+				} else {
+					SequenceHandler.Next();
+				}
 				break;
 			case 11:
-				PHP.logData("predictionInt", ""+Slider.getSliderValue(), true);
+				Slider.Run(Instructions.Get(4), "0%", "100%");
 				break;
 			case 12:
-				ClickPage.Run(Instructions.Get(5), "Next");
+				PHP.logData("predictionInt", ""+Slider.getSliderValue(), true);
 				break;
 			case 13:
+				ClickPage.Run(Instructions.Get(5), "Next");
+				break;
+			case 14:
 				IOtask2Block block4 = new IOtask2Block();
 				
 				block4.nTargets = 6;
@@ -153,10 +160,10 @@ public class SequenceHandler {
 				
 				block4.Run();
 				break;	
-			case 14:
+			case 15:
 				ClickPage.Run(Instructions.Get(51),  "Next");
 				break;
-			case 15:
+			case 16:
 				IOtask2Block block41 = new IOtask2Block();
 				
 				block41.nTargets = 6;
@@ -169,22 +176,22 @@ public class SequenceHandler {
 				
 				block41.Run();
 				break;		
-			case 16:
+			case 17:
 				Slider.Run(Instructions.Get(52), "0%", "100%");
 				break;
-			case 17:
+			case 18:
 				PHP.logData("predictionExt",  ""+Slider.getSliderValue(), true);
 				break;
-			case 18:
+			case 19:
 				ClickPage.Run(Instructions.Get(6), "Next");
 				break;
-			case 19:
+			case 20:
 				ClickPage.Run(Instructions.Get(61), "Next");
 				break;
-			case 20:
+			case 21:
 				ClickPage.Run(Instructions.Get(62), "Next");
 				break;
-			case 21:
+			case 22:
 				IOtask2Block block5 = new IOtask2Block();
 				
 				block5.nTargets = 6;
@@ -196,10 +203,10 @@ public class SequenceHandler {
 				
 				block5.Run();
 				break;				
-			case 22:
+			case 23:
 				ClickPage.Run(Instructions.Get(7), "Next");
 				break;
-			case 23:
+			case 24:
 				IOtask2Block block6 = new IOtask2Block();
 				
 				block6.nTargets = 6;
@@ -211,10 +218,10 @@ public class SequenceHandler {
 				
 				block6.Run();
 				break;	
-			case 24:
+			case 25:
 				ClickPage.Run(Instructions.Get(8), "Next");
 				break;	
-			case 25:
+			case 26:
 				ProgressBar.Initialise();
 				ProgressBar.Show();
 				ProgressBar.SetProgress(0, 16);
@@ -234,20 +241,20 @@ public class SequenceHandler {
 				
 				block7.Run();
 				break;
-			case 26:
+			case 27:
 				ProgressBar.Hide();
 				Slider.Run(Instructions.Get(81), "0%", "100%");
 				break;
-			case 27:
+			case 28:
 				PHP.logData("postdictionInt", ""+Slider.getSliderValue(), true);
 				break;
-			case 28:
+			case 29:
 				Slider.Run(Instructions.Get(82), "0%", "100%");
 				break;
-			case 29:
+			case 30:
 				PHP.logData("postdictionExt", ""+Slider.getSliderValue(), true);
 				break;
-			case 30:
+			case 31:
 				String data2 = TimeStamp.Now() + ",";
 				data2 = data2 + SessionInfo.participantID + ",";
 				data2 = data2 + Counterbalance.getFactorLevel("counterbtargetvals") + ",";
@@ -258,7 +265,7 @@ public class SequenceHandler {
 				PHP.UpdateStatus("finished");
 				PHP.logData("finish", data2, true);
 				break;
-			case 31:
+			case 32:
 				ClickPage.Run("The end", "nobutton");
 				break;
 			

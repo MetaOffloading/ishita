@@ -70,24 +70,32 @@ public class Instructions {
         	
         	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
         		i=i+"Sometimes when you are doing the task the circles will jump to "
-                        + "different positions on the screen. This will only happen one time out every <b>four</b> times"
-                        + " that you do the task, so it will only happen occasionally.<br><br>"
+                        + "different positions on the screen. "
                         + "Click below to see an example of this.";
         	} else {
         		i=i+"Click below to practice again.";
         	}
         	
         	break;
+        case 32:
+        	i="This will only happen occasionally.<br><br>On three quarters of trials, you will drag "
+        			+ "all of the circles from 1 to 15, and they will never jump into "
+        			+ "new positions. On the remaining quarter of trials, the circles will jump into new positions "
+        			+ "just once, at a randomly selected time between the 1st and 15th circle.<br><br>"
+        			+ "This will be selected randomly, so you will not know at the start of the trial whether or "
+        			+ "not the circles are going to jump into new positions.";
+        	break;
+        	
         case 4:
         	i="Now that you have had some practice with the experiment, we would like you to tell us "
                     + "how <b>confident</b> you are that you can accurately perform the task.<br><br>";
         	
         	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i = i + "Remember that on 25% of trials, the circles will jump to different positions on the screen.";
+        		i = i + "Remember that on a quarter of the trials, the circles will jump to different positions at a certain point.";
         	} 
         	
             i = i + "<br><br>Please use the scale below to indicate what percentage of "
-                    + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
+                    + "the special circles you can correctly drag to the instructed side of the square, <b>on average</b>. 100% "
                     + "would mean that you always get every single one correct. 0% would mean that you can never "
                     + "get any of them correct.";
             break;
@@ -119,11 +127,11 @@ public class Instructions {
                     + "<b>when you use reminders</b>.<br><br>";
         	
         	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i = i + "Remember that on 25% of trials, the circles will jump to different positions on the screen.";
+        		i = i + "Remember that on a quarter of trials, the circles will jump to different positions on the screen.";
         	} 
         	
         	i=i     + "<br><br>Please use the scale below to indicate what percentage of "
-                    + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
+                    + "the special circles you can correctly drag to the instructed side of the square, <b>on average</b>. 100% "
                     + "would mean that you always get every single one correct. 0% would mean that you can never "
                     + "get any of them correct.";
             break;
@@ -148,8 +156,14 @@ public class Instructions {
         	i = "When you are presented with a choice like this, it is completely up to you. "
                     + "You should do whatever you think will allow you to score the highest number of points. "
                     + "Please keep in mind not only the points, but also how many special circles you are likely to "
-                    + "drag to the correct border with/without reminders.<br><br>"
-        			+ "If you use reminders, the exact number of points you can win for each special circle will vary, "
+                    + "drag to the correct border with/without reminders.<br><br>";
+        	
+        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
+        		i = i + "Please also keep in mind that no matter which option you choose, there will be 25% probability "
+                        + "that during a trial, the circles will jump to different positions once.<br><br>";
+        	}
+                    
+        	i = i	+ "If you use reminders, the exact number of points you can win for each special circle will vary, "
         			+ "but it will always be less than 10. You will always be told exactly "
         			+ "how many points the special circles are worth, before you make your choice.<br><br>"
         			+ "Please make your decisions carefully to make sure you score as many points as possible. This "

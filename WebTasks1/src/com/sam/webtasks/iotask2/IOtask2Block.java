@@ -50,6 +50,7 @@ public class IOtask2Block {
 	// randomly re-position circles? if so how many times per trial?
 	public int rePosition = 0;
 	public ArrayList<Integer> rePositions = new ArrayList<Integer>();
+	public ArrayList<Integer> rePositionTrials = new ArrayList<Integer>();
 	
 	// update the progress bar with progress through the block? 
 	public boolean updateProgress = false;
@@ -502,16 +503,47 @@ public class IOtask2Block {
 				}
 				
 			}
-
+			
+			ArrayList<Integer> overwrite0 = new ArrayList<Integer>();
+			ArrayList<Integer> overwrite1 = new ArrayList<Integer>();
+			ArrayList<Integer> overwrite2 = new ArrayList<Integer>();
+	
 			// now put the whole list of target values together
 			for (int i = 0; i < 16; i++) {
 				targetValues.add(choiceValues.get(i));
 				overwriteChoice.add(condValues.get(i));
+				
+				if (condValues.get(i)==0) {
+					overwrite0.add(i);
+				}
+				
+				if (condValues.get(i)==1) {
+					overwrite1.add(i);
+				}
+				
+				if (condValues.get(i)==2) {
+					overwrite2.add(i);
+				}
+			}
+
+			// now shuffle them
+			for (int i = 0; i < overwrite0.size(); i++) {
+				Collections.swap(overwrite0, i, Random.nextInt(overwrite0.size()));
 			}
 			
+			for (int i = 0; i < overwrite1.size(); i++) {
+				Collections.swap(overwrite1, i, Random.nextInt(overwrite1.size()));
+			}
 			
+			for (int i = 0; i < overwrite2.size(); i++) {
+				Collections.swap(overwrite2, i, Random.nextInt(overwrite2.size()));
+			}
 			
-			
+			//add two choice trials and one each forced internal/external
+			rePositionTrials.add(overwrite0.get(0));
+			rePositionTrials.add(overwrite0.get(1));
+			rePositionTrials.add(overwrite1.get(0));
+			rePositionTrials.add(overwrite2.get(0));
 		}
 		
 		
@@ -587,9 +619,6 @@ public class IOtask2Block {
 	// use this to specify surprise tests across a block
 	public ArrayList<Integer> surpriseTests = new ArrayList<Integer>();
 	
-	// use this to specify reposition trials
-	public ArrayList<Integer> repositionTrials = new ArrayList<Integer>();
-
 	// ???????
 	public int completedCircles = 0;
 	public int backupCompletedCircles = 0;
