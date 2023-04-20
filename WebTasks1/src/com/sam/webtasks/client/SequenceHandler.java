@@ -266,7 +266,7 @@ public class SequenceHandler {
 				PHP.logData("finish", data2, true);
 				break;
 			case 32:
-				ClickPage.Run("The end", "nobutton");
+				ClickPage.Run(Instructions.Get(9), "nobutton");
 				break;
 			
 			}

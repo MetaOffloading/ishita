@@ -18,10 +18,10 @@ public class Instructions {
                     + "<br><br>Please close any programs "
                     + "that could cause distraction (e.g. email clients) and "
                     + "maximise the size of this window.<br><br>This experiment will take "
-                    + "approximately 20 minutes. Please only continue when you think "
-                    + "you will be free from distractions for the next 20 minutes.<br><br>"
+                    + "approximately 25 minutes. Please only continue when you think "
+                    + "you will be free from distractions for the next 25 minutes.<br><br>"
                     + "As compensation for completing "
-                    + "this experiment, you will receive £3 via the Prolific "
+                    + "this experiment, you will receive £4 via the Prolific "
                     + "system.<br><br>You may withdraw at any time without penalty, simply by "
                     + "closing your browser window. If you are having difficulty "
                     + "running the experiment we recommend that you try using Google "
@@ -138,7 +138,7 @@ public class Instructions {
         case 6:
         	i = "From now on, you will score points every time you drag one of the special circles "  
 					+ "to the correct border.<br><br>You should try to score as many points as you can.<br><br>"
-					+ "The top 50% of participants will receive an additional bonus payment of £1.<br><br>";
+					+ "The top 50% of participants will receive an additional bonus payment of £0.50.<br><br>";
         	break;
         case 61:
         	i = "Each time you do the task, you will have a choice between two options. One option will be to "
@@ -167,7 +167,7 @@ public class Instructions {
         			+ "but it will always be less than 10. You will always be told exactly "
         			+ "how many points the special circles are worth, before you make your choice.<br><br>"
         			+ "Please make your decisions carefully to make sure you score as many points as possible. This "
-        			+ "will give you the best chance to earn the additional £1 bonus payment.<br><br>"
+        			+ "will give you the best chance to earn the additional £0.50 bonus payment.<br><br>"
         			+ "Click below for some more practice. From now on you will not receive any feedback about "
         			+ "whether you have dragged the special circles to the correct side or not.";
         	break;
@@ -255,9 +255,8 @@ public class Instructions {
                 + "It will not be possible to identify you from these data.<br><br>"
                 + "We aim to publish the results of this project in scientific journals and book chapters. Copies of the "
                 + "results can either be obtained directly from the scientific journals' websites or from us.<br><br>"
-                + "Should you wish to raise a complaint, please contact the Investigator of this project, "
-                + "Dr Annika Boldt (<a href=\"mailto:a.boldt@ucl.ac.uk\">a.boldt@ucl.ac.uk</a>), or the Principal Investigator "
-                + "Dr Sam Gilbert (<a href=\\\"mailto:sam.gilbert@ucl.ac.uk\\\">sam.gilbert@ucl.ac.uk</a>). However, "
+                + "Should you wish to raise a complaint, please contact the Principal Investigator "
+                + "Professor Sam Gilbert (<a href=\\\"mailto:sam.gilbert@ucl.ac.uk\\\">sam.gilbert@ucl.ac.uk</a>). However, "
                 + "if you feel your complaint has not been handled to your satisfaction, please be aware that you can "
                 + "also contact the Chair of the UCL Research Ethics Committee (<a href=\"mailto:ethics@ucl.ac.uk\">ethics@ucl.ac.uk</a>).");
     }
