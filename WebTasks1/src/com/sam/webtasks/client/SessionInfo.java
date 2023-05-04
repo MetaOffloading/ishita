@@ -43,7 +43,7 @@ public class SessionInfo {
 	//e.g. specifiedLevels = {-1, 2, -1}; would randomise factors 1 and 3, and set the second factor to level 2
 	//NB levels range from 0 to (maximum - 1)
 	public static String[] counterbalanceFactors = {"counterbtargetvals","reliability"};
-	public static int[] counterbalanceLevels = {2,1};
+	public static int[] counterbalanceLevels = {2,2};
 	public static int[] specifiedLevels = {-1,-1};
 	
 	/*************************************************/
