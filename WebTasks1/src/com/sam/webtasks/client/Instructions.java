@@ -235,7 +235,7 @@ public class Instructions {
                 + "particular numbers and move the corresponding circle in a particular direction. You will be asked how "
                 + "confident you are in your ability to solve the task. "
                 + "The experiment "
-                + "will last approximately 35 minutes and you will receive a payment of £3.90 via the "
+                + "will last approximately 25 minutes and you will receive a payment of £3.75 via the "
                 + "Prolific payment system. There are no anticipated risks or "
                 + "benefits associated with participation in this study.<br><br>"
                 + "It is up to you to decide whether or not to take part. If you choose "
