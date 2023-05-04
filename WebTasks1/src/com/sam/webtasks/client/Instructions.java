@@ -21,7 +21,7 @@ public class Instructions {
                     + "approximately 25 minutes. Please only continue when you think "
                     + "you will be free from distractions for the next 25 minutes.<br><br>"
                     + "As compensation for completing "
-                    + "this experiment, you will receive £4 via the Prolific "
+                    + "this experiment, you will receive £3.75 via the Prolific "
                     + "system.<br><br>You may withdraw at any time without penalty, simply by "
                     + "closing your browser window. If you are having difficulty "
                     + "running the experiment we recommend that you try using Google "
