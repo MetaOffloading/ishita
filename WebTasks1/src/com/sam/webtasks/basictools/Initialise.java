@@ -52,7 +52,7 @@ public class Initialise {
 			RootPanel.get().add(new Label("initalising..."));
 			
 			//get session key from query line
-			SessionInfo.sessionKey = Window.Location.getParameter("SESSION_ID");
+			//SessionInfo.sessionKey = Window.Location.getParameter("SESSION_ID");
 			//SessionInfo.prolificExperimentCode = Window.Location.getParameter("STUDY_ID");
 			SessionInfo.participantID = Window.Location.getParameter("PROLIFIC_PID");
 			

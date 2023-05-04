@@ -54,18 +54,7 @@ public class Consent {
         final RadioButton maleRadioButton = new RadioButton("gender", "male");
         final RadioButton femaleRadioButton = new RadioButton("gender", "female");
         final RadioButton otherRadioButton = new RadioButton("gender", "prefer to self-describe:");
-        final Label eduLabel = new Label("What is the highest level of education you have completed to this date?");
-        final RadioButton ISCED0RadioButton = new RadioButton("edu", "Early childhood education or no formal education (e.g. early childhood education and development, play school, reception, pre-primary, pre-school, educación inicial)");
-        final RadioButton ISCED1RadioButton = new RadioButton("edu", "Primary education (e.g. primary education, elementary education, basic education; typically ends around age 10 to 12 years)");
-        final RadioButton ISCED2RadioButton = new RadioButton("edu", "Lower secondary education (e.g. lower grades of secondary school, junior secondary school, middle school, junior high school)");
-        final RadioButton ISCED3RadioButton = new RadioButton("edu", "Upper secondary education (e.g. upper grades of secondary school, senior secondary school, senior high school; typically ends around age 17 to 18 years)");
-        final RadioButton ISCED4RadioButton = new RadioButton("edu", "Post-secondary non-tertiary education (e.g. technician diploma, primary professional education, préparation aux carrières administratives; usually designed for direct labour market entry)");
-        final RadioButton ISCED5RadioButton = new RadioButton("edu", "Short-cycle tertiary education (e.g. junior college, higher technical education, community college education, technician or advanced/higher vocational training, associate degree, bac+2; practically-based, occupationally-specific and prepare for the labour market but can also be a pathway to other tertiary education programmes)");
-        final RadioButton ISCED6RadioButton = new RadioButton("edu", "Bachelor’s or equivalent level");
-        final RadioButton ISCED7RadioButton = new RadioButton("edu", "Master’s or equivalent level");
-        final RadioButton ISCED8RadioButton = new RadioButton("edu", "Doctoral or equivalent level");
-        
-        		
+          		
         final TextBox genderBox = new TextBox();
         final Label projectTitleText = new Label();
         final HTML approvalHTML = new HTML();
@@ -146,17 +135,6 @@ public class Consent {
         genderPanel.add(femaleRadioButton);
         genderPanel.add(otherRadioButton);
         genderPanel.add(genderBox);
-        
-        eduPanel.add(eduLabel);
-        eduPanel.add(ISCED0RadioButton);
-        eduPanel.add(ISCED1RadioButton);
-        eduPanel.add(ISCED2RadioButton);
-        eduPanel.add(ISCED3RadioButton);
-        eduPanel.add(ISCED4RadioButton);
-        eduPanel.add(ISCED5RadioButton);
-        eduPanel.add(ISCED6RadioButton);
-        eduPanel.add(ISCED7RadioButton);
-        eduPanel.add(ISCED8RadioButton);
 
         mainPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 
@@ -222,34 +200,7 @@ public class Consent {
                 if (otherRadioButton.getValue()) {
                     validGender++;
                 }
-                
-                if (ISCED0RadioButton.getValue()) {
-                	validEdu++;
-            	}
-                if (ISCED1RadioButton.getValue()) {
-                	validEdu++;
-            	}
-                if (ISCED2RadioButton.getValue()) {
-                	validEdu++;
-            	}
-                if (ISCED3RadioButton.getValue()) {
-                	validEdu++;
-            	}
-                if (ISCED4RadioButton.getValue()) {
-                	validEdu++;
-            	}
-                if (ISCED5RadioButton.getValue()) {
-                	validEdu++;
-            	}
-                if (ISCED6RadioButton.getValue()) {
-                	validEdu++;
-            	}
-                if (ISCED7RadioButton.getValue()) {
-                	validEdu++;
-            	}
-                if (ISCED8RadioButton.getValue()) {
-                	validEdu++;
-            	}
+                       
 
                 if (box1.getValue()) {
                     boxesTicked++;
@@ -270,7 +221,7 @@ public class Consent {
                     boxesTicked++;
                 }
 
-                if (boxesTicked + validAge + validGender + validEdu == 9) {
+                if (boxesTicked + validAge + validGender == 8) {
                 	if (maleRadioButton.getValue()) {
                 		SessionInfo.gender=Names.GENDER_MALE;
                 	}
@@ -282,35 +233,7 @@ public class Consent {
                 	if (otherRadioButton.getValue()) {
                 		SessionInfo.gender=Names.GENDER_OTHER;
                 	}
-                	
-                	
-                	if (ISCED0RadioButton.getValue()) {
-                		SessionInfo.edu=0;
-                	}
-                	if (ISCED1RadioButton.getValue()) {
-                		SessionInfo.edu=1;
-                	}
-                	if (ISCED2RadioButton.getValue()) {
-                		SessionInfo.edu=2;
-                	}
-                	if (ISCED3RadioButton.getValue()) {
-                		SessionInfo.edu=3;
-                	}
-                	if (ISCED4RadioButton.getValue()) {
-                		SessionInfo.edu=4;
-                	}
-                	if (ISCED5RadioButton.getValue()) {
-                		SessionInfo.edu=5;
-                	}
-                	if (ISCED6RadioButton.getValue()) {
-                		SessionInfo.edu=6;
-                	}
-                	if (ISCED7RadioButton.getValue()) {
-                		SessionInfo.edu=7;
-                	}
-                	if (ISCED8RadioButton.getValue()) {
-                		SessionInfo.edu=8;
-                	}
+                	 	
                 	
                     SessionInfo.age = Integer.parseInt(ageBox.getText());
                     
@@ -336,10 +259,6 @@ public class Consent {
                         alertString = alertString + "Please indicate your gender\n";
                     }
                     
-                    if (validEdu == 0) {
-                        alertString = alertString + "Please indicate your highest level of education";
-                    }
-
                     Window.alert(alertString);
                 }
             }
