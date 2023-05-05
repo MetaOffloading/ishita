@@ -60,9 +60,9 @@ public class Initialise {
 				SessionInfo.participantID = Window.prompt("What is your Prolific ID?",  "");
 			}
 			
-			if (SessionInfo.sessionKey == null) {
+			//if (SessionInfo.sessionKey == null) {
 				SessionInfo.sessionKey = SessionKey.Get();
-			}
+			//}
 			
 			/*if (SessionInfo.prolificExperimentCode == null) {
 				SessionInfo.prolificExperimentCode = SessionInfo.experimentCode;
