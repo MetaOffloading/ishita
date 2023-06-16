@@ -16,10 +16,10 @@ public class SessionInfo {
 	public static int experimentType = Names.EXPERIMENT_PROLIFIC;
 	
 	//what is the name for this experiment?
-	public static String experimentCode="YW2";
+	public static String experimentCode="YW3";
 	
 	//which version of the experiment is this?
-	public static int experimentVersion=5;
+	public static int experimentVersion=1;
 	
 	//what is the minimum permitted screen size in pixels?
 	//if the screen is smaller than this the participant will be asked
@@ -44,7 +44,7 @@ public class SessionInfo {
 	//NB levels range from 0 to (maximum - 1)
 	public static String[] counterbalanceFactors = {"counterbtargetvals","reliability"};
 	public static int[] counterbalanceLevels = {2,2};
-	public static int[] specifiedLevels = {-1,-1};
+	public static int[] specifiedLevels = {-1,ExtraNames.UNRELIABLE};
 	
 	/*************************************************/
     /* no need to edit the settings below this point */

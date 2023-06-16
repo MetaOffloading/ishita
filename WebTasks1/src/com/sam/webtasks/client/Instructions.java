@@ -78,9 +78,9 @@ public class Instructions {
         	
         	break;
         case 32:
-        	i="This will only happen occasionally.<br><br>On three quarters of trials, you will drag "
+        	i="This will only happen occasionally.<br><br>On half of the trials, you will drag "
         			+ "all of the circles from 1 to 15, and they will never jump into "
-        			+ "new positions. On the remaining quarter of trials, the circles will jump into new positions "
+        			+ "new positions. On the remaining half of trials, the circles will jump into new positions "
         			+ "just once, at a randomly selected time between the 1st and 15th circle.<br><br>"
         			+ "This will be selected randomly, so you will not know at the start of the trial whether or "
         			+ "not the circles are going to jump into new positions.";
@@ -91,7 +91,7 @@ public class Instructions {
                     + "how <b>confident</b> you are that you can accurately perform the task.<br><br>";
         	
         	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i = i + "Remember that on a quarter of the trials, the circles will jump to different positions at a certain point.";
+        		i = i + "Remember that on half of the trials, the circles will jump to different positions at a certain point.";
         	} 
         	
             i = i + "<br><br>Please use the scale below to indicate what percentage of "
@@ -127,7 +127,7 @@ public class Instructions {
                     + "<b>when you use reminders</b>.<br><br>";
         	
         	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i = i + "Remember that on a quarter of trials, the circles will jump to different positions on the screen.";
+        		i = i + "Remember that on half of the trials, the circles will jump to different positions on the screen.";
         	} 
         	
         	i=i     + "<br><br>Please use the scale below to indicate what percentage of "
@@ -159,7 +159,7 @@ public class Instructions {
                     + "drag to the correct border with/without reminders.<br><br>";
         	
         	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i = i + "Please also keep in mind that no matter which option you choose, there will be 25% probability "
+        		i = i + "Please also keep in mind that no matter which option you choose, there will be 50% probability "
                         + "that during a trial, the circles will jump to different positions once.<br><br>";
         	}
                     

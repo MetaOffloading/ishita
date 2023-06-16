@@ -539,11 +539,15 @@ public class IOtask2Block {
 				Collections.swap(overwrite2, i, Random.nextInt(overwrite2.size()));
 			}
 			
-			//add two choice trials and one each forced internal/external
+			//add four choice trials and two each forced internal/external
 			rePositionTrials.add(overwrite0.get(0));
 			rePositionTrials.add(overwrite0.get(1));
+			rePositionTrials.add(overwrite0.get(2));
+			rePositionTrials.add(overwrite0.get(3));
 			rePositionTrials.add(overwrite1.get(0));
+			rePositionTrials.add(overwrite1.get(1));
 			rePositionTrials.add(overwrite2.get(0));
+			rePositionTrials.add(overwrite2.get(1));
 		}
 		
 		
