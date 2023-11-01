@@ -29,8 +29,6 @@
   <source path='iotask1'/>
   <source path='iotask2'/>
   <source path='perceptualTask'/>
-  <source path='timeBasedOffloading'/>
-  <source path='questionnaire'/>
 
   <!-- allow Super Dev Mode -->
   <add-linker name="xsiframe"/>

@@ -34,13 +34,8 @@ public class IOtask2PreTrial {
 		String displayString = "";
 
 		if (IOtask2BlockContext.showPoints()) {
-			if (IOtask2BlockContext.getPointDisplay() == Names.POINT_GAINLOSS) {
-			displayString = displayString + "You have " + IOtask2BlockContext.getTotalPoints()
-					+ " points (" + IOtask2BlockContext.getMoneyString() + ").<br><br>";
-			} else {
-				displayString = displayString + "You have scored " + IOtask2BlockContext.getTotalPoints()
-				+ " points.<br><br>";
-			}
+			displayString = displayString + "You have scored a total of " + IOtask2BlockContext.getTotalPoints()
+					+ " points so far.<br><br>";
 		}
 
 		int points = IOtask2BlockContext.currentTargetValue();
@@ -53,19 +48,13 @@ public class IOtask2PreTrial {
 					+ "Please touch the button below to start.";
 		} else {
 			displayString = displayString
-					+ "Please select the option that you prefer.<br><br>";
+					+ "This time you have a choice.<br><br>Please touch the option that you prefer.<br><br>";
 		}
 
 		displayText.setHTML(displayString);
-		
-		String s = "s";
-		
-		if (points == 1) {
-			s = "";
-		}
 
 		final Button reminderButton = new Button(
-				"Special circles worth<br><b>" + points + " </b>point" + s + "<br><br>" + "Reminders allowed");
+				"Special circles worth<br><b>" + points + " </b>points<br><br>" + "Reminders allowed");
 
 		if (points == IOtask2BlockContext.maxPoints()) {
 			reminderButton.setHTML(
@@ -126,10 +115,9 @@ public class IOtask2PreTrial {
 		// add panel to root
 		RootPanel.get().add(horizontalPanel);
 
-		// equalise the dimensions of the buttons
+		// equalise the widths of the buttons
 		if ((points > 0) & (points < IOtask2BlockContext.maxPoints())) {
 			reminderButton.setWidth(noReminderButton.getOffsetWidth() + "px");
-			noReminderButton.setHeight(reminderButton.getOffsetHeight() + "px");
 		}
 
 		reminderButton.addClickHandler(new ClickHandler() {
@@ -137,12 +125,10 @@ public class IOtask2PreTrial {
 				Date responseTime = new Date();
 				
 				IOtask2BlockContext.setReminderChoice(1);
-				IOtask2BlockContext.setReminderCost(IOtask2BlockContext.currentTargetValue() -
-												    IOtask2BlockContext.maxPoints());
 				
 				//,1, below indicates the output that reminders have been selected
 				
-				final String data = IOtask2BlockContext.getBlockNum() + "," + IOtask2BlockContext.getTrialNum() + "," + IOtask2BlockContext.currentTargetValue() + ",1," + (int) (responseTime.getTime() - instructionStart.getTime()); 
+				final String data = IOtask2BlockContext.getTrialNum() + "," + IOtask2BlockContext.currentTargetValue() + ",1," + (int) (responseTime.getTime() - instructionStart.getTime()); 
 
 				RootPanel.get().remove(horizontalPanel);
 
@@ -163,10 +149,9 @@ public class IOtask2PreTrial {
 				Date responseTime = new Date();
 				
 				IOtask2BlockContext.setReminderChoice(0);
-				IOtask2BlockContext.setReminderCost(0);
 				
 				//,0, below indicates that reminders have not been selected
-				final String data = IOtask2BlockContext.getBlockNum() + "," + IOtask2BlockContext.getTrialNum() + "," + IOtask2BlockContext.currentTargetValue() + ",0," + (int) (responseTime.getTime() - instructionStart.getTime()); 
+				final String data = IOtask2BlockContext.getTrialNum() + "," + IOtask2BlockContext.currentTargetValue() + ",0," + (int) (responseTime.getTime() - instructionStart.getTime()); 
 
 				RootPanel.get().remove(horizontalPanel);
 

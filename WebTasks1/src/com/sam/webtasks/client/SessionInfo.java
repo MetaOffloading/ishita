@@ -1,8 +1,5 @@
 package com.sam.webtasks.client;
 
-import java.util.Collections;
-
-import com.google.gwt.user.client.Random;
 import com.sam.webtasks.basictools.Names;
 
 public class SessionInfo {
@@ -11,15 +8,15 @@ public class SessionInfo {
 	/*******************************************************/
 		
 	//are we just testing locally? set this to true if so and it won't try to log data to the database
-	public static boolean localTesting=false;
-	public static boolean runInfoConsentPages=true; //should we do the info and consent pages?
+	public static boolean localTesting=true;
+	public static boolean runInfoConsentPages=false; //should we do the info and consent pages?
 	public static int experimentType = Names.EXPERIMENT_PROLIFIC;
 	
 	//what is the name for this experiment?
-	public static String experimentCode="YW3";
+	public static String experimentCode="SG1";
 	
 	//which version of the experiment is this?
-	public static int experimentVersion=1;
+	public static int experimentVersion=1;  
 	
 	//what is the minimum permitted screen size in pixels?
 	//if the screen is smaller than this the participant will be asked
@@ -42,9 +39,12 @@ public class SessionInfo {
 	//if you want to specify the level of any of those factors, set it with specifiedLevels. otherwise set to -1
 	//e.g. specifiedLevels = {-1, 2, -1}; would randomise factors 1 and 3, and set the second factor to level 2
 	//NB levels range from 0 to (maximum - 1)
-	public static String[] counterbalanceFactors = {"counterbtargetvals","reliability"};
+	public static String[] counterbalanceFactors = {"colourMeaning", "conditionOrder"};
 	public static int[] counterbalanceLevels = {2,2};
-	public static int[] specifiedLevels = {-1,ExtraNames.UNRELIABLE};
+	public static int[] specifiedLevels = {-1,ExtraNames.PENALTY_SECOND};
+	
+	//colourMeaning: which colour is associated with high reward?
+	//conditionOrder: is offloading allowed first or second?
 	
 	/*************************************************/
     /* no need to edit the settings below this point */
@@ -53,12 +53,11 @@ public class SessionInfo {
 	//participant info variables
 	public static boolean resume=false;      //is this a resumption of an earlier session?
 	public static String status="";          //status loaded from the database
-	public static int resumePosition=1;      //what position should we resume from, if the participant comes back?
+	public static int resumePosition=0;      //what position should we resume from, if the participant comes back?
 	public static int resumeProgress=0;      //what should the progress bar be set to if we resume?
 	public static int resumePoints=0;        //if we are scoring points, what number of points should we resume from?
 	public static int gender;
 	public static int age;
-	public static int edu;
 	public static String participantID;
 	public static String sessionKey="";      //use this to store a random session key
 	public static String rewardCode="";      //reward code to be revealed at end, in order to participant to claim paymen

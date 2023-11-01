@@ -13,10 +13,6 @@ public class IOtask2InitialiseTrial {
 	public static void Run() {		
 		IOtask2Block block = IOtask2BlockContext.getContext();
 
-		if (block.nTargetsVariable) {
-			block.nTargets = block.nTargetsList.get(block.currentTrial);
-		}
-
 		block.reminderFlag = -1;
 		block.backupReminderFlag = -1;
 
@@ -33,63 +29,12 @@ public class IOtask2InitialiseTrial {
 				}
 			}
 		}
-
+		
 		// set up surprise tests if specified trial-by-trial
 		if (block.surpriseTests.size() > 0) {
 			block.surpriseTest = block.surpriseTests.get(block.currentTrial);
 		}
 
-		// set up repositions
-		block.rePositions.clear();
-		
-		if (block.rePosition > 0) {
-			boolean doRepositions = true;
-			int firstRepos = block.nCircles+1;
-			int lastRepos = block.totalCircles-block.nCircles;
-
-			if (block.standard16block) {
-				doRepositions = false;
-				
-				if (block.rePositionTrials.contains(block.currentTrial)) {
-					doRepositions = true;
-					
-					if (block.overwriteChoice.get(block.currentTrial)==0) {
-						firstRepos = 3; //could reposition from number 3 onwards
-						lastRepos = block.nCircles-1;
-					}
-				}
-			}
-			
-			if (doRepositions) {	
-				for (int i = firstRepos; i < lastRepos; i++) { 
-					block.rePositions.add(i);
-				}
-
-				if (block.rePositions.size() == 0) { //not enough circles to set up the repositions
-					for (int i = 1; i < lastRepos; i++) { 
-						block.rePositions.add(i);
-					}
-				}
-
-				// shuffle repositions
-				for (int i = 0; i < block.rePositions.size(); i++) {
-					Collections.swap(block.rePositions, i, Random.nextInt(block.rePositions.size()));
-				}
-
-				// trim to the collect length
-				while (block.rePositions.size() > block.rePosition) {
-					block.rePositions.remove(block.rePositions.size()-1);
-				}
-
-				// sort into ascending order
-				Collections.sort(block.rePositions);
-			} else {
-				block.rePositions.add(-1);
-			}
-		} else {
-			block.rePositions.add(-1);
-		}
-		
 		// set up target directions
 		ArrayList<Integer> targetDirections = new ArrayList<Integer>();
 		ArrayList<Integer> possibleTargetPositions = new ArrayList<Integer>();
@@ -97,10 +42,10 @@ public class IOtask2InitialiseTrial {
 		boolean redosequence; // we can set this to true if the sequence needs to be redone
 
 		int randomisationCounter = 0;
-
+		
 		do {
 			randomisationCounter++;
-
+			
 			redosequence=false;
 
 			while (targetDirections.size() < block.nTargets) {
@@ -128,7 +73,7 @@ public class IOtask2InitialiseTrial {
 			// distribute them as evenly as possible
 
 			for (int i = block.nCircles; i < block.totalCircles; i++) { // start at block.nCircles because none of the
-				// initial circles on screen can be a target
+																		// initial circles on screen can be a target
 				possibleTargetPositions.add(i);
 			}
 
@@ -175,61 +120,60 @@ public class IOtask2InitialiseTrial {
 				// now empty binPositions variable
 				binPositions.clear();
 			}
+			
+			// now assign targets
 
-			// now assign targets if they are not being specified manually 
-			if (!block.specifyTargets) {
-				//first initialise all circles as nontargets
-				for (int i = 0; i < block.totalCircles; i++) {
-					block.targetSide[i] = 0;
-				}
-
-				//then add targets
-				for (int i = 0; i < block.nTargets; i++) {
-					block.targetSide[targetPositions.get(0)] = targetDirections.get(0);
-
-					targetPositions.remove(0);
-					targetDirections.remove(0);
-				}
+			// first set default side to zero
+			for (int i = 0; i < block.totalCircles; i++) {
+				block.targetSide[i] = 0;
 			}
 
+			// now add targets
+			for (int i = 0; i < block.nTargets; i++) {
+				block.targetSide[targetPositions.get(0)] = targetDirections.get(0);
+
+				targetPositions.remove(0);
+				targetDirections.remove(0);
+			}
+			
 			if (block.surpriseTest < 999) {
 				//we're running a surprise test, so count the number of targets that should be memorised at the point of the test
-
+	
 				int[] nTargets = new int[4];
 				nTargets[0]=0;
 				nTargets[1]=0;
 				nTargets[2]=0;
 				nTargets[3]=0;
-
+				
 				for (int c = block.surpriseTest; c < (block.surpriseTest + block.nCircles - 1); c++) {
 					nTargets[block.targetSide[c]]++;
 				}
-
+				
 				for (int side = 0; side < 4; side++) {
 					block.surpriseDrags[side]=nTargets[side];
 				}
-
+ 					
 				//now work out the expected number of targets
 
 				double targetProb = (double) block.nTargets / (double) (block.totalCircles - block.nCircles);
 				int expectedTargets = (int) (targetProb * (double) block.nCircles);
-
+				
 				//re-do the sequence if its the wrong number of targets
 				if ((nTargets[1]+nTargets[2])!=expectedTargets) {
 					redosequence=true;
-
+					
 					//set up a new position for the surprise test, in case that's the problem
 					block.surpriseTest = Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles);
 				}
-
+				
 				//re-do the sequence if the target directions are not matched in number
 				if (nTargets[1] != nTargets[2]) {
 					redosequence=true;
-
+					
 					//set up a new position for the surprise test, in case that's the problem
 					block.surpriseTest = Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles);
 				}
-
+				
 				if (randomisationCounter>999999) {
 					redosequence=false;
 				}

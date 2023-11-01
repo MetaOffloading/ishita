@@ -1,264 +1,138 @@
 package com.sam.webtasks.client;
 
-import com.google.gwt.user.client.ui.HTML;
 import com.sam.webtasks.basictools.Counterbalance;
-import com.sam.webtasks.iotask2.IOtask2BlockContext;
 
 public class Instructions {
 
 	public static String Get(int index) {
-		String i="";
-		 
-		switch(index) {
-		case 0:
-            i = "Thank you for taking part in this experiment. You may "
-                    + "only participate in this experiment if you have followed  "
-                    + "the link from the Prolific website. You "
-                    + "will not receive any compensation otherwise."
-                    + "<br><br>Please close any programs "
-                    + "that could cause distraction (e.g. email clients) and "
-                    + "maximise the size of this window.<br><br>This experiment will take "
-                    + "approximately 25 minutes. Please only continue when you think "
-                    + "you will be free from distractions for the next 25 minutes.<br><br>"
-                    + "As compensation for completing "
-                    + "this experiment, you will receive £3.75 via the Prolific "
-                    + "system.<br><br>You may withdraw at any time without penalty, simply by "
-                    + "closing your browser window. If you are having difficulty "
-                    + "running the experiment we recommend that you try using Google "
-                    + "Chrome. Unfortunately the experiment may not be compatible with all "
-                    + "systems and we apologise if you are not able to take part.";
-            break;
-        case 1:
-        	i="In this experiment, you will have a simple task to do.<br><br>"
-                    + "You will see several yellow circles inside a box. "
-                    + "Inside each circle will be a number. <br><br>"
-                    + "You can move them around using your mouse, or drag them with your finger if "
-                    + "you are using a touchscreen. Your task is to drag them to the bottom "
-                    + "of the box in sequence. "
-                    + "Please start by dragging 1 all the way to the bottom. "
-                    + "This will make it disappear. Then drag 2 to the bottom, then 3, "
-                    + "and so on.<br><br>Click below to practice the task.";
-            break;
-        case 2:
-			i="Now you will continue the same task, but sometimes there will be something else to "
-                    + "do.<br><br>As well as dragging each circle in turn to the "
-                    + "bottom of the screen, there will sometimes be special "
-                    + "circles that you should drag in another direction (left, top, or right) instead of towards the bottom.<br><br>"
-                    + "These special circles will initially appear in a different colour "
-                    + "when they are first shown on the screen, instead of yellow. This is an "
-                    + "instruction telling you where they should go.<br><br>"
-                    + "For example, suppose that the circle with 7 in it was first shown in blue "
-                    + "when it appeared on the screen. That would be an instruction that "
-                    + "when you get to 7 in the sequence, you should drag that circle "
-                    + "to the blue side of the box (left) instead of the bottom.<br><br>"
-                    + "You will still be able to drag any "
-                    + "circle to the bottom of the box, but you should try to "
-                    + "remember to drag these special circles to the instructed "
-                    + "location instead.<br><br>"
-                    + "Click below to practise the task.";
-            break;
-        case 3:
-			i = "Well done. Now it will get more difficult.<br><br>There will be a total of 15 "
-	        			+ "circles and 6 of them will be special ones that should go to one of the "
-	        			+ "coloured sides of the box.<br><br> "
-	        			+ "Don't worry if you do not remember all of them. That's fine - "
-	        			+ "just try to remember as many as you can.<br><br>"
-	        			+ "Click below to practise the task.";
-            break;
-        case 31:
-        	i = "";
-        	
-        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i=i+"Sometimes when you are doing the task the circles will jump to "
-                        + "different positions on the screen. "
-                        + "Click below to see an example of this.";
-        	} else {
-        		i=i+"Click below to practice again.";
-        	}
-        	
-        	break;
-        case 32:
-        	i="This will only happen occasionally.<br><br>On half of the trials, you will drag "
-        			+ "all of the circles from 1 to 15, and they will never jump into "
-        			+ "new positions. On the remaining half of trials, the circles will jump into new positions "
-        			+ "just once, at a randomly selected time between the 1st and 15th circle.<br><br>"
-        			+ "This will be selected randomly, so you will not know at the start of the trial whether or "
-        			+ "not the circles are going to jump into new positions.";
-        	break;
-        	
-        case 4:
-        	i="Now that you have had some practice with the experiment, we would like you to tell us "
-                    + "how <b>confident</b> you are that you can accurately perform the task.<br><br>";
-        	
-        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i = i + "Remember that on half of the trials, the circles will jump to different positions at a certain point.";
-        	} 
-        	
-            i = i + "<br><br>Please use the scale below to indicate what percentage of "
-                    + "the special circles you can correctly drag to the instructed side of the square, <b>on average</b>. 100% "
-                    + "would mean that you always get every single one correct. 0% would mean that you can never "
-                    + "get any of them correct.";
-            break;
-        case 5:
-        	i="Now we are going to explain a strategy that can make the task easier.<br><br>"
-                    + "When you see a special circle, you can set a reminder by immediately dragging it to a "
-                    + "different part of the box. For example, if a circle initially appeared in blue, you "
-                    + "could immediately drag it next to the blue (left) side of the box. Then, when "
-                    + "you get to that circle in the sequence its location would remind you where it is supposed "
-                    + "to go.<br><br>Please now try the task again, using this strategy to help you.";
-            break;
-        case 51:
-        	i = "";
-        	
-        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i=i+"Click below to practice again. This time, the circles will jump to new positions at "
-        				+ "a certain point. This means that you will lose the benefit "
-        				+ "of any reminders that you set, but you should still set reminders by dragging the special "
-        				+ "circles next to the side where they need to go.";
-        	} else {
-        		i=i+"Click below to practice again.";
-        	}
-        	
-        	break;
-        	
-        case 52:
-        	i="Now that you have had some practice using this strategy, we would like you to tell us "
-                    + "how <b>confident</b> you are that you can accurately perform the task "
-                    + "<b>when you use reminders</b>.<br><br>";
-        	
-        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i = i + "Remember that on half of the trials, the circles will jump to different positions on the screen.";
-        	} 
-        	
-        	i=i     + "<br><br>Please use the scale below to indicate what percentage of "
-                    + "the special circles you can correctly drag to the instructed side of the square, <b>on average</b>. 100% "
-                    + "would mean that you always get every single one correct. 0% would mean that you can never "
-                    + "get any of them correct.";
-            break;
-        case 6:
-        	i = "From now on, you will score points every time you drag one of the special circles "  
-					+ "to the correct border.<br><br>You should try to score as many points as you can.<br><br>"
-					+ "The top 50% of participants will receive an additional bonus payment of £0.50.<br><br>";
-        	break;
-        case 61:
-        	i = "Each time you do the task, you will have a choice between two options. One option will be to "
-        	        + "do the task <b>without reminders</b>. If you choose this option, you will always score "
-        	        + "10 points for every special circle you remember.<br><br>The other option will be to do the task "
-        	        + "<b>with reminders</b>. If you choose this option, each special circle will be worth fewer "
-        	        + "points. For example, you might be told that if you want to use reminders, each special "
-        	        + "circle will be worth only 5 points.<br><br>You should choose whichever option you think will "
-        	        + "score you the most points.<br><br>So if, for example, you thought you would earn more "
-        	        + "points by setting reminders and scoring 5 points for each special circle, you should choose "
-        	        + "this option. But if you thought you would score more points by just using your own memory "
-        	        + "and earning 10 points for each special circle, you should choose this option instead.";
-        	break;
-        case 62:
-        	i = "When you are presented with a choice like this, it is completely up to you. "
-                    + "You should do whatever you think will allow you to score the highest number of points. "
-                    + "Please keep in mind not only the points, but also how many special circles you are likely to "
-                    + "drag to the correct border with/without reminders.<br><br>";
-        	
-        	if(Counterbalance.getFactorLevel("reliability")==ExtraNames.UNRELIABLE) {
-        		i = i + "Please also keep in mind that no matter which option you choose, there will be 50% probability "
-                        + "that during a trial, the circles will jump to different positions once.<br><br>";
-        	}
-                    
-        	i = i	+ "If you use reminders, the exact number of points you can win for each special circle will vary, "
-        			+ "but it will always be less than 10. You will always be told exactly "
-        			+ "how many points the special circles are worth, before you make your choice.<br><br>"
-        			+ "Please make your decisions carefully to make sure you score as many points as possible. This "
-        			+ "will give you the best chance to earn the additional £0.50 bonus payment.<br><br>"
-        			+ "Click below for some more practice. From now on you will not receive any feedback about "
-        			+ "whether you have dragged the special circles to the correct side or not.";
-        	break;
-        case 7:
-        	i = "There is one last element to this task, which is that on a random number of blocks, "
-        			+ "the computer will overwrite your choices. Regardless of the choice you just "
-        			+ "made you will then be told whether reminders are <b>forbidden</b> or whether "
-        			+ "they are <b>mandatory</b>. Please pay attention to when this happens and "
-        			+ "carefully follow the instructions.<br><br>"
-        			+ "Click below to complete one last practice block.";
-        	break;
-        case 8:
-            i = "Now this task will start for real.<br><br>"
-                    + "Please perform the task as quickly and accurately as possible.<br><br>"
-                    + "You are not expected to remember the special circles every time, "
-                    + "just try your best. Please make wise decisions as to whether you would "
-                    + "like to use reminders or not so that you can maximise your points.<br><br>"
-                    + "From now on, a little timer will indicate how much time you have left to "
-                    + "move all circles. Please complete every block within 1 minute.<br><br>"
-                    + "One last thing: Sometimes the task will <b>finish early</b>, before any special "
-                    + "circles appear. This is not a bug, but intended to speed things up a little.<br><br>"
-                    + "You can start the main experiment when you are ready.";
-            break;
-        case 81:
-        	i="You have now finished the experiment. We would like you to estimate "
-                    + "how <b>accurate</b> you were when you performed the task just now.<br><br>"
-                    + "Please use the scale below to indicate what percentage of "
-                    + "the special circles you correctly dragged to the instructed side of the square, "
-                    + "<b>when you used your own memory</b>. 100% "
-                    + "would mean that you got every single one correct. 0% would mean that you did not "
-                    + "get any of them correct.";
-            break;
-        case 82:
-        	i="Now please estimate you accurate you were just now <b>when you used reminders</b>.";
-            break;
-        
-        case 9:
-			i = "You have now completed the experiment. Thank you for taking part.<br><br>"
-					+ "In the present study we tried to understand how people choose to set "
-					+ "reminders. Previous studies have shown that the simple act of "
-					+ "using a reminder may improve our memory for subsequent information. "
-					+ "In this study, we want to study the cognitive mechanisms behind "
-					+ "this phenomenon. In particular, we are interested in understanding "
-					+ "how confidence in your own memory might guide your decision to ask for "
-					+ "a reminder.<br><br>"
-					+ "Please click on the link below to receive your payment:<br><br>"
-					+ "<b><a href=\"https://app.prolific.co/submissions/complete?cc=C1ISPGGF\">"
-					+ "CLICK HERE</a></b>";
+		String i = "";
+		
+		String highVal = "", lowVal = "", highValLoc = "", lowValLoc = "";
+
+		if (Counterbalance.getFactorLevel("colourMeaning") == ExtraNames.BLUE_HIGHVAL) {
+			highVal = "blue";
+			lowVal = "pink";
+
+			highValLoc = "left";
+			lowValLoc = "right";
+		} else {
+			highVal = "pink";
+			lowVal = "blue";
+
+			highValLoc = "right";
+			lowValLoc = "left";
 		}
 
-		return(i);	
+		switch (index) {
+		case 0:
+			i = "In this experiment you will have a simple task to do.<br><br>"
+					+ "You will see several yellow circles inside a box. Inside each circle will be a number. <br><br>"
+					+ "You can move them around with your mouse. Your task is to drag them to the bottom of the box in sequence.<br><br>"
+					+ " Please start by dragging 1 all the way to the bottom. This will make it disappear. <br><br>"
+					+ "Then drag 2 to the bottom, then 3, and so on.";
+			break;
+
+		case 1:
+			i = "Now you will continue the same task, but sometimes there will be something else to do.<br><br>"
+					+ "As well as dragging each circle in turn to the bottom of the screen, there will sometimes be special circles that you should drag in another direction (left or right) instead of towards the bottom.<br><br>"
+					+ "These special circles will initially appear in a different colour when they are first shown on the screen, instead of yellow. This is an instruction telling you where they should go.<br><br>"
+					+ "For example, suppose that the circle with 7 in it was first shown in blue when it appeared on the screen. That would be an instruction that when you get to 7 in the sequence, you should drag that circle to the blue side of the box (left) instead of the bottom.<br><br>"
+					+ "You will still be able to drag any circle to the bottom of the box, but you should try to remember to drag these special circles to the instructed location instead.";
+			break;
+
+		case 2:
+			i = "Now it will get more difficult. There will be a total of " + Params.totalCircles + " circles, and " + Params.nTargets + " of them will be special ones that should go to one of the coloured sides of the box.<br><br>"
+					+ "This is a very hard task, and you will not be able to remember all of them. That's fine-just try to remember as many as you can.<br><br>"
+					+ "You will also see a countdown timer on the screen. Please try to complete the task before the timer runs out.";
+			break;
+			
+		case 3:
+			i = "From now on, you will score points every time you drag one of the special circles to the correct location.<br><br>"
+					+ "The <b>" + highVal + "</b> circles are worth more than the <b>" + lowVal
+					+ "</b> circles. Every time you drag a <b>" + highVal + "</b> circle to the " + highValLoc
+					+ " you will score <b>" + Params.highValuePoints + "</b> points. But you will only score <b>" + Params.lowValuePoints + "</b> points for dragging a <b>" + lowVal + "</b> circle "
+					+ "to the " + lowValLoc + ".<br><br>However, any time you drag an incorrect circle to the left or right, you will lose 1 point.<br><br>"
+							+ "These points are worth real money. Your payment at the end of the experiment "
+					+ "will be based on how many points you score. You will be paid £1 for every " + Params.pointsPerPound + " points.<br><br>"
+					+ "This means that you can earn over £9 for this experiment if you remember all the circles. <br><br>Click below to continue.";
+			break;
+		case 4:
+			i = "Now we are going to explain a strategy that can help you remember the special circles.<br><br>"
+					+ "As soon as you see a special circle, you can set a reminder by immediately dragging it next to the corresponding edge of the box (blue or pink). "
+					+ "Then, when you get to that circle in the sequence its location would remind you where it is supposed to go.<br><br>"
+					+ "Please now try the task again, using this strategy to help you.";
+			break;
+		case 5:
+			double targetProb = (double) Params.nTargets / (double) (Params.totalCircles - Params.nCircles);
+			int expectedTargets = (int) (0.5 * targetProb * (double) Params.nCircles);
+			
+			i = "One last thing: just occasionally, the screen will go blank and the circles will re-arrange themselves into new positions within the box.<br><br>"
+					+ "If this happens, you should try to remember which numbers were supposed to be dragged to each side of the box (e.g. drag 17 to the left), "
+					+ "and drag them to the left, right, and bottom accordingly.<br><br>You do not need to follow the numberical sequence, so you can drag the circles to "
+					+ "the edges of the box in whatever order you like. However, you can only drag a maximum of " + expectedTargets + " circles to the left and " + expectedTargets + " to the right.<br><br>"
+					+ "This will only happen occasionally, and you will not earn any money for remembering these circles. But please do your best.<br><br>"
+					+ "Click below to practice this.";
+			break;
+
+
+		case 6:
+			i = "Now the experiment will begin for real. The more points you score, the more money you will earn.<br><br>"
+					+ "You will start with an initial payment of £2 and earn additional money in addition to this.<br><br>"
+					+ "It is up to you whether you prefer to use your own memory to remember the special circles or "
+					+ "set reminders to help you. ";
+			
+			if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_FIRST) {
+				i = i + "But every time you set a reminder you will <b>lose two points</b>.";
+			}
+			
+			i = i + "<br><br>Click below to start."; 
+			break;
+			
+		case 7:
+			i = "You are now about to start the last part of the experiment. There will now be one difference.<br><br>";
+			
+			if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_SECOND) {
+				i = i + "Every time you set a reminder you will <b>lose two points</b>.";
+			} else {
+				i = i + "There will <b>no longer be any penalty</b> for setting reminders. You can set as many as you like "
+						+ "and this will not affect the number of points you earn.";
+			}
+			
+			
+			i = i + "<br><br>Click below to continue.";
+			break;
+			
+		case 8:
+			i = "You did not use the strategy to help you remember the special circles.<br><br>"
+					+ "As soon as you see a special circle, you can set a reminder by immediately dragging it next to the corresponding edge of the box (blue or pink). "
+					+ "Then, when you get to that circle in the sequence its location would remind you where it is supposed to go.<br><br>"
+					+ "<br><br>Please now try the task again, using this strategy to help you.";
+			break;
+		}
+
+		return (i);
 	}
-	
+
 	public static String InfoText() {
 		return ("We would like to invite you to participate in this research project. "
-                + "You should only participate if you want to; choosing not to take part "
-                + "will not disadvantage you in any way. Before you decide whether you "
-                + "want to take part, please read the following information carefully and "
-                + "discuss it with others if you wish. Ask us if there is anything that "
-                + "is not clear or you would like more information.<br><br>"
-                + "We are recruiting volunteers from the Prolific website to "
-                + "take part in an experiment aiming to improve our understanding of human "
-                + "attention and memory. You will see various objects on the screen like coloured, numbered circles, "
-                + "and you will be asked to move them with your computer mouse. Sometimes you will be asked to remember "
-                + "particular numbers and move the corresponding circle in a particular direction. You will be asked how "
-                + "confident you are in your ability to solve the task. "
-                + "The experiment "
-                + "will last approximately 25 minutes and you will receive a payment of £3.75 via the "
-                + "Prolific payment system. There are no anticipated risks or "
-                + "benefits associated with participation in this study.<br><br>"
-                + "It is up to you to decide whether or not to take part. If you choose "
-                + "not to participate, you won't incur any penalties or lose any "
-                + "benefits to which you might have been entitled. However, if you do "
-                + "decide to take part, you can print out this information sheet and "
-                + "you will be asked to fill out a consent form on the next page. "
-                + "Even after agreeing to take "
-                + "part, you can still withdraw at any time and without giving a reason. If you withdraw before the "
-                + "end of the experiment, we will not retain your data and it will not be analysed."
-                + "<br><br>All data will be collected and stored in accordance with the General Data Protection "
-                + "Regulations 2018. Personal information is stored separately from test results, and researchers "
-                + "on this project have no access to this data. Your personal information such as name and email "
-                + "address is held by Prolific but the researchers on this project have no acccess "
-                + "to this. Data from this experiment may be made available to the research community, for example by "
-                + "posting them on websites such as the Open Science Framework (<a href=\"http://osf.io\">http://osf.io</a>). "
-                + "It will not be possible to identify you from these data.<br><br>"
-                + "We aim to publish the results of this project in scientific journals and book chapters. Copies of the "
-                + "results can either be obtained directly from the scientific journals' websites or from us.<br><br>"
-                + "Should you wish to raise a complaint, please contact the Principal Investigator "
-                + "Professor Sam Gilbert (<a href=\\\"mailto:sam.gilbert@ucl.ac.uk\\\">sam.gilbert@ucl.ac.uk</a>). However, "
-                + "if you feel your complaint has not been handled to your satisfaction, please be aware that you can "
-                + "also contact the Chair of the UCL Research Ethics Committee (<a href=\"mailto:ethics@ucl.ac.uk\">ethics@ucl.ac.uk</a>).");
-    }
+				+ "You should only participate if you want to; choosing not to take part "
+				+ "will not disadvantage you in any way. Before you decide whether you "
+				+ "want to take part, please read the following information carefully and "
+				+ "discuss it with others if you wish. Ask us if there is anything that "
+				+ "is not clear or you would like more information.<br><br>"
+				+ "We are recruiting volunteers from the Amazon Mechanical Turk website to "
+				+ "take part in an experiment aiming to improve our understanding of human "
+				+ "attention and memory. Full instructions will be provided before the experiment begins. "
+				+ "The experiment " + "will last approximately 40 minutes. There are no anticipated risks or "
+				+ "benefits associated with participation in this study.<br><br>"
+				+ "It is up to you to decide whether or not to take part. If you choose "
+				+ "not to participate, you won't incur any penalties or lose any "
+				+ "benefits to which you might have been entitled. However, if you do "
+				+ "decide to take part, you can print out this information sheet and "
+				+ "you will be asked to fill out a consent form on the next page. " + "Even after agreeing to take "
+				+ "part, you can still withdraw at any time and without giving a reason. "
+				+ "<br><br>All data will be collected and stored in accordance with the UK Data "
+				+ "Protection Act 1998.");
+	}
 
 }

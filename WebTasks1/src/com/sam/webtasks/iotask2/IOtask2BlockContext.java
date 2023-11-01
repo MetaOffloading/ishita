@@ -40,11 +40,6 @@ public class IOtask2BlockContext {
 	public static boolean getUpdateProgress() {
 		return (blockContext.updateProgress);
 	}
-	
-	//update progress label?
-	public static boolean getUpdateProgressText() {
-		return (blockContext.updateProgressText);
-	}
 
 	// find out the current total number of points
 	public static int getTotalPoints() {
@@ -55,46 +50,30 @@ public class IOtask2BlockContext {
 		return (blockContext.showPointLabels);
 	}
 	
-	public static boolean getShowTargetFeedback() {
-		return (blockContext.showTargetFeedback);
-	}
-	
 	// find out the amount of money earned
 	public static String getMoneyString() {
-		String money = "";
 		int nPoints = blockContext.totalPoints;
 		
-		if (blockContext.pointDisplay == Names.POINT_GAINLOSS) {
-			int nCents = (int) Math.ceil( (float) (100*nPoints) / Params.pointsPerDollar);
-			int nDollars = nCents / 100;
-			int nRemainderCents = nCents % 100;
+		String money = "";
 		
-			money = money + "$" + nDollars + ".";
-		
-			if (nRemainderCents < 10) {
-				money = money + "0" + nRemainderCents;
-			} else {
-				money = money + nRemainderCents;
-			}
-		} else {
-			int nPence = (int) Math.ceil( (float) (100*nPoints) / Params.pointsPerPound);
-			int nPounds = nPence / 100;
-			int nRemainderPence = nPence % 100;
-		
-			money = money + "£" + nPounds + ".";
-		
-			if (nRemainderPence < 10) {
-				money = money + "0" + nRemainderPence;
-			} else {
-				money = money + nRemainderPence;
-			}
+		if (nPoints<0) {
+			money += "-";
+			nPoints = -nPoints;
 		}
-		return (money);	
-	}
-	
-	//how should points be displayed?
-	public static int getPointDisplay() {
-		return (blockContext.pointDisplay);
+		
+		int nPence = (int) Math.ceil( (float) (100*nPoints) / Params.pointsPerPound);
+		int nPounds = nPence / 100;
+		int nRemainderPence = nPence % 100;
+
+		money += "£" + nPounds + ".";
+		
+		if (nRemainderPence < 10) {
+			money = money + "0" + nRemainderPence;
+		} else {
+			money = money + nRemainderPence;
+		}
+		
+		return (money);
 	}
 	
 	// is the countdown timer running?
@@ -130,11 +109,6 @@ public class IOtask2BlockContext {
 	public static int currentTargetValue() {
 		return (blockContext.targetValues.get(blockContext.currentTrial));
 	}
-	
-	// what is the trial type for the current trial, are choices to be overwritten?
-	public static int currentOverwriteChoice() {
-		return (blockContext.overwriteChoice.get(blockContext.currentTrial));
-	}
 
 	// what is the maximum number of points (i.e. for targets in the no reminder
 	// condition)
@@ -145,16 +119,6 @@ public class IOtask2BlockContext {
 	// what is the current trial number
 	public static int getTrialNum() {
 		return (blockContext.currentTrial);
-	}
-	
-	// what is the total number of trials
-	public static int getNTrials() {
-		return (blockContext.nTrials);
-	}
-
-	// what reward frame are we in?
-	public static int getRewardFrame() {
-		return (blockContext.rewardFrame);
 	}
 
 	// use these methods to set and find out which is the next circle in the
@@ -265,7 +229,11 @@ public class IOtask2BlockContext {
 	public static void incrementHits() {
 		blockContext.nHits++;
 		
-		if ((blockContext.scorePoints)&&(!blockContext.gainLossExp)) {
+		if (blockContext.pointValues[blockContext.exitFlag] == Params.highValuePoints) {
+			blockContext.nHighValHits++;
+		}
+		
+		if (blockContext.scorePoints) {
 			if (blockContext.variablePoints) {
 				blockContext.totalPoints += blockContext.pointValues[blockContext.exitFlag];
 			} else {
@@ -274,25 +242,23 @@ public class IOtask2BlockContext {
 		}
 	}
 	
-	public static void decrementPoints() {
-		if (blockContext.scorePoints) {
-			if (blockContext.variablePoints) {
-				blockContext.totalPoints -= 1;
-			}
-		}
+	public static int getHighValHits() {
+		return (blockContext.nHighValHits);
 	}
 	
 	public static void incrementPoints(int nPoints) {
 		blockContext.totalPoints += nPoints;
 	}
 	
-	public static void setReminderCost(int reminderCost) {
-		blockContext.gainLossReminderCost = reminderCost;
+	public static int getReminderPenalty() {
+		return(blockContext.reminderPenalty);
 	}
 	
-	public static void chargeReminderCost() {
-		if (blockContext.gainLossExp) {
-			blockContext.totalPoints += blockContext.gainLossReminderCost;
+	public static void decrementPoints() {
+		if (blockContext.scorePoints) {
+			if (blockContext.variablePoints) {
+				blockContext.totalPoints -= 1;
+			}
 		}
 	}
 	
@@ -313,39 +279,6 @@ public class IOtask2BlockContext {
 	// how many points per target will be scored?
 	public static void setActualPoints(int newPoints) {
 		blockContext.actualPoints = newPoints;
-		
-		int rememberPoints = 0;
-		int forgetPoints = 0;
-		
-		
-		if (blockContext.gainLossExp) {
-			if (newPoints == blockContext.maxPoints) { //forced ext or forced int condition
-				rememberPoints = 10;
-			} else {
-				rememberPoints = newPoints;
-			}
-		}
-		
-		if (blockContext.rewardFrame == Names.LOSS_FRAME) {
-			rememberPoints -= blockContext.maxPoints;
-			forgetPoints -= blockContext.maxPoints;
-		}
-		
-		blockContext.gainLossRememberPoints = rememberPoints;
-		blockContext.gainLossForgetPoints = forgetPoints;
-	}
-	
-	//adjust points if this is a gain / loss experiment
-	public static void gainLossRemember() {
-		if (blockContext.gainLossExp) {
-			blockContext.totalPoints += blockContext.gainLossRememberPoints;
-		}
-	}
-	
-	public static void gainLossForget() {
-		if (blockContext.gainLossExp) {
-			blockContext.totalPoints += blockContext.gainLossForgetPoints;
-		}
 	}
 
 	// post-trial feedback

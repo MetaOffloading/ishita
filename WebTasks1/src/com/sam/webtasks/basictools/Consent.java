@@ -237,7 +237,7 @@ public class Consent {
                 	
                     SessionInfo.age = Integer.parseInt(ageBox.getText());
                     
-                    String data=""+SessionInfo.gender+","+SessionInfo.age+","+SessionInfo.edu+","+Counterbalance.getCounterbalancingCell();
+                    String data=""+SessionInfo.gender+","+SessionInfo.age+","+Counterbalance.getCounterbalancingCell();
              
                     RootPanel.get().remove(scrollPanel);
 
