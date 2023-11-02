@@ -246,6 +246,10 @@ public class IOtask2BlockContext {
 		return (blockContext.nHighValHits);
 	}
 	
+	public static void setHighValHits(int hits) {
+		blockContext.nHighValHits=hits;
+	}
+	
 	public static void incrementPoints(int nPoints) {
 		blockContext.totalPoints += nPoints;
 	}

@@ -54,7 +54,7 @@ public class Instructions {
 					+ "to the " + lowValLoc + ".<br><br>However, any time you drag an incorrect circle to the left or right, you will lose 1 point.<br><br>"
 							+ "These points are worth real money. Your payment at the end of the experiment "
 					+ "will be based on how many points you score. You will be paid £1 for every " + Params.pointsPerPound + " points.<br><br>"
-					+ "This means that you can earn over £9 for this experiment if you remember all the circles. <br><br>Click below to continue.";
+					+ "This means that you can earn over £8 for this experiment if you remember all the circles. <br><br>Click below to continue.";
 			break;
 		case 4:
 			i = "Now we are going to explain a strategy that can help you remember the special circles.<br><br>"
@@ -77,12 +77,14 @@ public class Instructions {
 
 		case 6:
 			i = "Now the experiment will begin for real. The more points you score, the more money you will earn.<br><br>"
-					+ "You will start with an initial payment of £2 and earn additional money in addition to this.<br><br>"
+					+ "You will start with an initial payment of £4.50 and earn additional money in addition to this.<br><br>"
 					+ "It is up to you whether you prefer to use your own memory to remember the special circles or "
 					+ "set reminders to help you. ";
 			
 			if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_FIRST) {
 				i = i + "But every time you set a reminder you will <b>lose two points</b>.";
+			} else {
+				i = i + "But every time you set a reminder you will <b>lose one point</b>.";
 			}
 			
 			i = i + "<br><br>Click below to start."; 
@@ -92,10 +94,9 @@ public class Instructions {
 			i = "You are now about to start the last part of the experiment. There will now be one difference.<br><br>";
 			
 			if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_SECOND) {
-				i = i + "Every time you set a reminder you will <b>lose two points</b>.";
+				i = i + "Every time you set a reminder you will <b>lose two points</b>, instead of one point.";
 			} else {
-				i = i + "There will <b>no longer be any penalty</b> for setting reminders. You can set as many as you like "
-						+ "and this will not affect the number of points you earn.";
+				i = i + "Every time you set a reminder you will <b>lose one point</b>, instead of two points.";
 			}
 			
 			

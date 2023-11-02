@@ -235,7 +235,7 @@ public class SequenceHandler {
 				IOtask2Block block7 = new IOtask2Block();
 				block7.logDragData=true; //log trial-by-trial data to the database
 				block7.blockNum = 7;
-				block7.totalPoints = (int) (2 * Params.pointsPerPound); //start with £2
+				block7.totalPoints = (int) (4.5 * Params.pointsPerPound); //start with £4.50
 				block7.showLivePoints=true;
 				block7.showPointLabels = true;
 				block7.nCircles=Params.nCircles;
@@ -256,7 +256,7 @@ public class SequenceHandler {
 				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_FIRST) {
 					block7.reminderPenalty = 2;
 				} else {
-					block7.reminderPenalty = 0;
+					block7.reminderPenalty = 1;
 				}
 				
 				block7.surpriseTests.add(999);
@@ -298,7 +298,7 @@ public class SequenceHandler {
 				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_SECOND) {
 					block8.reminderPenalty = 2;
 				} else {
-					block8.reminderPenalty = 0;
+					block8.reminderPenalty = 1;
 				}
 
 				

@@ -866,6 +866,7 @@ public class IOtask2RunTrial {
 							
 							//pretend that there were 10 hits
 							IOtask2BlockContext.setnHits(10);
+							IOtask2BlockContext.setHighValHits(10);
 
 							trialTimer.cancel();
 							IOtask2BlockContext.setCountdownTime(Params.countdownTime);

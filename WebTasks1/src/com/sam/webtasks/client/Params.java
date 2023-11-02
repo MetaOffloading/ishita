@@ -6,9 +6,9 @@ public class Params {
 	public final static int nTargets = 12;
 	public final static int lockOutTime = 0;
 	public final static int nTrials = 8;
-	public final static int pointsPerPound = 100;
+	public final static int pointsPerPound = 200;
 	public static int progress = 0;
-	public static int countdownTime = 150;
+	public static int countdownTime = 120;
 	public static int highValuePoints = 8;
 	public static int lowValuePoints = 2;
 }

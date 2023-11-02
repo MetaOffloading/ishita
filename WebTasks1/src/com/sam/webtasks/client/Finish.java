@@ -14,20 +14,20 @@ import com.sam.webtasks.iotask2.IOtask2BlockContext;
 
 public class Finish {
 	public static void Run() {
-		if (SessionInfo.experimentType == Names.EXPERIMENT_MTURK) {
+		if (SessionInfo.experimentType == Names.EXPERIMENT_PROLIFIC) {
 			ProgressBar.Hide();
 			
 			int totalPoints = IOtask2BlockContext.getTotalPoints();
 			
-			IOtask2BlockContext.incrementPoints(-2 * Params.pointsPerPound); //remove points corresponding to the flat $2
+			IOtask2BlockContext.incrementPoints((int) (-4.5 * Params.pointsPerPound)); //remove points corresponding to the flat £4.50
 
 			final HTML goodbyeText = new HTML("Thank you for taking part.<br><br>If you would like "
 					+ "to contact the experimenter you can email "
 					+ "<a href=\"mailto:sam.gilbert@ucl.ac.uk\">sam.gilbert@ucl.ac.uk</a>."
 					+ "<br><br>To complete the experiment and receive payment via Prolific, "
-					+ "please click <b><a href=\"https://google.com\">THIS LINK</a></b>."
+					+ "please click <b><a href=\"https://app.prolific.com/submissions/complete?cc=C1IVJN00\">THIS LINK</a></b>."
 					+ "<br><br>You scored a total of " + totalPoints + " points. This "
-					+ "means that as well as the £2 you will receive for completing the experiment, you will "
+					+ "means that as well as the £4.50 you will receive for completing the experiment, you will "
 					+ "also receive an additional bonus payment of " + IOtask2BlockContext.getMoneyString() + ". You will receive "
 					+ "this within 2 working days.");
 			final HTML commentText = new HTML("<br><br>Do you have any concerns about "
