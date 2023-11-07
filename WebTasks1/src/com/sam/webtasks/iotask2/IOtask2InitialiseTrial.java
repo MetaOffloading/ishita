@@ -66,60 +66,24 @@ public class IOtask2InitialiseTrial {
 
 			// shuffle target directions
 			for (int i = 0; i < targetDirections.size(); i++) {
-				Collections.swap(targetDirections, i, Random.nextInt(targetDirections.size()));
+				//Collections.swap(targetDirections, i, Random.nextInt(targetDirections.size()));
 			}
 
 			// set up where in the sequence of circles the targets appear. We try to
 			// distribute them as evenly as possible
-
-			for (int i = block.nCircles; i < block.totalCircles; i++) { // start at block.nCircles because none of the
-																		// initial circles on screen can be a target
-				possibleTargetPositions.add(i);
-			}
-
-			int binSize = possibleTargetPositions.size() / block.nTargets;
-			int remainingItems = possibleTargetPositions.size() % block.nTargets;
-
-			ArrayList<Integer> binSizes = new ArrayList<Integer>();
-
-			for (int i = 0; i < remainingItems; i++) {
-				binSizes.add(binSize + 1); // add a bin of minimum size + 1 for each of the remaining items
-			}
-
-			for (int i = 0; i < block.nTargets - remainingItems; i++) {
-				binSizes.add(binSize); // now add the standard bin size for the other items
-			}
-
-			// now shuffle the binSizes
-			for (int i = 0; i < binSizes.size(); i++) {
-				Collections.swap(binSizes, i, Random.nextInt(binSizes.size()));
-			}
+			
+			int nTargetPositions = block.totalCircles - block.nCircles;
+			int nTargetPositionsHalf = nTargetPositions/2;
 
 			// put actual target positions in this variable
 			ArrayList<Integer> targetPositions = new ArrayList<Integer>();
 
-			// set up binpositions variable, collecting all positions within a single bin
-			ArrayList<Integer> binPositions = new ArrayList<Integer>();
-
-			// now loop over the targets and pick middle of corresponding bin
-			for (int i = 0; i < block.nTargets; i++) {
-				for (int ii = 0; ii < binSizes.get(i); ii++) {
-					binPositions.add(possibleTargetPositions.get(0));
-					possibleTargetPositions.remove(0);
-				}
-
-				// get middle item from binPositions
-				int middle = binPositions.size() / 2;
-
-				if ((binPositions.size() % 2) == 0) { // if it's even randomly subtract 1 half the time
-					middle -= Random.nextInt(2);
-				}
-
-				targetPositions.add(binPositions.get(middle));
-
-				// now empty binPositions variable
-				binPositions.clear();
-			}
+			// add a position in the first half
+			targetPositions.add(block.nCircles + Random.nextInt(nTargetPositionsHalf));
+						
+			// add a position in the second half
+			targetPositions.add(block.totalCircles - 1 - Random.nextInt(nTargetPositionsHalf));
+						
 			
 			// now assign targets
 

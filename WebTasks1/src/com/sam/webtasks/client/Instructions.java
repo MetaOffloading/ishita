@@ -6,22 +6,6 @@ public class Instructions {
 
 	public static String Get(int index) {
 		String i = "";
-		
-		String highVal = "", lowVal = "", highValLoc = "", lowValLoc = "";
-
-		if (Counterbalance.getFactorLevel("colourMeaning") == ExtraNames.BLUE_HIGHVAL) {
-			highVal = "blue";
-			lowVal = "pink";
-
-			highValLoc = "left";
-			lowValLoc = "right";
-		} else {
-			highVal = "pink";
-			lowVal = "blue";
-
-			highValLoc = "right";
-			lowValLoc = "left";
-		}
 
 		switch (index) {
 		case 0:
@@ -48,66 +32,66 @@ public class Instructions {
 			
 		case 3:
 			i = "From now on, you will score points every time you drag one of the special circles to the correct location.<br><br>"
-					+ "The <b>" + highVal + "</b> circles are worth more than the <b>" + lowVal
-					+ "</b> circles. Every time you drag a <b>" + highVal + "</b> circle to the " + highValLoc
-					+ " you will score <b>" + Params.highValuePoints + "</b> points. But you will only score <b>" + Params.lowValuePoints + "</b> points for dragging a <b>" + lowVal + "</b> circle "
-					+ "to the " + lowValLoc + ".<br><br>However, any time you drag an incorrect circle to the left or right, you will lose 1 point.<br><br>"
+					+ "The BLUE circles are worth <b>";
+			
+			if (Counterbalance.getFactorLevel("conditionOrder")==ExtraNames.LOW_THEN_HIGH) {
+				i = i + "more";
+			} else {
+				i = i + "less";
+			}
+			
+			i = i + "</b> then the PINK circles. Every time you drag a BLUE circle to the LEFT " 
+					+ " you will score <b>" + Params.mediumValuePoints + "</b> points. But you will score <b>";
+			
+			if (Counterbalance.getFactorLevel("conditionOrder")==ExtraNames.LOW_THEN_HIGH) {
+				i = i + Params.lowValuePoints + "</b> point";
+			} else {
+				i = i + Params.highValuePoints + "</b> points";
+			}
+			
+			i = i + " for dragging a PINK circle "
+					+ "to the RIGHT.<br><br>Any time you drag an incorrect circle to the left or right, you will lose 1 point.<br><br>"
 							+ "These points are worth real money. Your payment at the end of the experiment "
-					+ "will be based on how many points you score. You will be paid £1 for every " + Params.pointsPerPound + " points.<br><br>"
-					+ "This means that you can earn over £8 for this experiment if you remember all the circles. <br><br>Click below to continue.";
+					+ "will be based on how many points you score. You will be paid " + Params.moneyPerPoint + " for each point.<br><br>"
+					+ "This means that you can earn over " + Params.possiblePayment + " for this experiment if you remember all the circles. <br><br>Click below to continue.";
 			break;
 		case 4:
 			i = "Now we are going to explain a strategy that can help you remember the special circles.<br><br>"
 					+ "As soon as you see a special circle, you can set a reminder by immediately dragging it next to the corresponding edge of the box (blue or pink). "
 					+ "Then, when you get to that circle in the sequence its location would remind you where it is supposed to go.<br><br>"
-					+ "Please now try the task again, using this strategy to help you.";
+					+ "You will only be able to do this for the <b>BLUE</b> circles, not the PINK ones.<br><br>"
+					+ "Please now try the task again, using this strategy to help you. Each time you set a reminder you will need "
+					+ "to wait three seconds before you can continue the task.";
 			break;
 		case 5:
-			double targetProb = (double) Params.nTargets / (double) (Params.totalCircles - Params.nCircles);
-			int expectedTargets = (int) (0.5 * targetProb * (double) Params.nCircles);
-			
-			i = "One last thing: just occasionally, the screen will go blank and the circles will re-arrange themselves into new positions within the box.<br><br>"
-					+ "If this happens, you should try to remember which numbers were supposed to be dragged to each side of the box (e.g. drag 17 to the left), "
-					+ "and drag them to the left, right, and bottom accordingly.<br><br>You do not need to follow the numberical sequence, so you can drag the circles to "
-					+ "the edges of the box in whatever order you like. However, you can only drag a maximum of " + expectedTargets + " circles to the left and " + expectedTargets + " to the right.<br><br>"
-					+ "This will only happen occasionally, and you will not earn any money for remembering these circles. But please do your best.<br><br>"
-					+ "Click below to practice this.";
-			break;
-
-
-		case 6:
 			i = "Now the experiment will begin for real. The more points you score, the more money you will earn.<br><br>"
-					+ "You will start with an initial payment of £4.50 and earn additional money in addition to this.<br><br>"
-					+ "It is up to you whether you prefer to use your own memory to remember the special circles or "
-					+ "set reminders to help you. ";
+					+ "You will start with an initial payment of " + Params.basePayment + " and earn additional money in addition to this.<br><br>"
+					+ "It is up to you whether you prefer to use your own memory to remember the special circles, "
+					+ "set reminders, or just drag them to the bottom if you don't want to earn the extra bonus money. ";
 			
-			if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_FIRST) {
-				i = i + "But every time you set a reminder you will <b>lose two points</b>.";
-			} else {
-				i = i + "But every time you set a reminder you will <b>lose one point</b>.";
-			}
-			
+
 			i = i + "<br><br>Click below to start."; 
 			break;
 			
-		case 7:
-			i = "You are now about to start the last part of the experiment. There will now be one difference.<br><br>";
+		case 6:
+			i = "You are now more than half way through. For the final part of the experiment there will now "
+					+ "be one difference.<br><br> The PINK circles are now worth <b>";
 			
-			if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_SECOND) {
-				i = i + "Every time you set a reminder you will <b>lose two points</b>, instead of one point.";
+			if (Counterbalance.getFactorLevel("conditionOrder")==ExtraNames.HIGH_THEN_LOW) {
+				i = i + Params.lowValuePoints + "</b> point instead of " + Params.highValuePoints;
 			} else {
-				i = i + "Every time you set a reminder you will <b>lose one point</b>, instead of two points.";
+				i = i + Params.highValuePoints + "</b> points instead of " + Params.lowValuePoints;
 			}
 			
+			i = i + ". So they are now worth ";
+			
+			if (Counterbalance.getFactorLevel("conditionOrder")==ExtraNames.HIGH_THEN_LOW) {
+				i = i + "<b>less</b> than the BLUE circles, not more.";
+			} else {
+				i = i + "<b>more</b> than the BLUE circles, not less.";
+			}
 			
 			i = i + "<br><br>Click below to continue.";
-			break;
-			
-		case 8:
-			i = "You did not use the strategy to help you remember the special circles.<br><br>"
-					+ "As soon as you see a special circle, you can set a reminder by immediately dragging it next to the corresponding edge of the box (blue or pink). "
-					+ "Then, when you get to that circle in the sequence its location would remind you where it is supposed to go.<br><br>"
-					+ "<br><br>Please now try the task again, using this strategy to help you.";
 			break;
 		}
 
@@ -121,10 +105,10 @@ public class Instructions {
 				+ "want to take part, please read the following information carefully and "
 				+ "discuss it with others if you wish. Ask us if there is anything that "
 				+ "is not clear or you would like more information.<br><br>"
-				+ "We are recruiting volunteers from the Amazon Mechanical Turk website to "
+				+ "We are recruiting volunteers from Prolific to "
 				+ "take part in an experiment aiming to improve our understanding of human "
 				+ "attention and memory. Full instructions will be provided before the experiment begins. "
-				+ "The experiment " + "will last approximately 40 minutes. There are no anticipated risks or "
+				+ "The experiment " + "will last approximately 30 minutes. There are no anticipated risks or "
 				+ "benefits associated with participation in this study.<br><br>"
 				+ "It is up to you to decide whether or not to take part. If you choose "
 				+ "not to participate, you won't incur any penalties or lose any "

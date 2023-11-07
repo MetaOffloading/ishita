@@ -112,24 +112,22 @@ public class SequenceHandler {
 				  } else {
 					  SequenceHandler.Next();
 				  }
-				break;		
-			case 6:
-				ClickPage.Run(Instructions.Get(2),  "Next");
-				break;			
-			case 7:// need add feedback 
+				break;	
+			  case 6:
+				  ClickPage.Run("Well done, that's correct. Click below to practice again.", "Next");
+				  break;
+			case 7:
 				IOtask2Block block3 = new IOtask2Block();
 				block3.logDragData=true; //log trial-by-trial data to the database
-				block3.blockNum=3;
-				block3.nCircles=Params.nCircles;
-				block3.totalCircles=Params.totalCircles;
-				block3.nTargets=Params.nTargets;	
+				block3.blockNum=2;
+				block3.totalCircles=12;
+				block3.nTargets=2;
 				block3.nTrials=1;
 				block3.variablePoints = true;
 				block3.pointValues = new int[] {0,1,1,0};
-				block3.countdownTimer = true;
-				
+		
 				block3.Run();
-			    break;			
+				break;			
 			case 8:
 				ClickPage.Run(Instructions.Get(3),  "Next");
 				break;
@@ -145,12 +143,15 @@ public class SequenceHandler {
 				block4.nTrials=1;
 				block4.variablePoints = true;
 				block4.countdownTimer = true;
+				block4.offloadCondition = Names.REMINDERS_VARIABLE;
+				block4.moveableSides = new boolean[] {false,true,false,false};
 				
-				if (Counterbalance.getFactorLevel("colourMeaning") == ExtraNames.BLUE_HIGHVAL) {
-					block4.pointValues = new int[] {0,Params.highValuePoints,Params.lowValuePoints,0};
+				
+				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.LOW_THEN_HIGH) {
+					block4.pointValues = new int[] {0,Params.mediumValuePoints,Params.lowValuePoints,0};
 					
 				} else {
-					block4.pointValues = new int[] {0,Params.lowValuePoints,Params.highValuePoints,0}; 
+					block4.pointValues = new int[] {0,Params.mediumValuePoints,Params.highValuePoints,0}; 
 				}
 
 				
@@ -162,8 +163,7 @@ public class SequenceHandler {
 			case 11:
 				IOtask2Block block5 = new IOtask2Block();
 				block5.logDragData=true; //log trial-by-trial data to the database
-				block5.blockNum = 5;
-				block5.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
+				block5.blockNum=5;
 				block5.showLivePoints=true;
 				block5.showPointLabels = true;
 				block5.nCircles=Params.nCircles;
@@ -172,53 +172,57 @@ public class SequenceHandler {
 				block5.nTrials=1;
 				block5.variablePoints = true;
 				block5.countdownTimer = true;
-				block5.moveableSides = new boolean[] {true,true,true,true};
 				block5.offloadCondition = Names.REMINDERS_VARIABLE;
+				block5.moveableSides = new boolean[] {false,true,false,false};
+				block5.reminderLockout = true;
+				block5.reminderLockoutTime = Params.reminderLockoutTime;
 				
-				if (Counterbalance.getFactorLevel("colourMeaning") == ExtraNames.BLUE_HIGHVAL) {
-					block5.pointValues = new int[] {0,Params.highValuePoints,Params.lowValuePoints,0};
+				
+				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.LOW_THEN_HIGH) {
+					block5.pointValues = new int[] {0,Params.mediumValuePoints,Params.lowValuePoints,0};
 					
 				} else {
-					block5.pointValues = new int[] {0,Params.lowValuePoints,Params.highValuePoints,0}; 
+					block5.pointValues = new int[] {0,Params.mediumValuePoints,Params.highValuePoints,0}; 
 				}
-					
+
+				
 				block5.Run();
 				break;
 			case 12:
-				if (IOtask2BlockContext.getHighValHits() < 5) {
-					SequenceHandler.SetPosition(SequenceHandler.GetPosition()-2);
-					ProgressBar.Decrement();
-					ProgressBar.Decrement();
-					ClickPage.Run(Instructions.Get(8), "Next");
-				} else {
-					ClickPage.Run(Instructions.Get(5), "Next");
-				}
-
+				ClickPage.Run(Instructions.Get(5), "Next");
 				break;
 			case 13:
+				//add progress bar to screen
+				ProgressBar.Initialise();
+				ProgressBar.Show();
+				ProgressBar.SetProgress(0,  (2*Params.nTrials));
+				Params.progress=0;
+				
 				IOtask2Block block6 = new IOtask2Block();
-				block6.logDragData=true;
-				block6.blockNum = 6;
-				block6.totalPoints = IOtask2BlockContext.getTotalPoints();
-				block6.showLivePoints = true;
+				block6.logDragData=true; //log trial-by-trial data to the database
+				block6.blockNum=6;
+				block6.showLivePoints=true;
+				block6.totalPoints = (int) (3 * Params.pointsPerPound); //start with £3.00
 				block6.showPointLabels = true;
 				block6.nCircles=Params.nCircles;
 				block6.totalCircles=Params.totalCircles;
 				block6.nTargets=Params.nTargets;
-				block6.nTrials=1;
-				block6.variablePoints=true;
-				block6.countdownTimer=true;
-				block6.moveableSides = new boolean[] {true,true,true,true};
-				
-				if (Counterbalance.getFactorLevel("colourMeaning") == ExtraNames.BLUE_HIGHVAL) {
-					block6.pointValues = new int[] {0,Params.highValuePoints,Params.lowValuePoints,0};	
-				} else {
-					block6.pointValues = new int[] {0,Params.lowValuePoints,Params.highValuePoints,0}; 
-				}
-				
+				block6.nTrials=Params.nTrials;
+				block6.variablePoints = true;
+				block6.countdownTimer = true;
 				block6.offloadCondition = Names.REMINDERS_VARIABLE;
+				block6.moveableSides = new boolean[] {false,true,false,false};
+				block6.reminderLockout = true;
+				block6.reminderLockoutTime = Params.reminderLockoutTime;
 				
-				block6.surpriseTest=12;
+				
+				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.LOW_THEN_HIGH) {
+					block6.pointValues = new int[] {0,Params.mediumValuePoints,Params.lowValuePoints,0};
+					
+				} else {
+					block6.pointValues = new int[] {0,Params.mediumValuePoints,Params.highValuePoints,0}; 
+				}
+
 				
 				block6.Run();
 				break;
@@ -226,108 +230,49 @@ public class SequenceHandler {
 				ClickPage.Run(Instructions.Get(6), "Next");
 				break;
 			case 15:
-				//add progress bar to screen
-				ProgressBar.Initialise();
-				ProgressBar.Show();
-				ProgressBar.SetProgress(0,  (2*Params.nTrials)-4);
-				Params.progress=0;
-				
 				IOtask2Block block7 = new IOtask2Block();
 				block7.logDragData=true; //log trial-by-trial data to the database
-				block7.blockNum = 7;
-				block7.totalPoints = (int) (4.5 * Params.pointsPerPound); //start with £4.50
+				block7.blockNum=7;
 				block7.showLivePoints=true;
+				block7.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
 				block7.showPointLabels = true;
 				block7.nCircles=Params.nCircles;
 				block7.totalCircles=Params.totalCircles;
 				block7.nTargets=Params.nTargets;
 				block7.nTrials=Params.nTrials;
 				block7.variablePoints = true;
-				block7.countdownTimer = true;	
+				block7.countdownTimer = true;
 				block7.offloadCondition = Names.REMINDERS_VARIABLE;
-				block7.moveableSides = new boolean[] {true,true,true,true};
+				block7.moveableSides = new boolean[] {false,true,false,false};
+				block7.reminderLockout = true;
+				block7.reminderLockoutTime = Params.reminderLockoutTime;
 				
-				if (Counterbalance.getFactorLevel("colourMeaning") == ExtraNames.BLUE_HIGHVAL) {
-					block7.pointValues = new int[] {0,Params.highValuePoints,Params.lowValuePoints,0};
-				} else {
-					block7.pointValues = new int[] {0,Params.lowValuePoints,Params.highValuePoints,0}; 
-				}
 				
-				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_FIRST) {
-					block7.reminderPenalty = 2;
-				} else {
-					block7.reminderPenalty = 1;
-				}
-				
-				block7.surpriseTests.add(999);
-				block7.surpriseTests.add(Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles));
-				block7.surpriseTests.add(999);
-				block7.surpriseTests.add(Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles));
-				block7.surpriseTests.add(999);
-				block7.surpriseTests.add(Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles));
-				block7.surpriseTests.add(999);
-				block7.surpriseTests.add(Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles));
-				block7.Run();
-				break;
-			case 16:
-				ClickPage.Run(Instructions.Get(7), "Next");
-				break;
-			case 17:
-				IOtask2Block block8 = new IOtask2Block();
-				block8.logDragData=true; //log trial-by-trial data to the database
-				block8.blockNum = 10;
-				block8.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
-				block8.showLivePoints=true;
-				block8.showPointLabels = true;
-				block8.nCircles=Params.nCircles;
-				block8.totalCircles=Params.totalCircles;
-				block8.nTargets=Params.nTargets;
-				block8.nTrials=Params.nTrials;
-				block8.variablePoints = true;
-				block8.countdownTimer = true;
-				block8.offloadCondition = Names.REMINDERS_VARIABLE;
-				block8.moveableSides = new boolean[] {true,true,true,true};
-				
-				if (Counterbalance.getFactorLevel("colourMeaning") == ExtraNames.BLUE_HIGHVAL) {
-					block8.pointValues = new int[] {0,Params.highValuePoints,Params.lowValuePoints,0};
+				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.HIGH_THEN_LOW) {
+					block7.pointValues = new int[] {0,Params.mediumValuePoints,Params.lowValuePoints,0};
 					
 				} else {
-					block8.pointValues = new int[] {0,Params.lowValuePoints,Params.highValuePoints,0}; 
-				}
-				
-				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.PENALTY_SECOND) {
-					block8.reminderPenalty = 2;
-				} else {
-					block8.reminderPenalty = 1;
+					block7.pointValues = new int[] {0,Params.mediumValuePoints,Params.highValuePoints,0}; 
 				}
 
 				
-				block8.surpriseTests.add(999);
-				block8.surpriseTests.add(Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles));
-				block8.surpriseTests.add(999);
-				block8.surpriseTests.add(Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles));
-				block8.surpriseTests.add(999);
-				block8.surpriseTests.add(Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles));
-				block8.surpriseTests.add(999);
-				block8.surpriseTests.add(Params.nCircles + Random.nextInt(Params.totalCircles - Params.nCircles));
-				
-				block8.Run();
+				block7.Run();
 				break;
-			case 18:
-				String d = Counterbalance.getFactorLevel("colourMeaning") + ",";
-				d = d + Counterbalance.getFactorLevel("conditionOrder") + ",";
+			case 16:
+				ProgressBar.Hide();
+				
+				String d = Counterbalance.getFactorLevel("conditionOrder") + ",";
 				d = d + IOtask2BlockContext.getMoneyString() + ",";
 				d = d + TimeStamp.Now();
 
 				PHP.logData("finish", d, true);
 				break;
-			case 19:
+			case 17:
 				PHP.UpdateStatus("finished");
 				break;
-			case 20:
+			case 18:
 				Finish.Run();
-				break;
-				   
+				break;		   
 			}
 			break; 
 		
