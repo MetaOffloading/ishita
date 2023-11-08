@@ -202,7 +202,7 @@ public class SequenceHandler {
 				block6.logDragData=true; //log trial-by-trial data to the database
 				block6.blockNum=6;
 				block6.showLivePoints=true;
-				block6.totalPoints = (int) (3 * Params.pointsPerPound); //start with £3.00
+				block6.totalPoints = (int) (Params.basePaymentDouble * Params.pointsPerPound);
 				block6.showPointLabels = true;
 				block6.nCircles=Params.nCircles;
 				block6.totalCircles=Params.totalCircles;

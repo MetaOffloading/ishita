@@ -19,7 +19,7 @@ public class Finish {
 			
 			int totalPoints = IOtask2BlockContext.getTotalPoints();
 			
-			IOtask2BlockContext.incrementPoints((int) (-3 * Params.pointsPerPound)); //remove points corresponding to the flat £4.50
+			IOtask2BlockContext.incrementPoints((int) (-Params.basePaymentDouble * Params.pointsPerPound)); //remove points corresponding to the flat base payment
 
 			final HTML goodbyeText = new HTML("Thank you for taking part.<br><br>If you would like "
 					+ "to contact the experimenter you can email "

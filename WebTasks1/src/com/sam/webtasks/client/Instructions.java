@@ -60,8 +60,10 @@ public class Instructions {
 					+ "As soon as you see a special circle, you can set a reminder by immediately dragging it next to the corresponding edge of the box (blue or pink). "
 					+ "Then, when you get to that circle in the sequence its location would remind you where it is supposed to go.<br><br>"
 					+ "You will only be able to do this for the <b>BLUE</b> circles, not the PINK ones.<br><br>"
-					+ "Please now try the task again, using this strategy to help you. Each time you set a reminder you will need "
-					+ "to wait three seconds before you can continue the task.";
+					+ "Please now try the task again, using this strategy to help you.";
+			
+			i = i + " Each time you set a reminder you will need "
+					+ "to wait 2.5 seconds before you can continue the task.";
 			break;
 		case 5:
 			i = "Now the experiment will begin for real. The more points you score, the more money you will earn.<br><br>"
