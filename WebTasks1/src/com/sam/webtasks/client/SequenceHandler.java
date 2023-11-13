@@ -62,18 +62,18 @@ public class SequenceHandler {
 			 ********************************************************************/		
 			case 1:
 				String data = "" + TimeStamp.Now();
-				
+
 				RootPanel.get().clear();
-				
+
 				PHP.logData("start", data, false);
-				
+
 				ClickPage.Run(Instructions.Get(0),  "Next");
 				break;		
 			case 2:
 				//reduce default size of circles, because there will be more on screen
 				IOtask2DisplayParams.circleRadius = 0.05;
 				IOtask2DisplayParams.circleTextSize = 20;
-				
+
 				IOtask2Block block1 = new IOtask2Block();
 				block1.logDragData=true; //log trial-by-trial data to the database
 				block1.blockNum=1;
@@ -92,7 +92,7 @@ public class SequenceHandler {
 				break;
 			case 3:
 				ClickPage.Run(Instructions.Get(1),  "Next");
-			    break;	
+				break;	
 			case 4:
 				IOtask2Block block2 = new IOtask2Block();
 				block2.logDragData=true; //log trial-by-trial data to the database
@@ -102,30 +102,31 @@ public class SequenceHandler {
 				block2.nTrials=1;
 				block2.variablePoints = true;
 				block2.pointValues = new int[] {0,1,1,0};
-		
+
 				block2.Run();
 				break;
-			  case 5:
-				  if (IOtask2BlockContext.getnHits() == 0) {
-					  SequenceHandler.SetPosition(SequenceHandler.GetPosition() - 2);
-					  ClickPage.Run("You did not drag the special circle to the instructed location. Please try again.", "Continue");
-				  } else {
-					  SequenceHandler.Next();
-				  }
+			case 5:
+				if (IOtask2BlockContext.getnHits() == 0) {
+					SequenceHandler.SetPosition(SequenceHandler.GetPosition() - 2);
+					ClickPage.Run("You did not drag the special circle to the instructed location. Please try again.", "Continue");
+				} else {
+					SequenceHandler.Next();
+				}
 				break;	
-			  case 6:
-				  ClickPage.Run("Well done, that's correct. Click below to practice again.", "Next");
-				  break;
+			case 6:
+				ClickPage.Run(Instructions.Get(2), "Next");
+				break;
 			case 7:
 				IOtask2Block block3 = new IOtask2Block();
 				block3.logDragData=true; //log trial-by-trial data to the database
 				block3.blockNum=2;
-				block3.totalCircles=12;
-				block3.nTargets=2;
+				block3.nCircles=Params.nCircles;
+				block3.totalCircles=Params.totalCircles;
+				block3.nTargets=Params.nTargets;
 				block3.nTrials=1;
 				block3.variablePoints = true;
 				block3.pointValues = new int[] {0,1,1,0};
-		
+
 				block3.Run();
 				break;			
 			case 8:
@@ -145,16 +146,16 @@ public class SequenceHandler {
 				block4.countdownTimer = true;
 				block4.offloadCondition = Names.REMINDERS_VARIABLE;
 				block4.moveableSides = new boolean[] {false,true,false,false};
-				
-				
+
+
 				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.LOW_THEN_HIGH) {
 					block4.pointValues = new int[] {0,Params.mediumValuePoints,Params.lowValuePoints,0};
-					
+
 				} else {
 					block4.pointValues = new int[] {0,Params.mediumValuePoints,Params.highValuePoints,0}; 
 				}
 
-				
+
 				block4.Run();
 				break;
 			case 10:
@@ -176,28 +177,31 @@ public class SequenceHandler {
 				block5.moveableSides = new boolean[] {false,true,false,false};
 				block5.reminderLockout = true;
 				block5.reminderLockoutTime = Params.reminderLockoutTime;
-				
-				
+
+
 				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.LOW_THEN_HIGH) {
 					block5.pointValues = new int[] {0,Params.mediumValuePoints,Params.lowValuePoints,0};
-					
+
 				} else {
 					block5.pointValues = new int[] {0,Params.mediumValuePoints,Params.highValuePoints,0}; 
 				}
 
-				
+
 				block5.Run();
 				break;
 			case 12:
 				ClickPage.Run(Instructions.Get(5), "Next");
 				break;
 			case 13:
+				ClickPage.Run(Instructions.Get(6), "Next");
+				break;
+			case 14:
 				//add progress bar to screen
 				ProgressBar.Initialise();
 				ProgressBar.Show();
-				ProgressBar.SetProgress(0,  (2*Params.nTrials));
+				ProgressBar.SetProgress(0,  Params.nTrials);
 				Params.progress=0;
-				
+
 				IOtask2Block block6 = new IOtask2Block();
 				block6.logDragData=true; //log trial-by-trial data to the database
 				block6.blockNum=6;
@@ -212,74 +216,36 @@ public class SequenceHandler {
 				block6.countdownTimer = true;
 				block6.offloadCondition = Names.REMINDERS_VARIABLE;
 				block6.moveableSides = new boolean[] {false,true,false,false};
+				block6.pointValues = new int[] {0,1,1,0}; //this ensures that the L/R box colours are correct
+				block6.announcePoints = true;
 				block6.reminderLockout = true;
 				block6.reminderLockoutTime = Params.reminderLockoutTime;
-				
-				
-				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.LOW_THEN_HIGH) {
-					block6.pointValues = new int[] {0,Params.mediumValuePoints,Params.lowValuePoints,0};
-					
-				} else {
-					block6.pointValues = new int[] {0,Params.mediumValuePoints,Params.highValuePoints,0}; 
-				}
 
-				
 				block6.Run();
-				break;
-			case 14:			
-				ClickPage.Run(Instructions.Get(6), "Next");
-				break;
+				break;	
 			case 15:
-				IOtask2Block block7 = new IOtask2Block();
-				block7.logDragData=true; //log trial-by-trial data to the database
-				block7.blockNum=7;
-				block7.showLivePoints=true;
-				block7.totalPoints = IOtask2BlockContext.getTotalPoints(); //carry over points from previous block
-				block7.showPointLabels = true;
-				block7.nCircles=Params.nCircles;
-				block7.totalCircles=Params.totalCircles;
-				block7.nTargets=Params.nTargets;
-				block7.nTrials=Params.nTrials;
-				block7.variablePoints = true;
-				block7.countdownTimer = true;
-				block7.offloadCondition = Names.REMINDERS_VARIABLE;
-				block7.moveableSides = new boolean[] {false,true,false,false};
-				block7.reminderLockout = true;
-				block7.reminderLockoutTime = Params.reminderLockoutTime;
-				
-				
-				if (Counterbalance.getFactorLevel("conditionOrder") == ExtraNames.HIGH_THEN_LOW) {
-					block7.pointValues = new int[] {0,Params.mediumValuePoints,Params.lowValuePoints,0};
-					
-				} else {
-					block7.pointValues = new int[] {0,Params.mediumValuePoints,Params.highValuePoints,0}; 
-				}
-
-				
-				block7.Run();
-				break;
-			case 16:
 				ProgressBar.Hide();
-				
+
 				String d = Counterbalance.getFactorLevel("conditionOrder") + ",";
 				d = d + IOtask2BlockContext.getMoneyString() + ",";
 				d = d + TimeStamp.Now();
 
 				PHP.logData("finish", d, true);
 				break;
-			case 17:
+			case 16:
 				PHP.UpdateStatus("finished");
 				break;
-			case 18:
+			case 17:
 				Finish.Run();
 				break;		   
 			}
 			break; 
-		
 
-		/********************************************/
-		/* no need to edit the code below this line */
-		/********************************************/
+
+
+			/********************************************/
+			/* no need to edit the code below this line */
+			/********************************************/
 
 		case 1: // initialisation loop
 			switch (sequencePosition.get(1)) {
@@ -338,7 +304,7 @@ public class SequenceHandler {
 				break;
 			}
 			break;
-			
+
 		case 2: // IOtask1 loop
 			switch (sequencePosition.get(2)) {
 			/*************************************************************
@@ -370,10 +336,10 @@ public class SequenceHandler {
 				SequenceHandler.Next();
 				break;
 				// TODO: mechanism to give post-trial feedback?
-				
+
 			}
 			break;
-			
+
 		case 3: //IOtask2 loop
 			switch (sequencePosition.get(3)) {
 			/*************************************************************
@@ -384,11 +350,11 @@ public class SequenceHandler {
 				// first check if the block has ended. If so return control to the main sequence
 				// handler
 				IOtask2Block block = IOtask2BlockContext.getContext();
-				
+
 				if (block.currentTrial == block.nTrials) {
 					SequenceHandler.SetLoop(0,  false);
 				}
-				
+
 				SequenceHandler.Next();
 				break;
 			case 2:
@@ -399,12 +365,39 @@ public class SequenceHandler {
 				if (IOtask2BlockContext.currentTargetValue() > -1) {
 					IOtask2PreTrial.Run();
 				} else { //otherwise just skip to the start of the block
-					if (IOtask2BlockContext.getTrialNum() > 0) {
-						ClickPage.Run("Ready?", "Continue");
+					if (IOtask2BlockContext.getAnnouncePoints()) {
+						int trialNum = IOtask2BlockContext.getTrialNum();
+
+						String msg = "This time, the PINK circles will be worth <b>";
+
+						if (((trialNum+Counterbalance.getFactorLevel("conditionOrder")) % 2) == 0) {
+							int[] pointValues = {0,Params.mediumValuePoints,Params.lowValuePoints,0};
+
+							IOtask2BlockContext.setPointValues(pointValues);	
+
+							msg += "" + Params.lowValuePoints + "</b> ";
+							
+							if (Params.lowValuePoints==1) {
+								msg += "point";
+							} else {
+								msg += "points";
+							}
+						} else {
+							int[] pointValues = {0,Params.mediumValuePoints,Params.highValuePoints,0};
+
+							IOtask2BlockContext.setPointValues(pointValues);	
+
+							msg += "" + Params.highValuePoints + "</b> points";
+						}
+
+						msg += ".<br><br>Ready?";	
+
+						ClickPage.Run(msg, "Continue");
 					} else {
 						SequenceHandler.Next();
 					}
-				}
+				} 
+
 				break;
 			case 4:
 				//now run the trial
@@ -423,10 +416,10 @@ public class SequenceHandler {
 				SequenceHandler.Next();
 				break;
 			}
-		
+
 		}
 	}
-	
+
 	private static ArrayList<Integer> sequencePosition = new ArrayList<Integer>();
 	private static int whichLoop;
 
@@ -442,7 +435,7 @@ public class SequenceHandler {
 			sequencePosition.set(whichLoop, 0);
 		}
 	}
-	
+
 	// get current loop
 	public static int GetLoop() {
 		return (whichLoop);

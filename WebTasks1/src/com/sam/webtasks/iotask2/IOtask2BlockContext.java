@@ -250,6 +250,18 @@ public class IOtask2BlockContext {
 		blockContext.nHighValHits=hits;
 	}
 	
+	public static int[] getPointValues() {
+		return(blockContext.pointValues);
+	}
+	
+	public static boolean getAnnouncePoints() {
+		return(blockContext.announcePoints);
+	}
+	
+	public static void setPointValues(int[] pointValues) {
+		blockContext.pointValues = pointValues;
+	}
+	
 	public static void incrementPoints(int nPoints) {
 		blockContext.totalPoints += nPoints;
 	}

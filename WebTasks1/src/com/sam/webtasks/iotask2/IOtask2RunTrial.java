@@ -176,8 +176,10 @@ public class IOtask2RunTrial {
 		final HTML rightPoints = new HTML("");
 
 		if (block.showPointLabels) {
-			leftPoints.setHTML("+" + block.pointValues[1]);
-			rightPoints.setHTML("+" + block.pointValues[2]);
+			int[] pointValues = IOtask2BlockContext.getPointValues();
+			
+			leftPoints.setHTML("+" + pointValues[1]);
+			rightPoints.setHTML("+" + pointValues[2]);
 			leftPoints.addStyleName("pointHTML");
 			rightPoints.addStyleName("pointHTML");
 		}

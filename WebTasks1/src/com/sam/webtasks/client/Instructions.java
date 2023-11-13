@@ -25,9 +25,10 @@ public class Instructions {
 			break;
 
 		case 2:
-			i = "Now it will get more difficult. There will be a total of " + Params.totalCircles + " circles, and " + Params.nTargets + " of them will be special ones that should go to one of the coloured sides of the box.<br><br>"
-					+ "This is a very hard task, and you will not be able to remember all of them. That's fine-just try to remember as many as you can.<br><br>"
-					+ "You will also see a countdown timer on the screen. Please try to complete the task before the timer runs out.";
+			i = "Well done, that's correct.<br><br>"
+			  		+ "Click below to practice again.<br><br>"
+			  		+ "This time the task will be harder. You will always start with a blue circle, "
+			  		+ "then you will get several pink circles afterwards. Just try to remember as many as you can.";
 			break;
 			
 		case 3:
@@ -53,7 +54,7 @@ public class Instructions {
 					+ "to the RIGHT.<br><br>Any time you drag an incorrect circle to the left or right, you will lose 1 point.<br><br>"
 							+ "These points are worth real money. Your payment at the end of the experiment "
 					+ "will be based on how many points you score. You will be paid " + Params.moneyPerPoint + " for each point.<br><br>"
-					+ "This means that you can earn over " + Params.possiblePayment + " for this experiment if you remember all the circles. <br><br>Click below to continue.";
+					+ "This means that you can earn up to " + Params.possiblePayment + " for this experiment if you remember all the circles. <br><br>Click below to continue.";
 			break;
 		case 4:
 			i = "Now we are going to explain a strategy that can help you remember the special circles.<br><br>"
@@ -63,37 +64,32 @@ public class Instructions {
 					+ "Please now try the task again, using this strategy to help you.";
 			
 			i = i + " Each time you set a reminder you will need "
-					+ "to wait 2.5 seconds before you can continue the task.";
+					+ "to wait " + Params.reminderLockoutString + " before you can continue the task.";
 			break;
 		case 5:
 			i = "Now the experiment will begin for real. The more points you score, the more money you will earn.<br><br>"
 					+ "You will start with an initial payment of " + Params.basePayment + " and earn additional money in addition to this.<br><br>"
 					+ "It is up to you whether you prefer to use your own memory to remember the special circles, "
-					+ "set reminders, or just drag them to the bottom if you don't want to earn the extra bonus money. ";
+					+ "set reminders, or just ignore them if you don't want to earn the extra bonus money. ";
 			
 
 			i = i + "<br><br>Click below to start."; 
 			break;
 			
 		case 6:
-			i = "You are now more than half way through. For the final part of the experiment there will now "
-					+ "be one difference.<br><br> The PINK circles are now worth <b>";
+			i = "One last thing. From now on, the value of the PINK circles will vary each time you do the task. "
+					+ "Sometimes they will be worth <b>" + Params.lowValuePoints + "</b> point";
 			
-			if (Counterbalance.getFactorLevel("conditionOrder")==ExtraNames.HIGH_THEN_LOW) {
-				i = i + Params.lowValuePoints + "</b> point instead of " + Params.highValuePoints;
-			} else {
-				i = i + Params.highValuePoints + "</b> points instead of " + Params.lowValuePoints;
+			if (Params.lowValuePoints>1) {
+				i += "s";
 			}
 			
-			i = i + ". So they are now worth ";
+			i += " and sometimes they will be worth <b>" + Params.highValuePoints + "</b> points.<br><br>"
+					+ "You will always be told how much they are worth, before you start the task. You can "
+					+ "use this information to decide how important it is to remember the PINK circles, and "
+					+ "whether you would prefer to set a reminder for the BLUE circle. It is completely "
+					+ "up to you.<br><br>Click below to start.";
 			
-			if (Counterbalance.getFactorLevel("conditionOrder")==ExtraNames.HIGH_THEN_LOW) {
-				i = i + "<b>less</b> than the BLUE circles, not more.";
-			} else {
-				i = i + "<b>more</b> than the BLUE circles, not less.";
-			}
-			
-			i = i + "<br><br>Click below to continue.";
 			break;
 		}
 

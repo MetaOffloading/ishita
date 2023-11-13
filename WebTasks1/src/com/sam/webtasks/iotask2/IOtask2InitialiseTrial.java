@@ -47,7 +47,7 @@ public class IOtask2InitialiseTrial {
 			randomisationCounter++;
 			
 			redosequence=false;
-
+		    /*	
 			while (targetDirections.size() < block.nTargets) {
 				if (block.variablePoints) {
 					// if we have variable points, only set targets for sides of the square
@@ -62,6 +62,12 @@ public class IOtask2InitialiseTrial {
 					targetDirections.add(2);
 					targetDirections.add(3);
 				}
+			}*/
+			
+			targetDirections.add(1);
+			
+			while (targetDirections.size() < block.nTargets) {
+				targetDirections.add(2);
 			}
 
 			// shuffle target directions
@@ -73,18 +79,16 @@ public class IOtask2InitialiseTrial {
 			// distribute them as evenly as possible
 			
 			int nTargetPositions = block.totalCircles - block.nCircles;
-			int nTargetPositionsHalf = nTargetPositions/2;
+			int nTargetPositionsDivided = nTargetPositions/block.nTargets;
 
 			// put actual target positions in this variable
 			ArrayList<Integer> targetPositions = new ArrayList<Integer>();
 
-			// add a position in the first half
-			targetPositions.add(block.nCircles + Random.nextInt(nTargetPositionsHalf));
+			// set up positions
+			for (int i = 0; i < block.nTargets; i++) {
+				targetPositions.add(block.nCircles + (i*nTargetPositionsDivided) + Random.nextInt(nTargetPositionsDivided));
+			}
 						
-			// add a position in the second half
-			targetPositions.add(block.totalCircles - 1 - Random.nextInt(nTargetPositionsHalf));
-						
-			
 			// now assign targets
 
 			// first set default side to zero
