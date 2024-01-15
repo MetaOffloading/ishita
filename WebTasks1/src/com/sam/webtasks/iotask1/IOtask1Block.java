@@ -53,6 +53,12 @@ public class IOtask1Block {
 	
 	//should we ask arithmetic questions?
 	public boolean askArithmetic = false;
+	
+	//should we include thought probes?
+	public boolean thoughtProbe = false;
+	
+	public int[] thoughtProbeTrials;
+
 
 	//this method actually runs the block
 	public void Run() {
@@ -118,6 +124,9 @@ public class IOtask1Block {
 	
 	//after which circle should we interrupt the participant with an arithmetic question?
 	public int quizCircle = -1; //-1 means that there will be no interruption
+	
+	//after which circle should we interrupt the participant with a thought probe?
+	public int probeCircle = -1;
 	
 	//this flag is set when a red flash has been triggered (incorrect circle in the sequence has been dragged out)
 	//we use this to avoid getting in an endless loop of red flashes

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.google.gwt.user.client.Window;
 import com.sam.webtasks.basictools.Names;
+import com.sam.webtasks.basictools.ProgressBar;
 
 public class IOtask1BlockContext {
 	private static IOtask1Block blockContext;
@@ -118,6 +119,7 @@ public class IOtask1BlockContext {
 	// increment the trial number at the end of a trial
 	public static void incrementTrialNumber() {
 		blockContext.currentTrial++;
+		ProgressBar.Increment();
 	}
 
 	// set and check the doubleClickFlag
@@ -174,6 +176,18 @@ public class IOtask1BlockContext {
 			// -1 so the question does not get asked again
 			blockContext.quizCircle = -1;
 
+			return (true);
+		} else {
+			return (false);
+		}
+	}
+	
+	public static boolean probeCircle() {
+		if (blockContext.clickedCircle == blockContext.probeCircle) {
+
+			//return probe circle to -1
+			blockContext.probeCircle = -1;
+			
 			return (true);
 		} else {
 			return (false);

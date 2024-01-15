@@ -19,7 +19,7 @@ public class WebTasks implements EntryPoint {
 	IOtask2Block IOtask2BlockInitialiser = new IOtask2Block();
 		
 	public void onModuleLoad() {
-		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {	      
+		/*GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {	      
 		      @Override
 		      public void onUncaughtException(Throwable e) {
 		        // TODO Auto-generated method stub
@@ -30,7 +30,7 @@ public class WebTasks implements EntryPoint {
 		        Window.alert("Uncaught exception. Loop: " + SequenceHandler.GetLoop() + ", Position: "
 	        			 + SequenceHandler.GetPosition() + "\n" + msg);
 		      }
-		    });
+		    });*/
 		
 		// set the sequence handler to the initialisation loop and start from the beginning
 		SequenceHandler.SetLoop(1,true); 

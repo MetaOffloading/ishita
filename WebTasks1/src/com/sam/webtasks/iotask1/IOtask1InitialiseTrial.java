@@ -2,10 +2,12 @@
 package com.sam.webtasks.iotask1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
 import com.google.gwt.user.client.Random;
+import com.google.gwt.user.client.Window;
 import com.sam.webtasks.basictools.ClickPage;
 
 public class IOtask1InitialiseTrial {
@@ -73,6 +75,20 @@ public class IOtask1InitialiseTrial {
 			if (block.askArithmetic) {
 				//select a random position before the first target circle
 				block.quizCircle = Random.nextInt(targetSeqPositionsSorted.get(0));
+			}
+			
+			if (block.thoughtProbe) {
+				if (Random.nextInt(3) == 0) {
+					block.probeCircle = targetSeqPositionsSorted.get(0)-1;
+				}
+				/*
+				for (int i = 0; i < block.thoughtProbeTrials.length; i++) {
+					if (block.currentTrial == block.thoughtProbeTrials[i]) {
+						block.probeCircle = targetSeqPositionsSorted.get(0)-1;
+					}
+				}*/
+				
+				
 			}
 			
 			//add additional instructions for targets

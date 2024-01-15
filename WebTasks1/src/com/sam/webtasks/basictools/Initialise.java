@@ -54,7 +54,9 @@ public class Initialise {
 			//get session key from query line
 			//SessionInfo.sessionKey = Window.Location.getParameter("SESSION_ID");
 			//SessionInfo.prolificExperimentCode = Window.Location.getParameter("STUDY_ID");
-			SessionInfo.participantID = Window.Location.getParameter("PROLIFIC_PID");
+			//SessionInfo.participantID = Window.Location.getParameter("PROLIFIC_PID");
+			
+			SessionInfo.participantID = "test";
 			
 			if (SessionInfo.participantID == null) {
 				SessionInfo.participantID = Window.prompt("What is your Prolific ID?",  "");
