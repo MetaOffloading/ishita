@@ -119,9 +119,12 @@ public class IOtask1BlockContext {
 	// increment the trial number at the end of a trial
 	public static void incrementTrialNumber() {
 		blockContext.currentTrial++;
-		ProgressBar.Increment();
+		
+		if (blockContext.incrementProgress) {
+			ProgressBar.Increment();
+		}
 	}
-
+	
 	// set and check the doubleClickFlag
 	public static void setDoubleClickFlag(boolean doubleClickFlag) {
 		blockContext.doubleClickFlag = doubleClickFlag;

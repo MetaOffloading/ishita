@@ -8,14 +8,92 @@ public class Instructions {
 		String i = "";
 
 		switch (index) {
-		case 0:
-			i = "This is the first page of instructions.";
-			break;
 		case 1:
-			i = "This is the second page of instructions<br>with a line break "
-					+ "and some <b>bold</b> test.";
+			i="In this experiment you will have a simple task to do.<br><br>"
+                  + "You will see several yellow circles inside a box. "
+                  + "Inside each circle will be a number. <br><br>"
+                  + "Using your mouse, you can click on these circles to "
+                  + "move them around. Your task is to drag them to the bottom "
+                  + "of the box in sequence. "
+                  + "Please start by dragging 1 all the way to the bottom. "
+                  + "This will make it disappear. Then drag 2 to the bottom, then 3, "
+                  + "and so on.<br><br>"
+                  + "Click below to practise the task.";
 			break;
-
+		case 2:
+			i="Now you will continue the same task, but sometimes there will be something else to "
+					+ "do.<br><br>As well as dragging each circle in turn to the "
+					+ "bottom of the screen, you will be instructed to drag one or more "
+					+ "of the circles to another part of the box. For "
+					+ "instance, you might be told that you should drag number 5 "
+					+ "to the left of the box instead of "
+					+ "the bottom.<br><br>You will still be able to drag any "
+					+ "circle to the bottom of the box, but you should try to "
+					+ "remember to drag these special circles to the instructed "
+					+ "location. ";
+			break;
+		case 3:
+			i="Now you will do the task again, but this time there will be three special "
+                  + "circles to remember.";
+			break;
+		case 4:
+			i="One last thing: the task may interrupt at certain points, and a screen will "
+					+ "appear asking you to tell us how much your attention has drifted from "
+					+ "the circle-dragging task.<br><br>You will be asked to answer "
+					+ "on a scale of 1 (I was 100% focused on this task and not distracted at all) "
+					+ "to 7 (I was 100% thinking about other things, and not focused on the task).<br><br> "
+					+ "<b>Important:</b> When you get this question, you should just answer about "
+					+ "your thoughts in the precise moment before it appeared. ";
+			break;
+		case 5:
+			i="Thank you. If you answer this question with 2 or higher, you will get one additional "
+					+ "question. You will be asked to estimate how much you intentionally shifted "
+					+ "your attention. By <i>intentional</i> we mean when you deliberately engage in "
+					+ "thinking about something unrelated to the current task. By contrast, "
+					+ "<i>unintentional</i> thoughts occur when something pops up into your mind that makes "
+					+ "you drift from the task, but you did not decide to do it deliberately.<br><br>"
+					+ "It's perfectly normal for both these experiences to happen in a task like this, "
+					+ "as it can be quite long and boring, and they don't necessarily indicate anything wrong "
+					+ "with how you are doing the task.";
+		    break;
+		case 6:
+			i="When you get these questions, please be as honest as possible. It is perfectly normal "
+					+ "for your mind to wander when you do a task like this, so there is nothing wrong "
+					+ "with saying that you were distracted, either intentionally or unintentionally. "
+					+ "It is most important to us that you answer as honestly as possible. Whatever you "
+					+ "say to these questions will not affect your approval for taking part in this experiment.";
+			break;
+		case 7:
+			i="One way to make the task easier is dragging the special circles near to the "
+					+ "instructed edge of the box to help you remember.<br><br> " 
+					+ "For example, if you had to remember to drag 5 to the left of the box, "
+					+ "you could drag it near to there at the beginning, before you drag the 1. " 
+					+ "Then when you eventually got to 5, its location would remind you "
+					+ "what to do. Please now try using this strategy to help with the task. ";
+			break;
+		case 8:
+			i="Now the task will start for real.";
+			
+			if (Counterbalance.getFactorLevel("offloadOrder") == ExtraNames.EXTERNAL_FIRST) {
+				i = i + "You should continue setting reminders by dragging "
+					  + "the instructed circles to the edge at the start of each trial.";
+			}				
+			break;
+		case 9:
+			i="From now on, you will not be able to set reminders any more. For the rest of "
+					+ "the experiment, please just use your memory "
+					+ "to remember the special circles.";
+			break;
+		case 10:
+			i = "From now on you should continue setting reminders by dragging the instructed circles "
+					+ "to the edge at the start of each trial.";
+			break;
+		case 11:
+			i = "You have now completed the experiment. "
+					+ "Please click on the link below to complete the experiment and receive payment via Prolific:<br><br>"
+					+ "<b><a href=\"https://app.prolific.com/submissions/complete?cc=C1IVJN00\">"
+ 					+ "CLICK HERE</a></b>";
+			break;
 		}
 
 		return (i);

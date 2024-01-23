@@ -320,8 +320,10 @@ public class IOtask1RunTrial {
 						} else {
 							// first time someone tries to remove a circle without offloading, give a pop-up
 							// window alert
-							Window.alert("You need to set reminders before you can continue. You can "
+							if (IOtask1BlockContext.defaultExit()) {
+								Window.alert("You need to set reminders before you can continue. You can "
 									+ "do this by moving the position of special circles.");
+							}
 
 						}
 					}
@@ -383,7 +385,7 @@ public class IOtask1RunTrial {
 										String IntentionalityProbe = Window.prompt("How much do you think your attention was "
 												+ "intentionally drifting from the experiment just now?\n\n"
 												+ "You should type a number between 1 (completely unintentional: something "
-												+ "just popped into your mind) and 7 (completely "
+												+ "just popped into your mind without your control) and 7 (completely "
 												+ "intentional: you were deliberately thinking about something unrelated "
 												+ "to the current task).","");
 

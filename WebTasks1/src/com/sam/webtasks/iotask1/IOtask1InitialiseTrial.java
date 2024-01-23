@@ -78,9 +78,12 @@ public class IOtask1InitialiseTrial {
 			}
 			
 			if (block.thoughtProbe) {
-				if (Random.nextInt(3) == 0) {
-					block.probeCircle = targetSeqPositionsSorted.get(0)-1;
+				for (int i = 0; i < block.thoughtProbeTrials.length; i++) {
+					if (block.thoughtProbeTrials[i]==block.currentTrial+1) {
+						block.probeCircle = targetSeqPositionsSorted.get(0)-1;
+					}
 				}
+
 				/*
 				for (int i = 0; i < block.thoughtProbeTrials.length; i++) {
 					if (block.currentTrial == block.thoughtProbeTrials[i]) {

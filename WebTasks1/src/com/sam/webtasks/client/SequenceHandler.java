@@ -55,6 +55,15 @@ public class SequenceHandler {
 	public static void Next() {	
 		// move forward one step in whichever loop we are now in
 		sequencePosition.set(whichLoop, sequencePosition.get(whichLoop) + 1);
+		
+		// set the number of targets, based on counterbalancing condition
+		if (Counterbalance.getFactorLevel("targetCondition")==ExtraNames.TARGETS_1) {
+			ExtraNames.nTargets = 1;
+		} 
+		
+		if (Counterbalance.getFactorLevel("targetCondition")==ExtraNames.TARGETS_3) {
+			ExtraNames.nTargets = 3;
+		}
 
 		switch (whichLoop) {
 		case 0: // MAIN LOOP
@@ -63,50 +72,194 @@ public class SequenceHandler {
 			 * The code here defines the main sequence of events in the experiment *
 			 ********************************************************************/		
 			case 1:
+				ClickPage.Run(Instructions.Get(1),  "Next");
+				break;
+			case 2:
+				IOtask1Block block1 = new IOtask1Block();
+				block1.blockNum=-1;
+				block1.nTargets=0;
+				block1.Run();
+				break;
+			case 3:
+				ClickPage.Run(Instructions.Get(2),  "Next");
+				break;
+			case 4:
+				IOtask1Block block2 = new IOtask1Block();
+				block2.blockNum=-2;
+				block2.Run();
+				break;
+			case 5:
+				if (ExtraNames.nTargets==3) {
+					ClickPage.Run(Instructions.Get(3),  "Next");
+				} else {
+					SequenceHandler.Next();
+				}
+				break;
+			case 6:
+				if (ExtraNames.nTargets==3) {
+					IOtask1Block block3 = new IOtask1Block();
+					block3.blockNum=-3;
+					block3.nTargets=3;
+					block3.Run();
+				} else {
+					SequenceHandler.Next();
+				}
+				break;
+			case 7:
+				ClickPage.Run(Instructions.Get(4), "Click for an example");
+				break;
+			case 8:
+				double r=0;
+
+				while ((r<1)|(r>7)) {
+					String OffTaskProbe = Window.prompt("Please tell us how much your thoughts drifted "
+							+ "from the experiment just now.\n\nYou should type a number between "
+							+ "1 (totally focused on the task) to 7 (totally focused on other off-task thoughts).","");
+
+					try {
+						r = Double.parseDouble(OffTaskProbe);
+					} catch (NumberFormatException nfe) {
+						r=0;
+					} 
+				}
+				
+				SequenceHandler.Next();
+				break;
+			case 9:
+				ClickPage.Run(Instructions.Get(5), "Click for an example");
+				break;
+			case 10:
+				r=0;
+
+				while ((r<1)|(r>7)) {
+					String IntentionalityProbe = Window.prompt("How much do you think your attention was "
+							+ "intentionally drifting from the experiment just now?\n\n"
+							+ "You should type a number between 1 (completely unintentional: something "
+							+ "just popped into your mind without your control) and 7 (completely "
+							+ "intentional: you were deliberately thinking about something unrelated "
+							+ "to the current task).","");
+
+					try {
+						r = Double.parseDouble(IntentionalityProbe);
+					} catch (NumberFormatException nfe) {
+						r=0;
+					}
+				}
+				
+				SequenceHandler.Next();
+				break;
+			case 11:
+				ClickPage.Run(Instructions.Get(6),  "Next");
+				break;
+			case 12:
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
+					ClickPage.Run(Instructions.Get(7),  "Next");
+				} else {
+					SequenceHandler.Next();
+				}
+				break;
+			case 13:
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
+					IOtask1Block block4 = new IOtask1Block();
+					block4.blockNum = -4;
+					block4.nTargets=ExtraNames.nTargets;
+					block4.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
+					
+					block4.Run();
+				} else {
+					SequenceHandler.Next();
+				}
+				break;
+			case 14:
+				ClickPage.Run(Instructions.Get(8), "Next");
+				break;
+			case 15:
 				ProgressBar.Initialise();
 				ProgressBar.Show();
 				ProgressBar.SetProgress(0, 60);
 				
-				IOtask1Block block1 = new IOtask1Block();
+				IOtask1Block block5 = new IOtask1Block();
+				block5.nTargets = ExtraNames.nTargets;
+				block5.nTrials = 30;
+				block5.incrementProgress = true;
+				block5.thoughtProbe = true;
 				
-				block1.nTrials = 60;
-				block1.nTargets = 3;
-				block1.thoughtProbe = true;
-				block1.thoughtProbeTrials = new int[]{1,3};
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
+					block5.blockNum = 1;
+					block5.offloadCondition = Names.REMINDERS_NOTALLOWED;
+				}
 				
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
+					block5.blockNum = 2;
+					block5.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
+				}
 				
-				block1.Run();
-				break;
-			case 2:
-				ProgressBar.Hide();
-				break;
-			case 10:
-				response = Window.prompt("Please tell us how much your thoughts drifted "
-						+ "from the experiment just now.\n\nYou should type a number between "
-						+ "1 (100% focused on the task) to 7 (100% focused on other thoughts).","");
-				
-				SequenceHandler.Next();
-				break;		
-			case 20:
-				double r=0;
-				
-				try {
-					r = Double.parseDouble(response);
-				} catch (NumberFormatException nfe) {
-					r=0;
-				} 
-				
-				if ((r>=1)&(r<=7)) {
-					ClickPage.Run("Thank you", "Next");
+				if (Counterbalance.getFactorLevel("probeTrialOrder")==0) {
+					block5.thoughtProbeTrials = new int[]{3, 7, 10, 15, 18, 22, 25, 28};
 				} else {
-					SequenceHandler.SetPosition(SequenceHandler.GetPosition() - 2);
+					block5.thoughtProbeTrials = new int[]{1, 5, 8, 13, 16, 20, 24, 29};
+				}
+				
+				block5.Run();
+				break;
+			case 16:
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
+					ClickPage.Run(Instructions.Get(7),  "Next");
+				} else {
 					SequenceHandler.Next();
 				}
+				break;
+			case 17:
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
+					IOtask1Block block6 = new IOtask1Block();
+					block6.blockNum = -6;
+					block6.nTargets = ExtraNames.nTargets;
+					block6.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
+					block6.Run();
+				} else {
+					SequenceHandler.Next();
+				}
+				break;
+			case 18:
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
+					ClickPage.Run(Instructions.Get(10),  "Next");
+				} else {
+					ClickPage.Run(Instructions.Get(9),  "Next");
+				}
+				break;
+			case 19:
+				IOtask1Block block7 = new IOtask1Block();
+				block7.nTargets = ExtraNames.nTargets;
+				block7.nTrials = 30;
+				block7.incrementProgress = true;
+				block7.thoughtProbe = true;
+				
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
+					block7.blockNum = 2;
+					block7.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
+				}
+				
+				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
+					block7.blockNum = 1;
+					block7.offloadCondition = Names.REMINDERS_NOTALLOWED;
+				}
+				
+				if (Counterbalance.getFactorLevel("probeTrialOrder")==1) {
+					block7.thoughtProbeTrials = new int[]{3, 7, 10, 15, 18, 22, 25, 28};
+				} else {	
+					block7.thoughtProbeTrials = new int[]{1, 5, 8, 13, 16, 20, 24, 29};
+				}
+				
+				block7.Run();
+				break;
+			case 20:
+				ProgressBar.Hide();
+				ClickPage.Run(Instructions.Get(11), "nobutton");
+				break;
 			}
-			break; 
+			break;
 
-
-
+			
 			/********************************************/
 			/* no need to edit the code below this line */
 			/********************************************/
