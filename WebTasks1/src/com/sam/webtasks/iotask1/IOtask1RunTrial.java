@@ -29,11 +29,13 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.sam.webtasks.basictools.Names;
 import com.sam.webtasks.basictools.PHP;
 import com.sam.webtasks.basictools.TimeStamp;
+import com.sam.webtasks.client.Params;
 import com.sam.webtasks.client.SequenceHandler;
 
 public class IOtask1RunTrial {
@@ -52,6 +54,39 @@ public class IOtask1RunTrial {
 
 		String data = block.blockNum + "," + block.currentTrial + "," + nTargets + "," + block.instructionReadingTime;
 		PHP.logData("instructionReadingTime", data, false);
+
+		int m = IOtask1BlockContext.countdownTime() / 60;
+		int s = IOtask1BlockContext.countdownTime() % 60;
+		String tLabel;
+
+		if (s < 10) {
+			tLabel = " " + m + ":0" + s;
+		} else {
+			tLabel = " " + m + ":" + s;
+		}
+
+		final Label timerLabel = new Label(tLabel);
+
+		final Timer trialTimer = new Timer() {
+			public void run() {
+				int minutes = IOtask1BlockContext.countdownTime() / 60;
+				int seconds = IOtask1BlockContext.countdownTime() % 60;
+
+				if (seconds < 10) {
+					timerLabel.setText(" " + minutes + ":" + "0" + seconds);
+				} else {
+					timerLabel.setText(" " + minutes + ":" + seconds);
+				}
+
+				IOtask1BlockContext.countdown();
+
+				if (IOtask1BlockContext.countdownTime() < 1) {
+					timerLabel.addStyleName("red");
+					timerLabel.setText("Please try to go faster.");
+					cancel();
+				}
+			}
+		};
 
 		// we need to set nCircles as a final variable, so that we can refer to it
 		// inside the draghandler
@@ -90,6 +125,21 @@ public class IOtask1RunTrial {
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 
 		final VerticalPanel wrapper1 = new VerticalPanel();
+		
+		final VerticalPanel timerWrapper = new VerticalPanel();
+		timerWrapper.setWidth(boxSize + "px");
+		timerWrapper.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		timerWrapper.add(timerLabel);
+		timerLabel.setStyleName("livePointsDisplay");
+
+		if (IOtask1BlockContext.countdownTimer()) {
+			wrapper1.add(timerWrapper);
+			trialTimer.cancel();
+			IOtask1BlockContext.setCountdownTime(Params.countdownTime);
+			
+			trialTimer.scheduleRepeating(1000);
+		}
+		
 		wrapper1.add(panel);
 
 		final VerticalPanel wrapper2 = new VerticalPanel();
@@ -284,6 +334,8 @@ public class IOtask1RunTrial {
 										circles[clickedCircle].setStrokeColor(ColorName.PINK);
 										circles[clickedCircle].setStrokeWidth(3);
 										circles[clickedCircle].setFillColor(ColorName.GREENYELLOW);
+										
+										IOtask1BlockContext.targetHit();
 									}
 
 									// remove text
@@ -402,6 +454,9 @@ public class IOtask1RunTrial {
 								
 								RootPanel.get().remove(verticalPanel);
 								IOtask1BlockContext.incrementTrialNumber();
+								trialTimer.cancel();
+								IOtask1BlockContext.setCountdownTime(Params.countdownTime);
+								
 								SequenceHandler.Next();
 							}
 						}.schedule(500);	
@@ -490,6 +545,9 @@ public class IOtask1RunTrial {
 
 											new Timer() {
 												public void run() {
+													trialTimer.cancel();
+													IOtask1BlockContext.setCountdownTime(Params.countdownTime);
+													
 													SequenceHandler.Next();
 												}
 											}.schedule(500);
@@ -519,6 +577,7 @@ public class IOtask1RunTrial {
 				if (IOtask1BlockContext.getDoubleClickFlag()) {
 					RootPanel.get().remove(verticalPanel);
 					IOtask1BlockContext.incrementTrialNumber();
+					trialTimer.cancel();
 					SequenceHandler.Next();
 				}
 			}

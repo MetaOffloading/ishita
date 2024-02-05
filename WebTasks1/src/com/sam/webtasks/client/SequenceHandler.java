@@ -89,13 +89,22 @@ public class SequenceHandler {
 				block2.Run();
 				break;
 			case 5:
+				if (!IOtask1BlockContext.targetHitStatus()) {
+					SequenceHandler.SetPosition(SequenceHandler.GetPosition()-2);
+					ClickPage.Run("You did not respond correctly to the special circle."
+							+ "<br><br>Click below to try again.", "Next");
+				} else {
+					SequenceHandler.Next();
+				}
+				break;
+			case 6:
 				if (ExtraNames.nTargets==3) {
 					ClickPage.Run(Instructions.Get(3),  "Next");
 				} else {
 					SequenceHandler.Next();
 				}
 				break;
-			case 6:
+			case 7:
 				if (ExtraNames.nTargets==3) {
 					IOtask1Block block3 = new IOtask1Block();
 					block3.blockNum=-3;
@@ -105,10 +114,10 @@ public class SequenceHandler {
 					SequenceHandler.Next();
 				}
 				break;
-			case 7:
+			case 8:
 				ClickPage.Run(Instructions.Get(4), "Click for an example");
 				break;
-			case 8:
+			case 9:
 				double r=0;
 
 				while ((r<1)|(r>7)) {
@@ -125,10 +134,10 @@ public class SequenceHandler {
 				
 				SequenceHandler.Next();
 				break;
-			case 9:
+			case 10:
 				ClickPage.Run(Instructions.Get(5), "Click for an example");
 				break;
-			case 10:
+			case 11:
 				r=0;
 
 				while ((r<1)|(r>7)) {
@@ -148,17 +157,17 @@ public class SequenceHandler {
 				
 				SequenceHandler.Next();
 				break;
-			case 11:
+			case 12:
 				ClickPage.Run(Instructions.Get(6),  "Next");
 				break;
-			case 12:
+			case 13:
 				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
 					ClickPage.Run(Instructions.Get(7),  "Next");
 				} else {
 					SequenceHandler.Next();
 				}
 				break;
-			case 13:
+			case 14:
 				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
 					IOtask1Block block4 = new IOtask1Block();
 					block4.blockNum = -4;
@@ -170,10 +179,10 @@ public class SequenceHandler {
 					SequenceHandler.Next();
 				}
 				break;
-			case 14:
+			case 15:
 				ClickPage.Run(Instructions.Get(8), "Next");
 				break;
-			case 15:
+			case 16:
 				ProgressBar.Initialise();
 				ProgressBar.Show();
 				ProgressBar.SetProgress(0, 60);
@@ -200,16 +209,17 @@ public class SequenceHandler {
 					block5.thoughtProbeTrials = new int[]{1, 5, 8, 13, 16, 20, 24, 29};
 				}
 				
+				block5.countdownTimer = true;
 				block5.Run();
 				break;
-			case 16:
+			case 17:
 				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
 					ClickPage.Run(Instructions.Get(7),  "Next");
 				} else {
 					SequenceHandler.Next();
 				}
 				break;
-			case 17:
+			case 18:
 				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
 					IOtask1Block block6 = new IOtask1Block();
 					block6.blockNum = -6;
@@ -220,14 +230,14 @@ public class SequenceHandler {
 					SequenceHandler.Next();
 				}
 				break;
-			case 18:
+			case 19:
 				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
 					ClickPage.Run(Instructions.Get(10),  "Next");
 				} else {
 					ClickPage.Run(Instructions.Get(9),  "Next");
 				}
 				break;
-			case 19:
+			case 20:
 				IOtask1Block block7 = new IOtask1Block();
 				block7.nTargets = ExtraNames.nTargets;
 				block7.nTrials = 30;
@@ -250,10 +260,25 @@ public class SequenceHandler {
 					block7.thoughtProbeTrials = new int[]{1, 5, 8, 13, 16, 20, 24, 29};
 				}
 				
+				block7.countdownTimer = true;
 				block7.Run();
 				break;
-			case 20:
+			case 21:
 				ProgressBar.Hide();
+				
+				// log data and check that it saves
+				String data = TimeStamp.Now() + ",";
+				data = data + SessionInfo.participantID + ",";
+				data = data + SessionInfo.gender + ",";
+				data = data + SessionInfo.age + ",";
+				data = data + Counterbalance.getFactorLevel("targetCondition") + ",";
+				data = data + Counterbalance.getFactorLevel("offloadOrder") + ",";
+				data = data + Counterbalance.getFactorLevel("probeTrialOrder");
+
+				PHP.UpdateStatus("finished");
+				PHP.logData("finish", data, true);
+				break;
+			case 22:
 				ClickPage.Run(Instructions.Get(11), "nobutton");
 				break;
 			}

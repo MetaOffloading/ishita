@@ -8,6 +8,7 @@ import java.util.Date;
 
 import com.google.gwt.user.client.Random;
 import com.sam.webtasks.basictools.Names;
+import com.sam.webtasks.client.Params;
 import com.sam.webtasks.client.SequenceHandler;
 
 public class IOtask1Block {
@@ -29,7 +30,12 @@ public class IOtask1Block {
 	public int currentTrial=0;   
 	
 	//which side of the box for nontargets? (usually 4, which is bottom)
-	public int defaultExit=4;            
+	public int defaultExit=4;    
+	
+	// include a countdowntimer?
+	public boolean countdownTimer = false;
+	public int countdownTime = Params.countdownTime; //number of seconds to start clock at
+
 	
 	//should target feedback be shown, i.e. green for correct target response, red for incorrect
 	public boolean showTargetFeedback=true;
@@ -141,4 +147,7 @@ public class IOtask1Block {
 	//here we collect a list of all circles that have been offloaded.
 	//we can use this for the mandatory offloading condition (any circles)
 	public ArrayList<Integer> allOffloaded = new ArrayList<Integer>();
+	
+	//have any targets been successfully detected?
+	public boolean targetHit = false;
 }

@@ -72,7 +72,13 @@ public class Instructions {
 					+ "what to do. Please now try using this strategy to help with the task. ";
 			break;
 		case 8:
-			i="Now the task will start for real.";
+			i="Now the task will start for real. You should try to complete the rest of the experiment "
+					+ "in one session and avoid distractions from other sources (email, "
+					+ "other browser tabs, etc.)<br><br>Any time you get a question about whether "
+					+ "your attention drifted to the task, please answer as accurately as possible and "
+					+ "then the computer will automatically skip forward to the next trial.<br><br>"
+					+ "You will see a countdown timer at the top of the screen. Please try to complete "
+					+ "each trial before the time runs out.<br><br>";
 			
 			if (Counterbalance.getFactorLevel("offloadOrder") == ExtraNames.EXTERNAL_FIRST) {
 				i = i + "You should continue setting reminders by dragging "
@@ -100,9 +106,9 @@ public class Instructions {
 	}
 
 	public static String InfoText() {
-		String expDur = "30";
+		String expDur = "40";
 		String eligibility = "All registered users of Prolific ";
-		String nVolunteers = "100";
+		String nVolunteers = "50";
 		
 		return ("We would like to invite you to participate in this research project. "
 				+ "You should only participate if you want to; choosing not to take part "
@@ -140,7 +146,7 @@ public class Instructions {
 				+ "Your personal data will be processed for the purposes outlined in this notice. The "
 				+ "legal basis that would be used to process your <i>personal data</i> will be "
 				+ "performance of a task in the pulic interest. Your personal data will be processed "
-				+ "so long as it is required for the research project. If we are able to anonumise or pseudonymise "
+				+ "so long as it is required for the research project. If we are able to anonymise or pseudonymise "
 				+ "the personal data you provide we will undertake this, and will endeavour to minimise "
 				+ "the processing of personal data wherever possible. Data from this project may "
 				+ "also be uploaded to a public repository such as <a href=\"https://osf.io\">https://osf.io</a>. "

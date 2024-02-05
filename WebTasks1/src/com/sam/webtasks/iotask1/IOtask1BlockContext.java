@@ -55,6 +55,14 @@ public class IOtask1BlockContext {
 			}
 		}
 	}
+	
+	public static void targetHit() {
+		blockContext.targetHit=true;
+	}
+	
+	public static boolean targetHitStatus() {
+		return(blockContext.targetHit);
+	}
 
 	public static int getClickedCircle() {
 		return (blockContext.clickedCircle);
@@ -214,4 +222,23 @@ public class IOtask1BlockContext {
 	public static int getTargetCircle(int side) {
 		return (blockContext.targetCircles[side]);
 	}
+	
+	// is the countdown timer running?
+		public static boolean countdownTimer() {
+			return (blockContext.countdownTimer);
+		}
+		
+		public static int countdownTime() {
+			return (blockContext.countdownTime);
+		}
+		
+		public static void setCountdownTime(int cTime) {
+			blockContext.countdownTime = cTime;
+		}
+		
+		public static void countdown() {
+			if (blockContext.countdownTime > 0) {
+				blockContext.countdownTime--;
+			}
+		}
 }

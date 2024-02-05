@@ -122,7 +122,7 @@ public class Consent {
         approvalHTML.setStyleName("bottomMarginSmall", true);
         approvalHTML.setHTML("Please scroll to the bottom to view all content.<br><br>"
         		+ "This study has been approved by the UCL Research Ethics Committee "
-                + "as Project ID Number: ?????");
+                + "as Project ID Number: ICN-VW-28-22-2023");
 
         bodyHTML.setStyleName("bottomMarginSmall", true);
         bodyHTML.setHTML("Thank you for your interest in taking part in this research. If "
@@ -276,7 +276,7 @@ public class Consent {
                     	PHP.logData("participantInfo", data, true);
                     }
                 } else {
-                    if (boxesTicked < 6) {
+                    if (boxesTicked < 12) {
                         alertString = alertString + "You must tick all boxes to continue\n";
                     }
 

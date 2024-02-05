@@ -9,7 +9,7 @@ public class Params {
 	public final static int pointsPerPound = 100;
 	public final static String moneyPerPoint = "£0.01";
 	public static int progress = 0;
-	public static int countdownTime = 45;
+	public static int countdownTime = 30;
 	public static int highValuePoints = 7;
 	public static int mediumValuePoints = 4;
 	public static int lowValuePoints = 1;
