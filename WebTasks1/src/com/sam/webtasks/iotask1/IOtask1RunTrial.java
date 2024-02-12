@@ -413,6 +413,11 @@ public class IOtask1RunTrial {
 					if (IOtask1BlockContext.probeCircle()) {
 						new Timer() {
 							public void run() {
+								//get time stamp, calculate time since beginning of trial
+								Date probeTime = new Date();
+
+								int probeTimeInt = (int) (probeTime.getTime() - block.instructionEnd.getTime());
+								
 								double r=0;
 
 								while ((r<1)|(r>7)) {
@@ -427,7 +432,7 @@ public class IOtask1RunTrial {
 									} 
 								}
 								
-								String OffTaskData = block.blockNum + "," + block.currentTrial + "," + r;
+								String OffTaskData = block.blockNum + "," + block.currentTrial + "," + r + "," + probeTimeInt;
 								PHP.logData("OffTaskResponse", OffTaskData, false);
 
 								if (r>1) {
