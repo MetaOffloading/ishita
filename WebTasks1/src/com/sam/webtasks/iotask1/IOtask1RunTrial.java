@@ -410,58 +410,24 @@ public class IOtask1RunTrial {
 
 					PHP.logData("dragEnd", data, false);
 
-					if (IOtask1BlockContext.probeCircle()) {
+					if (IOtask1BlockContext.probeCircle()) { //quit the trial and run a thought probe
 						new Timer() {
 							public void run() {
 								//get time stamp, calculate time since beginning of trial
 								Date probeTime = new Date();
 
 								int probeTimeInt = (int) (probeTime.getTime() - block.instructionEnd.getTime());
-								
-								double r=0;
 
-								while ((r<1)|(r>7)) {
-									String OffTaskProbe = Window.prompt("Please tell us how much your thoughts drifted "
-											+ "from the experiment just now.\n\nYou should type a number between "
-											+ "1 (totally focused on the task) to 7 (totally focused on other off-task thoughts).","");
-
-									try {
-										r = Double.parseDouble(OffTaskProbe);
-									} catch (NumberFormatException nfe) {
-										r=0;
-									} 
-								}
-								
-								String OffTaskData = block.blockNum + "," + block.currentTrial + "," + r + "," + probeTimeInt;
-								PHP.logData("OffTaskResponse", OffTaskData, false);
-
-								if (r>1) {
-									r=0;
-
-									while ((r<1)|(r>7)) {
-										String IntentionalityProbe = Window.prompt("How much do you think your attention was "
-												+ "intentionally drifting from the experiment just now?\n\n"
-												+ "You should type a number between 1 (completely unintentional: something "
-												+ "just popped into your mind without your control) and 7 (completely "
-												+ "intentional: you were deliberately thinking about something unrelated "
-												+ "to the current task).","");
-
-										try {
-											r = Double.parseDouble(IntentionalityProbe);
-										} catch (NumberFormatException nfe) {
-											r=0;
-										}
-									}
-									
-									String IntentionalityData = block.blockNum + "," + block.currentTrial + "," + r;
-									PHP.logData("IntentionalityResponse", IntentionalityData, false);
-								}
+								String ProbeTimeData = block.blockNum + "," + block.currentTrial + ","  + probeTimeInt;
+								PHP.logData("ProbeTimeStamp", ProbeTimeData, false);
 								
 								RootPanel.get().remove(verticalPanel);
 								IOtask1BlockContext.incrementTrialNumber();
 								trialTimer.cancel();
 								IOtask1BlockContext.setCountdownTime(Params.countdownTime);
 								
+								//run thought probe
+								SequenceHandler.SetLoop(4, true);
 								SequenceHandler.Next();
 							}
 						}.schedule(500);	

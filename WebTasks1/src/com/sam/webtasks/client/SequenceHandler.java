@@ -71,7 +71,7 @@ public class SequenceHandler {
 			/***********************************************************************
 			 * The code here defines the main sequence of events in the experiment *
 			 ********************************************************************/		
-			case 1:
+			case 16:
 				ClickPage.Run(Instructions.Get(1),  "Next");
 				break;
 			case 2:
@@ -182,7 +182,7 @@ public class SequenceHandler {
 			case 15:
 				ClickPage.Run(Instructions.Get(8), "Next");
 				break;
-			case 16:
+			case 1:
 				ProgressBar.Initialise();
 				ProgressBar.Show();
 				ProgressBar.SetProgress(0, 60);
@@ -204,7 +204,7 @@ public class SequenceHandler {
 				}
 				
 				if (Counterbalance.getFactorLevel("probeTrialOrder")==0) {
-					block5.thoughtProbeTrials = new int[]{3, 7, 10, 15, 18, 22, 25, 28};
+					block5.thoughtProbeTrials = new int[]{1,3, 7, 10, 15, 18, 22, 25, 28};
 				} else {
 					block5.thoughtProbeTrials = new int[]{1, 5, 8, 13, 16, 20, 24, 29};
 				}
@@ -458,7 +458,21 @@ public class SequenceHandler {
 				SequenceHandler.Next();
 				break;
 			}
-
+		
+			break;
+		case 4: //IOtask1 thoughtprobe
+			switch (sequencePosition.get(4)) {
+			case 1:
+				Slider.Run("test",  "0", "1");
+				break;
+			case 2:
+				Slider.Run("test2",  "0",  "1");
+				break;
+			case 3:
+				//go back to task
+				SequenceHandler.SetLoop(2,  true);
+				SequenceHandler.Next();
+			}
 		}
 	}
 
