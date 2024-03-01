@@ -41,7 +41,7 @@ public class SessionInfo {
 	//NB levels range from 0 to (maximum - 1)
 	public static String[] counterbalanceFactors = {"targetCondition", "offloadOrder", "probeTrialOrder"};
 	public static int[] counterbalanceLevels = {2,2,2};
-	public static int[] specifiedLevels = {-1,-1,-1};
+	public static int[] specifiedLevels = {1,1,-1};
 	
 	//colourMeaning: which colour is associated with high reward?
 	//conditionOrder: is offloading allowed first or second?
