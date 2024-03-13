@@ -49,7 +49,7 @@ public class IOtask1InitialiseTrial {
 		//now set up possible positions in the sequence (1 ... nCircles) for targets
 		ArrayList<Integer> targetSeqPositions = new ArrayList<Integer>();
 		
-		for (int i = 2; i < block.nCircles; i++) { //start at i=2 so that first possible target is on third circle
+		for (int i = 9; i < block.nCircles; i++) { //start at i=9 so that first possible target is on tenth circle
 			targetSeqPositions.add(i);
 		}
 		
@@ -80,7 +80,7 @@ public class IOtask1InitialiseTrial {
 			if (block.thoughtProbe) {
 				for (int i = 0; i < block.thoughtProbeTrials.length; i++) {
 					if (block.thoughtProbeTrials[i]==block.currentTrial+1) {
-						block.probeCircle = targetSeqPositionsSorted.get(0)-1;
+						block.probeCircle = 4 + Random.nextInt(4); //probe occurs somewhere between circles 5 and 8
 					}
 				}
 

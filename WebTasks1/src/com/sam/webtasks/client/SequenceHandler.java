@@ -71,7 +71,7 @@ public class SequenceHandler {
 			/***********************************************************************
 			 * The code here defines the main sequence of events in the experiment *
 			 ********************************************************************/		
-			case 16:
+			case 1:
 				ClickPage.Run(Instructions.Get(1),  "Next");
 				break;
 			case 2:
@@ -118,42 +118,19 @@ public class SequenceHandler {
 				ClickPage.Run(Instructions.Get(4), "Click for an example");
 				break;
 			case 9:
-				double r=0;
-
-				while ((r<1)|(r>7)) {
-					String OffTaskProbe = Window.prompt("Please tell us how much your thoughts drifted "
-							+ "from the experiment just now.\n\nYou should type a number between "
-							+ "1 (totally focused on the task) to 7 (totally focused on other off-task thoughts).","");
-
-					try {
-						r = Double.parseDouble(OffTaskProbe);
-					} catch (NumberFormatException nfe) {
-						r=0;
-					} 
-				}
+				ExtraNames.THOUGHT_PROBE_PRAC=true;
+				
+				SequenceHandler.SetLoop(4, true);
 				
 				SequenceHandler.Next();
 				break;
 			case 10:
-				ClickPage.Run(Instructions.Get(5), "Click for an example");
+				ExtraNames.THOUGHT_PROBE_PRAC=false;
+				
+				ClickPage.Run(Instructions.Get(5), "Next");
 				break;
 			case 11:
-				r=0;
-
-				while ((r<1)|(r>7)) {
-					String IntentionalityProbe = Window.prompt("How much do you think your attention was "
-							+ "intentionally drifting from the experiment just now?\n\n"
-							+ "You should type a number between 1 (completely unintentional: something "
-							+ "just popped into your mind without your control) and 7 (completely "
-							+ "intentional: you were deliberately thinking about something unrelated "
-							+ "to the current task).","");
-
-					try {
-						r = Double.parseDouble(IntentionalityProbe);
-					} catch (NumberFormatException nfe) {
-						r=0;
-					}
-				}
+				SequenceHandler.SetLoop(4, true);
 				
 				SequenceHandler.Next();
 				break;
@@ -182,14 +159,19 @@ public class SequenceHandler {
 			case 15:
 				ClickPage.Run(Instructions.Get(8), "Next");
 				break;
-			case 1:
+			case 16:
 				ProgressBar.Initialise();
 				ProgressBar.Show();
 				ProgressBar.SetProgress(0, 60);
 				
 				IOtask1Block block5 = new IOtask1Block();
-				block5.nTargets = ExtraNames.nTargets;
 				block5.nTrials = 30;
+				
+				for (int i=0; i < 15; i++) {
+					block5.targetList.add(1);
+					block5.targetList.add(3);
+				}
+				
 				block5.incrementProgress = true;
 				block5.thoughtProbe = true;
 				
@@ -204,7 +186,7 @@ public class SequenceHandler {
 				}
 				
 				if (Counterbalance.getFactorLevel("probeTrialOrder")==0) {
-					block5.thoughtProbeTrials = new int[]{1,3, 7, 10, 15, 18, 22, 25, 28};
+					block5.thoughtProbeTrials = new int[]{3, 7, 10, 15, 18, 22, 25, 28};
 				} else {
 					block5.thoughtProbeTrials = new int[]{1, 5, 8, 13, 16, 20, 24, 29};
 				}
@@ -241,6 +223,12 @@ public class SequenceHandler {
 				IOtask1Block block7 = new IOtask1Block();
 				block7.nTargets = ExtraNames.nTargets;
 				block7.nTrials = 30;
+				
+				for (int i=0; i < 15; i++) {
+					block7.targetList.add(1);
+					block7.targetList.add(3);
+				}
+				
 				block7.incrementProgress = true;
 				block7.thoughtProbe = true;
 				
@@ -463,10 +451,14 @@ public class SequenceHandler {
 		case 4: //IOtask1 thoughtprobe
 			switch (sequencePosition.get(4)) {
 			case 1:
-				Slider.Run("test",  "0", "1");
+				Slider.Run("thought probe 1",  "100% focused on task", "100% focused on other thoughts");
 				break;
 			case 2:
-				Slider.Run("test2",  "0",  "1");
+				if (!ExtraNames.THOUGHT_PROBE_PRAC) {
+					Slider.Run("thought probe 2",  "100% intentional",  "100% unintentional");
+				} else {
+					SequenceHandler.Next();
+				}
 				break;
 			case 3:
 				//go back to task

@@ -25,7 +25,7 @@ public class Instructions {
 					+ "do.<br><br>As well as dragging each circle in turn to the "
 					+ "bottom of the screen, you will be instructed to drag one or more "
 					+ "of the circles to another part of the box. For "
-					+ "instance, you might be told that you should drag number 5 "
+					+ "instance, you might be told that you should drag number 11 "
 					+ "to the left of the box instead of "
 					+ "the bottom.<br><br>You will still be able to drag any "
 					+ "circle to the bottom of the box, but you should try to "
@@ -39,9 +39,9 @@ public class Instructions {
 		case 4:
 			i="One last thing: the task may interrupt at certain points, and a screen will "
 					+ "appear asking you to tell us how much your attention has drifted from "
-					+ "the circle-dragging task.<br><br>You will be asked to answer "
-					+ "on a scale of 1 (I was 100% focused on this task and not distracted at all) "
-					+ "to 7 (I was 100% thinking about other things, and not focused on the task).<br><br> "
+					+ "the circle-dragging task.<br><br>You will be asked to move a slider to indicate "
+					+ "your answer, which could range from being 100% focused on the task to being 100% focused "
+					+ "on other thoughts.<br><br> "
 					+ "<b>Important:</b> When you get this question, you should just answer about "
 					+ "your thoughts in the precise moment before it appeared. ";
 			break;
@@ -66,9 +66,9 @@ public class Instructions {
 		case 7:
 			i="One way to make the task easier is dragging the special circles near to the "
 					+ "instructed edge of the box to help you remember.<br><br> " 
-					+ "For example, if you had to remember to drag 5 to the left of the box, "
+					+ "For example, if you had to remember to drag 12 to the left of the box, "
 					+ "you could drag it near to there at the beginning, before you drag the 1. " 
-					+ "Then when you eventually got to 5, its location would remind you "
+					+ "Then when you eventually got to 12, its location would remind you "
 					+ "what to do. Please now try using this strategy to help with the task. ";
 			break;
 		case 8:

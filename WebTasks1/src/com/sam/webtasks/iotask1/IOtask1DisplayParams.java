@@ -9,7 +9,7 @@ public class IOtask1DisplayParams {
 	public static double margin=0.22; 
 	
 	//radius of the circles, as a proportion of the box size
-	public static double circleRadius=0.055;
+	public static double circleRadius=0.04;
 
 	//size of labels inside circles
 	public static int circleTextSize=20;

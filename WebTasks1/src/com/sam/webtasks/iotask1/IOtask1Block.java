@@ -18,7 +18,7 @@ public class IOtask1Block {
 	public int nTrials=1;    
 	
 	//number of circles on the screen
-	public int nCircles=10;  
+	public int nCircles=15;  
 	
 	//allow any circle to be moved?
 	public int offloadCondition=Names.REMINDERS_OPTIONAL;
