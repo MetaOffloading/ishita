@@ -2,8 +2,6 @@ package com.sam.webtasks.client;
 
 public class ExtraNames {
 	//memory load
-	public final static int TARGETS_1=0;
-	public final static int TARGETS_3=1;
 	public static int nTargets;
 	
 	//condition order
@@ -12,5 +10,13 @@ public class ExtraNames {
 	
 	//thought probe practice conditions
 	public static boolean THOUGHT_PROBE_PRAC=false;
+	//probe response options
+	public static String LeftOption1;
+	public static String RightOption1;
+	public static String LeftOption2;
+	public static String RightOption2;
+	public static boolean probe1reverse;
+	public static boolean probe2reverse;
+	
 }
 

@@ -28,7 +28,7 @@ public class IOtask1Block {
 	
 	//which trial number is this?
 	public int currentTrial=0;   
-	
+
 	//which side of the box for nontargets? (usually 4, which is bottom)
 	public int defaultExit=4;    
 	

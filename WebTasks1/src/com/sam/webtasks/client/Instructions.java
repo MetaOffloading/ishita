@@ -39,27 +39,38 @@ public class Instructions {
 		case 4:
 			i="One last thing: the task may interrupt at certain points, and a screen will "
 					+ "appear asking you to tell us how much your attention has drifted from "
-					+ "the circle-dragging task.<br><br>You will be asked to move a slider to indicate "
-					+ "your answer, which could range from being 100% focused on the task to being 100% focused "
-					+ "on other thoughts.<br><br> "
+					+ "the circle-dragging memory task.<br><br>You will be asked to respond by dragging a slider "
+					+ "somewhere between the options of On Task (meaning that you were 100% focused "
+					+ "on the circle-dragging memory task, not thinking about anything else) and Off Task "
+					+ "(meaning that you were 100% focused "
+					+ "on other things, like your own thoughts, feelings about the experiment, "
+					+ "or some other distraction in your "
+					+ "environment, rather than focusing on doing the task itself).<br><br>"
+					+ "People usually find that they are somewhere between these two extremes most of the time."
+					+ "<br><br>"
 					+ "<b>Important:</b> When you get this question, you should just answer about "
 					+ "your thoughts in the precise moment before it appeared. ";
 			break;
 		case 5:
-			i="Thank you. If you answer this question with 2 or higher, you will get one additional "
-					+ "question. You will be asked to estimate how much you intentionally shifted "
-					+ "your attention. By <i>intentional</i> we mean when you deliberately engage in "
+			i="Thank you. After you get the question about being On Task or Off Task, you will "
+					+ "also be asked to estimate whether any Off Task thoughts were <b>intentional</b> "
+					+ "or <b>unintentional</b>. "
+					+ "By <i>intentional</i> we mean when you deliberately engage in "
 					+ "thinking about something unrelated to the current task. By contrast, "
 					+ "<i>unintentional</i> thoughts occur when something pops up into your mind that makes "
 					+ "you drift from the task, but you did not decide to do it deliberately.<br><br>"
 					+ "It's perfectly normal for both these experiences to happen in a task like this, "
 					+ "as it can be quite long and boring, and they don't necessarily indicate anything wrong "
-					+ "with how you are doing the task.";
+					+ "with how you are doing the task.<br><br>If your thoughts were completely On Task you can "
+					+ "make any response, in this case it does not matter where you drag the slider.";
 		    break;
 		case 6:
 			i="When you get these questions, please be as honest as possible. It is perfectly normal "
 					+ "for your mind to wander when you do a task like this, so there is nothing wrong "
-					+ "with saying that you were distracted, either intentionally or unintentionally. "
+					+ "with saying that you were distracted, either intentionally or unintentionally.<br><br>"
+					+ "Given that the task is quite boring, it would be unlikely that anyone will remain totally "
+					+ "focused on it for the entire session. For this reason, we do not expect you to respond "
+					+ "that you are always focused on the task.<br><br>"
 					+ "It is most important to us that you answer as honestly as possible. Whatever you "
 					+ "say to these questions will not affect your approval for taking part in this experiment.";
 			break;
@@ -73,8 +84,8 @@ public class Instructions {
 			break;
 		case 8:
 			i="Now the task will start for real. You should try to complete the rest of the experiment "
-					+ "in one session and avoid distractions from other sources (email, "
-					+ "other browser tabs, etc.)<br><br>Any time you get a question about whether "
+					+ "in one session and avoid performing any other tasks with your computer.<br><br>"
+					+ "Any time you get a question about whether "
 					+ "your attention drifted to the task, please answer as accurately as possible and "
 					+ "then the computer will automatically skip forward to the next trial.<br><br>"
 					+ "You will see a countdown timer at the top of the screen. Please try to complete "
@@ -95,10 +106,9 @@ public class Instructions {
 					+ "to the edge at the start of each trial.";
 			break;
 		case 11:
-			i = "You have now completed the experiment. "
-					+ "Please click on the link below to complete the experiment and receive payment via Prolific:<br><br>"
-					+ "<b><a href=\"https://app.prolific.com/submissions/complete?cc=C1IVJN00\">"
- 					+ "CLICK HERE</a></b>";
+			i = "You have now completed the experiment.<br><br>"
+					+ "Please enter the following completion code on the Mechanical Turk website to claim your "
+					+ "reward:<br><br><b>" + SessionInfo.rewardCode + "</b>"; 
 			break;
 		}
 

@@ -17,10 +17,7 @@ public class Initialise {
 	public static void Run() {
 		//set timestamp for the beginning of the experiment
 		TimeStamp.Start();
-		
-		//generate a reward code, which can be used to claim payment at end
-		RewardCode.Generate();
-				
+	
 		if (SessionInfo.localTesting) {
 			Window.alert("Set to local testing mode. Data will not be stored on server.");
 		}
@@ -35,7 +32,7 @@ public class Initialise {
 		    SessionInfo.participantID = Window.Location.getParameter("workerId");
 			
 			if (SessionInfo.participantID == null) {
-				SessionInfo.participantID = "null";
+				SessionInfo.participantID = Window.prompt("What is your MTurk worker ID?", "");
 			}
 		    
 			//set up the counterbalancing
@@ -46,6 +43,9 @@ public class Initialise {
 					Counterbalance.addFactor(SessionInfo.counterbalanceFactors[i], SessionInfo.counterbalanceLevels[i], SessionInfo.specifiedLevels[i]);
 				}
 			}
+			
+			//generate a reward code, which can be used to claim payment at end
+			RewardCode.Generate();
 		}
 		
 		if (SessionInfo.experimentType == Names.EXPERIMENT_PROLIFIC) {

@@ -56,13 +56,29 @@ public class SequenceHandler {
 		// move forward one step in whichever loop we are now in
 		sequencePosition.set(whichLoop, sequencePosition.get(whichLoop) + 1);
 		
-		// set the number of targets, based on counterbalancing condition
-		if (Counterbalance.getFactorLevel("targetCondition")==ExtraNames.TARGETS_1) {
-			ExtraNames.nTargets = 1;
+		// set the probe options, based on counterbalancing condition
+		if (Counterbalance.getFactorLevel("probeOptionArrangement1")==0) {
+			ExtraNames.LeftOption1 = "On task";
+			ExtraNames.RightOption1 = "Off task";
+			ExtraNames.probe1reverse = false; //use this so that off-task is always a higher number
 		} 
 		
-		if (Counterbalance.getFactorLevel("targetCondition")==ExtraNames.TARGETS_3) {
-			ExtraNames.nTargets = 3;
+		if (Counterbalance.getFactorLevel("probeOptionArrangement1")==1) {
+			ExtraNames.LeftOption1 = "Off task";
+			ExtraNames.RightOption1 = "On task";
+			ExtraNames.probe1reverse = true; //use this so that off-task is always a higher number
+		}
+		
+		if (Counterbalance.getFactorLevel("probeOptionArrangement2")==0) {
+			ExtraNames.LeftOption2 = "Untentional";
+			ExtraNames.RightOption2 = "Intentional";
+			ExtraNames.probe2reverse = false; //use this so that intentional is always a higher number
+		} 
+		
+		if (Counterbalance.getFactorLevel("probeOptionArrangement2")==1) {
+			ExtraNames.LeftOption2 = "Intentional";
+			ExtraNames.RightOption2 = "Unintentional";
+			ExtraNames.probe2reverse = true; //use this so that intentional is always a higher number
 		}
 
 		switch (whichLoop) {
@@ -148,7 +164,7 @@ public class SequenceHandler {
 				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
 					IOtask1Block block4 = new IOtask1Block();
 					block4.blockNum = -4;
-					block4.nTargets=ExtraNames.nTargets;
+					block4.nTargets=1;
 					block4.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
 					
 					block4.Run();
@@ -205,7 +221,7 @@ public class SequenceHandler {
 				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
 					IOtask1Block block6 = new IOtask1Block();
 					block6.blockNum = -6;
-					block6.nTargets = ExtraNames.nTargets;
+					block6.nTargets = 1;
 					block6.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
 					block6.Run();
 				} else {
@@ -256,12 +272,14 @@ public class SequenceHandler {
 				
 				// log data and check that it saves
 				String data = TimeStamp.Now() + ",";
+				data = data + SessionInfo.rewardCode + ",";
 				data = data + SessionInfo.participantID + ",";
 				data = data + SessionInfo.gender + ",";
 				data = data + SessionInfo.age + ",";
-				data = data + Counterbalance.getFactorLevel("targetCondition") + ",";
 				data = data + Counterbalance.getFactorLevel("offloadOrder") + ",";
-				data = data + Counterbalance.getFactorLevel("probeTrialOrder");
+				data = data + Counterbalance.getFactorLevel("probeTrialOrder") + ",";
+				data = data + Counterbalance.getFactorLevel("probeOptionArrangement1") + ",";
+				data = data + Counterbalance.getFactorLevel("probeOptionArrangement2");
 
 				PHP.UpdateStatus("finished");
 				PHP.logData("finish", data, true);
@@ -451,16 +469,53 @@ public class SequenceHandler {
 		case 4: //IOtask1 thoughtprobe
 			switch (sequencePosition.get(4)) {
 			case 1:
-				Slider.Run("thought probe 1",  "100% focused on task", "100% focused on other thoughts");
+				Slider.Run("Please tell us to what extent your thoughts just now were "
+						+ "<b>On Task</b> (totally focused on the circle-dragging memory task), <b>Off Task</b> "
+						+ "(totally focused on something else), or somewhere in between.",
+						ExtraNames.LeftOption1, ExtraNames.RightOption1);
 				break;
-			case 2:
+			case 2:	
+				int sliderValue1 = Slider.getSliderValue();
+
+				if (ExtraNames.probe1reverse) {
+					sliderValue1 = 100 - sliderValue1;
+				}
+				
+				String data1 = IOtask1BlockContext.getTrialTimeStamp() + ",";
+				data1 = data1 + IOtask1BlockContext.getBlockNum() + ",";
+				data1 = data1 + IOtask1BlockContext.getTrialNum() + ",";
+				data1 = data1 + IOtask1BlockContext.getNTargets() + ",";
+				data1 = data1 + IOtask1BlockContext.getOffloadCondition() + ",";
+				data1 = data1 + sliderValue1;
+				
+				PHP.logData("OffTaskProbe", data1, true);
+				break;
+			case 3:			
 				if (!ExtraNames.THOUGHT_PROBE_PRAC) {
-					Slider.Run("thought probe 2",  "100% intentional",  "100% unintentional");
+					Slider.Run("Now please tell us to what extent any Off Task thoughts were "
+						+ "<b>Intentional</b>, <b>Unintentional</b>, or somewhere in between.",
+						ExtraNames.LeftOption2, ExtraNames.RightOption2);
 				} else {
 					SequenceHandler.Next();
 				}
 				break;
-			case 3:
+			case 4:
+				int sliderValue2 = Slider.getSliderValue();
+				
+				if (ExtraNames.probe2reverse) {
+					sliderValue2 = 100 - sliderValue2;
+				}
+				
+				String data2 = IOtask1BlockContext.getTrialTimeStamp() + ",";
+				data2 = data2 + IOtask1BlockContext.getBlockNum() + ",";
+				data2 = data2 + IOtask1BlockContext.getTrialNum() + ",";
+				data2 = data2 + IOtask1BlockContext.getNTargets() + ",";
+				data2 = data2 + IOtask1BlockContext.getOffloadCondition() + ",";
+				data2 = data2 + sliderValue2;
+				
+				PHP.logData("IntentionalityProbe", data2, true);
+				break;
+			case 5:
 				//go back to task
 				SequenceHandler.SetLoop(2,  true);
 				SequenceHandler.Next();

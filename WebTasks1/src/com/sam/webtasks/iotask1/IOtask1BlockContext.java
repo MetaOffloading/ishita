@@ -170,6 +170,15 @@ public class IOtask1BlockContext {
 	public static int getDragDuration() {
 		return (blockContext.dragDuration);
 	}
+	
+	//get time since trial start
+	public static int getTrialTimeStamp() {
+		Date timestamp = new Date();
+		
+		int timestampMS = (int) (timestamp.getTime() - blockContext.instructionEnd.getTime());
+		
+		return (timestampMS);
+	}
 
 	// set and check the redFlashFlag
 	public static void setRedFlashFlag(boolean redFlashFlag) {
@@ -216,6 +225,14 @@ public class IOtask1BlockContext {
 
 	public static int getNCircles() {
 		return (blockContext.nCircles);
+	}
+	
+	public static int getNTargets() {
+		return (blockContext.nTargets);
+	}
+	
+	public static int getOffloadCondition() {
+		return (blockContext.offloadCondition);
 	}
 
 	// get the target circles for each side of the box
