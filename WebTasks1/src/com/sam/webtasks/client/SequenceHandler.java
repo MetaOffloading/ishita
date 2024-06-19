@@ -55,31 +55,6 @@ public class SequenceHandler {
 	public static void Next() {	
 		// move forward one step in whichever loop we are now in
 		sequencePosition.set(whichLoop, sequencePosition.get(whichLoop) + 1);
-		
-		// set the probe options, based on counterbalancing condition
-		if (Counterbalance.getFactorLevel("probeOptionArrangement1")==0) {
-			ExtraNames.LeftOption1 = "On task";
-			ExtraNames.RightOption1 = "Off task";
-			ExtraNames.probe1reverse = false; //use this so that off-task is always a higher number
-		} 
-		
-		if (Counterbalance.getFactorLevel("probeOptionArrangement1")==1) {
-			ExtraNames.LeftOption1 = "Off task";
-			ExtraNames.RightOption1 = "On task";
-			ExtraNames.probe1reverse = true; //use this so that off-task is always a higher number
-		}
-		
-		if (Counterbalance.getFactorLevel("probeOptionArrangement2")==0) {
-			ExtraNames.LeftOption2 = "Untentional";
-			ExtraNames.RightOption2 = "Intentional";
-			ExtraNames.probe2reverse = false; //use this so that intentional is always a higher number
-		} 
-		
-		if (Counterbalance.getFactorLevel("probeOptionArrangement2")==1) {
-			ExtraNames.LeftOption2 = "Intentional";
-			ExtraNames.RightOption2 = "Unintentional";
-			ExtraNames.probe2reverse = true; //use this so that intentional is always a higher number
-		}
 
 		switch (whichLoop) {
 		case 0: // MAIN LOOP
@@ -88,204 +63,23 @@ public class SequenceHandler {
 			 * The code here defines the main sequence of events in the experiment *
 			 ********************************************************************/		
 			case 1:
-				ClickPage.Run(Instructions.Get(1),  "Next");
+				//STAI.Run();
+				MFEQ.Run();
 				break;
 			case 2:
-				IOtask1Block block1 = new IOtask1Block();
-				block1.blockNum=-1;
-				block1.nTargets=0;
-				block1.Run();
+				SMCQ.Run();
 				break;
 			case 3:
-				ClickPage.Run(Instructions.Get(2),  "Next");
+				MCQ.Run();
 				break;
 			case 4:
-				IOtask1Block block2 = new IOtask1Block();
-				block2.blockNum=-2;
-				block2.Run();
+				PTQ.Run();
 				break;
 			case 5:
-				if (!IOtask1BlockContext.targetHitStatus()) {
-					SequenceHandler.SetPosition(SequenceHandler.GetPosition()-2);
-					ClickPage.Run("You did not respond correctly to the special circle."
-							+ "<br><br>Click below to try again.", "Next");
-				} else {
-					SequenceHandler.Next();
-				}
+				RTQ.Run();
 				break;
 			case 6:
-				if (ExtraNames.nTargets==3) {
-					ClickPage.Run(Instructions.Get(3),  "Next");
-				} else {
-					SequenceHandler.Next();
-				}
-				break;
-			case 7:
-				if (ExtraNames.nTargets==3) {
-					IOtask1Block block3 = new IOtask1Block();
-					block3.blockNum=-3;
-					block3.nTargets=3;
-					block3.Run();
-				} else {
-					SequenceHandler.Next();
-				}
-				break;
-			case 8:
-				ClickPage.Run(Instructions.Get(4), "Click for an example");
-				break;
-			case 9:
-				ExtraNames.THOUGHT_PROBE_PRAC=true;
-				
-				SequenceHandler.SetLoop(4, true);
-				
-				SequenceHandler.Next();
-				break;
-			case 10:
-				ExtraNames.THOUGHT_PROBE_PRAC=false;
-				
-				ClickPage.Run(Instructions.Get(5), "Next");
-				break;
-			case 11:
-				SequenceHandler.SetLoop(4, true);
-				
-				SequenceHandler.Next();
-				break;
-			case 12:
-				ClickPage.Run(Instructions.Get(6),  "Next");
-				break;
-			case 13:
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
-					ClickPage.Run(Instructions.Get(7),  "Next");
-				} else {
-					SequenceHandler.Next();
-				}
-				break;
-			case 14:
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
-					IOtask1Block block4 = new IOtask1Block();
-					block4.blockNum = -4;
-					block4.nTargets=1;
-					block4.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
-					
-					block4.Run();
-				} else {
-					SequenceHandler.Next();
-				}
-				break;
-			case 15:
-				ClickPage.Run(Instructions.Get(8), "Next");
-				break;
-			case 16:
-				ProgressBar.Initialise();
-				ProgressBar.Show();
-				ProgressBar.SetProgress(0, 60);
-				
-				IOtask1Block block5 = new IOtask1Block();
-				block5.nTrials = 30;
-				
-				for (int i=0; i < 15; i++) {
-					block5.targetList.add(1);
-					block5.targetList.add(3);
-				}
-				
-				block5.incrementProgress = true;
-				block5.thoughtProbe = true;
-				
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
-					block5.blockNum = 1;
-					block5.offloadCondition = Names.REMINDERS_NOTALLOWED;
-				}
-				
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
-					block5.blockNum = 2;
-					block5.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
-				}
-				
-				if (Counterbalance.getFactorLevel("probeTrialOrder")==0) {
-					block5.thoughtProbeTrials = new int[]{3, 7, 10, 15, 18, 22, 25, 28};
-				} else {
-					block5.thoughtProbeTrials = new int[]{1, 5, 8, 13, 16, 20, 24, 29};
-				}
-				
-				block5.countdownTimer = true;
-				block5.Run();
-				break;
-			case 17:
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
-					ClickPage.Run(Instructions.Get(7),  "Next");
-				} else {
-					SequenceHandler.Next();
-				}
-				break;
-			case 18:
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
-					IOtask1Block block6 = new IOtask1Block();
-					block6.blockNum = -6;
-					block6.nTargets = 1;
-					block6.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
-					block6.Run();
-				} else {
-					SequenceHandler.Next();
-				}
-				break;
-			case 19:
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
-					ClickPage.Run(Instructions.Get(10),  "Next");
-				} else {
-					ClickPage.Run(Instructions.Get(9),  "Next");
-				}
-				break;
-			case 20:
-				IOtask1Block block7 = new IOtask1Block();
-				block7.nTargets = ExtraNames.nTargets;
-				block7.nTrials = 30;
-				
-				for (int i=0; i < 15; i++) {
-					block7.targetList.add(1);
-					block7.targetList.add(3);
-				}
-				
-				block7.incrementProgress = true;
-				block7.thoughtProbe = true;
-				
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.INTERNAL_FIRST) {
-					block7.blockNum = 2;
-					block7.offloadCondition = Names.REMINDERS_MANDATORY_ANYCIRCLE;
-				}
-				
-				if (Counterbalance.getFactorLevel("offloadOrder")==ExtraNames.EXTERNAL_FIRST) {
-					block7.blockNum = 1;
-					block7.offloadCondition = Names.REMINDERS_NOTALLOWED;
-				}
-				
-				if (Counterbalance.getFactorLevel("probeTrialOrder")==1) {
-					block7.thoughtProbeTrials = new int[]{3, 7, 10, 15, 18, 22, 25, 28};
-				} else {	
-					block7.thoughtProbeTrials = new int[]{1, 5, 8, 13, 16, 20, 24, 29};
-				}
-				
-				block7.countdownTimer = true;
-				block7.Run();
-				break;
-			case 21:
-				ProgressBar.Hide();
-				
-				// log data and check that it saves
-				String data = TimeStamp.Now() + ",";
-				data = data + SessionInfo.rewardCode + ",";
-				data = data + SessionInfo.participantID + ",";
-				data = data + SessionInfo.gender + ",";
-				data = data + SessionInfo.age + ",";
-				data = data + Counterbalance.getFactorLevel("offloadOrder") + ",";
-				data = data + Counterbalance.getFactorLevel("probeTrialOrder") + ",";
-				data = data + Counterbalance.getFactorLevel("probeOptionArrangement1") + ",";
-				data = data + Counterbalance.getFactorLevel("probeOptionArrangement2");
-
-				PHP.UpdateStatus("finished");
-				PHP.logData("finish", data, true);
-				break;
-			case 22:
-				ClickPage.Run(Instructions.Get(11), "nobutton");
+				ClickPage.Run("the end", "end");
 				break;
 			}
 			break;
