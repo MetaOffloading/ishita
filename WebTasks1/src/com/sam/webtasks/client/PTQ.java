@@ -25,11 +25,11 @@ public class PTQ {
 		qPTQ.nOptions = 5;
 		
 		//How many items (i.e. questions) does the questionnaire have?
-		qPTQ.nItems = 14;
+		qPTQ.nItems = 16;
 		
 		//What is the maximum number of items to be presented on one page? If the questionnaire
 		//has more than this number, it will be presented on two or more page
-		qPTQ.itemsPerPage = 5;
+		qPTQ.itemsPerPage = 6;
 		
 		//What proportion of the screen width should be used for the questions rather than
 		//the response options. This can be adjusted by trial and error if the widths look wrong
@@ -57,13 +57,14 @@ public class PTQ {
 		qPTQ.items[5] = "My thoughts repeat themselves ";
 		qPTQ.items[6] = "Thoughts come to my mind without me wanting them to " ;
 		qPTQ.items[7] = "I get stuck on certain issues and can't move on ";
-		qPTQ.items[8] = "I keep asking myself questions without finding an answer ";
-		qPTQ.items[9] = "My thoughts prevent me from focusing on other things";
-		qPTQ.items[10] = "I keep thinking about the same issue all the time ";
-		qPTQ.items[11] = "Thoughts just pop into my mind ";
-		qPTQ.items[12] = "I feel driven to continue dwelling on the same issue ";
-		qPTQ.items[13] = "My thoughts are not much help to me ";
-		qPTQ.items[14] = "My thoughts take up all my attention";
+		qPTQ.items[8] = "I genuinely believe that the sky is green ";
+		qPTQ.items[9] = "I keep asking myself questions without finding an answer ";
+		qPTQ.items[10] = "My thoughts prevent me from focusing on other things";
+		qPTQ.items[11] = "I keep thinking about the same issue all the time ";
+		qPTQ.items[12] = "Thoughts just pop into my mind ";
+		qPTQ.items[13] = "I feel driven to continue dwelling on the same issue ";
+		qPTQ.items[14] = "My thoughts are not much help to me ";
+		qPTQ.items[15] = "My thoughts take up all my attention";
 		
 		//This needs to be included at the end of the code so that the questionnaire
 		//actually runs

@@ -64,7 +64,8 @@ public class SequenceHandler {
 			 ********************************************************************/		
 			case 1:
 				//STAI.Run();
-				MFEQ.Run();
+				//MFEQ.Run();
+				RTQ.Run();
 				break;
 			case 2:
 				SMCQ.Run();

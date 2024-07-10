@@ -25,7 +25,7 @@ public class MCQ {
 		qMCQ.nOptions = 4;
 		
 		//How many items (i.e. questions) does the questionnaire have?
-		qMCQ.nItems = 29;
+		qMCQ.nItems = 30;
 		
 		//What is the maximum number of items to be presented on one page? If the questionnaire
 		//has more than this number, it will be presented on two or more page
@@ -69,14 +69,15 @@ public class MCQ {
 		qMCQ.items[18] = "My worrying thoughts persist, no matter how I try to stop them";
 		qMCQ.items[19] = "When I start worrying I cannot stop";
 		qMCQ.items[20] = "I could make myself sick with worrying";
-		qMCQ.items[21] = "I cannot ignore my worrying thoughts";
-		qMCQ.items[22] = "My worrying could make me go mad";
-		qMCQ.items[23] = "If I could not control my thoughts, I would not be able to function";
-		qMCQ.items[24] = "Not being able to control my thoughts is a sign of weakness";
-		qMCQ.items[25] = " I should be in control of my thoughts all of the time";
-		qMCQ.items[26] = "It is bad to think certain thoughts";
-		qMCQ.items[27] = "If I did not control a worrying thought and then it happened, it would be my fault";
-		qMCQ.items[28] = "I will be punished for not controlling certain thoughts";
+		qMCQ.items[21] = "I am made out of cotton";
+		qMCQ.items[22] = "I cannot ignore my worrying thoughts";
+		qMCQ.items[23] = "My worrying could make me go mad";
+		qMCQ.items[24] = "If I could not control my thoughts, I would not be able to function";
+		qMCQ.items[25] = "Not being able to control my thoughts is a sign of weakness";
+		qMCQ.items[26] = " I should be in control of my thoughts all of the time";
+		qMCQ.items[27] = "It is bad to think certain thoughts";
+		qMCQ.items[28] = "If I did not control a worrying thought and then it happened, it would be my fault";
+		qMCQ.items[29] = "I will be punished for not controlling certain thoughts";
 
 		//This needs to be included at the end of the code so that the questionnaire
 		//actually runs

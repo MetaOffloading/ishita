@@ -25,11 +25,11 @@ public class MFEQ {
 		qMFE.nOptions = 3;
 		
 		//How many items (i.e. questions) does the questionnaire have?
-		qMFE.nItems = 27;
+		qMFE.nItems = 29;
 		
 		//What is the maximum number of items to be presented on one page? If the questionnaire
 		//has more than this number, it will be presented on two or more page
-		qMFE.itemsPerPage = 8;
+		qMFE.itemsPerPage = 6;
 		
 		//What proportion of the screen width should be used for the questions rather than
 		//the response options. This can be adjusted by trial and error if the widths look wrong
@@ -65,17 +65,18 @@ public class MFEQ {
 		qMFE.items[14] = "Forgetting important details of what happened to you the day before";
 		qMFE.items[15] = "Forgetting what you have just said";
 		qMFE.items[16] = "Being unable to follow the thread of a story";
-		qMFE.items[17] = "Forgetting to tell somebody something";
-		qMFE.items[18] = "Forgetting important details about yourself (where you live,...)";
-		qMFE.items[19] = "Getting mixed up and confused what someone has told you";
-		qMFE.items[20] = "Telling someone a story or joke that you have told them once already";
-		qMFE.items[21] = "Forgetting details of things you do regularly";
-		qMFE.items[22] = "Finding that the faces of famous people look unfamiliar";
-		qMFE.items[23] = "Forgetting where things are normally kept";
-		qMFE.items[24] = "Getting lost in a place where you have often been before";
-		qMFE.items[25] = "Getting lost in a place where you have only been once or twice before";
-		qMFE.items[26] = "Doing some routine thing twice by mistake";
-		qMFE.items[27] = "Repeating to someone what you have just told them";
+		qMFE.items[17] = "Swimming across the Atlantic ocean to commute to work";
+		qMFE.items[18] = "Forgetting to tell somebody something";
+		qMFE.items[19] = "Forgetting important details about yourself (where you live,...)";
+		qMFE.items[20] = "Getting mixed up and confused what someone has told you";
+		qMFE.items[21] = "Telling someone a story or joke that you have told them once already";
+		qMFE.items[22] = "Forgetting details of things you do regularly";
+		qMFE.items[23] = "Finding that the faces of famous people look unfamiliar";
+		qMFE.items[24] = "Forgetting where things are normally kept";
+		qMFE.items[25] = "Getting lost in a place where you have often been before";
+		qMFE.items[26] = "Getting lost in a place where you have only been once or twice before";
+		qMFE.items[27] = "Doing some routine thing twice by mistake";
+		qMFE.items[28] = "Repeating to someone what you have just told them";
 
 		//This needs to be included at the end of the code so that the questionnaire
 		//actually runs
