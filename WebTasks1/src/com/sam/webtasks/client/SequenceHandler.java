@@ -44,6 +44,7 @@ import com.sam.webtasks.iotask1.IOtask1InitialiseTrial;
 import com.sam.webtasks.iotask1.IOtask1RunTrial;
 import com.sam.webtasks.iotask2.IOtask2Block;
 import com.sam.webtasks.iotask2.IOtask2BlockContext;
+import com.sam.webtasks.iotask2.IOtask2ChoiceOverwrite;
 import com.sam.webtasks.iotask2.IOtask2DisplayParams;
 import com.sam.webtasks.iotask2.IOtask2RunTrial;
 import com.sam.webtasks.iotask2.IOtask2InitialiseTrial;
@@ -63,24 +64,163 @@ public class SequenceHandler {
 			 * The code here defines the main sequence of events in the experiment *
 			 ********************************************************************/		
 			case 1:
-				//STAI.Run();
-				//MFEQ.Run();
-				RTQ.Run();
+				ClickPage.Run(Instructions.Get(0), "Next");
 				break;
 			case 2:
-				SMCQ.Run();
-				break;
+				ClickPage.Run(Instructions.Get(1), "Next");
+				break;				
 			case 3:
-				MCQ.Run();
+				IOtask2Block block1 = new IOtask2Block();
+				
+				block1.totalCircles = 10;
+				block1.nTargets = 0;
+				block1.blockNum = 1;
+				block1.logDragData = true;
+				
+				block1.Run();
 				break;
 			case 4:
-				PTQ.Run();
+				ClickPage.Run(Instructions.Get(2), "Next");
 				break;
 			case 5:
-				RTQ.Run();
+				IOtask2Block block2 = new IOtask2Block();
+				
+				block2.totalCircles = 10;
+				block2.nTargets = 3;
+				block2.offloadCondition = Names.REMINDERS_NOTALLOWED;
+				block2.blockNum = 2;
+				block2.logDragData = true;
+				
+				block2.Run();
 				break;
 			case 6:
-				ClickPage.Run("the end", "end");
+				ClickPage.Run(Instructions.Get(3), "Next");
+				break;
+			case 7:
+				IOtask2Block block3 = new IOtask2Block();
+				
+				block3.nTargets = Params.nTargets;
+				block3.totalCircles = 15;
+				block3.offloadCondition = Names.REMINDERS_NOTALLOWED;
+				block3.blockNum = 3;
+				block3.logDragData = true;
+				
+				block3.Run();
+				break;
+			case 8:
+				Slider.Run(Instructions.Get(4), "0%", "100%");
+				break;
+			case 9:
+				PHP.logData("slider1", ""+Slider.getSliderValue(), true);
+				break;
+			case 10:
+				ClickPage.Run(Instructions.Get(5), "Next");
+				break;
+			case 11:
+				IOtask2Block block4 = new IOtask2Block();
+				
+				block4.nTargets = Params.nTargets;
+				block4.totalCircles = 15;
+				block4.offloadCondition = Names.REMINDERS_MANDATORY_TARGETONLY;
+				block4.blockNum = 4;
+				block4.logDragData = true;
+				
+				block4.Run();
+				break;	
+			case 12:
+				ClickPage.Run(Instructions.Get(6), "Next");
+				break;
+			case 13:
+				ClickPage.Run(Instructions.Get(61), "Next");
+				break;
+			case 14:
+				ClickPage.Run(Instructions.Get(62), "Next");
+				break;
+			case 15:
+				IOtask2Block block5 = new IOtask2Block();
+				
+				block5.nTargets = Params.nTargets;
+				block5.totalCircles = 15;
+				block5.targetValues.add(1);
+				block5.blockNum = 5;
+				block5.logDragData = true;
+				
+				block5.Run();
+				break;				
+			case 16:
+				ClickPage.Run(Instructions.Get(7), "Next");
+				break;
+			case 17:
+				IOtask2Block block6 = new IOtask2Block();
+				
+				block6.nTargets = Params.nTargets;
+				block6.totalCircles = 15;
+				block6.standard24blockprac = true;
+				block6.blockNum = 6;
+				block6.logDragData = true;
+				
+				block6.Run();
+				break;	
+			case 18:
+				ClickPage.Run(Instructions.Get(8), "Next");
+				break;	
+			case 19:
+				ProgressBar.Initialise();
+				ProgressBar.Show();
+				ProgressBar.SetProgress(0, 22);
+				
+				IOtask2Block block7 = new IOtask2Block();
+				
+				block7.nTargets = Params.nTargets;
+				block7.totalCircles = 15;
+				block7.standard16block = true;
+				block7.updateProgressText = true;
+				block7.updateProgress = true;
+				block7.countdownTimer = true;
+				block7.blockNum = 7;
+				block7.logDragData = true;
+				
+				block7.Run();
+				break;
+			case 20:
+				ProgressBar.SetProgress(16, 22);
+				RTQ.Run();
+				break;
+			case 21:
+				ProgressBar.SetProgress(17, 22);
+				PTQ.Run();
+				break;
+			case 22:
+				ProgressBar.SetProgress(18, 22);
+				MCQ.Run();
+				break;
+			case 23:
+				ProgressBar.SetProgress(19,  22);
+				SMCQ.Run();
+				break;
+			case 24:
+				ProgressBar.SetProgress(20, 22);
+				MFEQ.Run();
+				break;
+			case 25:
+				ProgressBar.SetProgress(21, 22);
+				STAI.Run();
+				break;
+			case 26:
+				ProgressBar.Hide();
+				
+				// log data and check that it saves
+				String data = TimeStamp.Now() + ",";
+				data = data + SessionInfo.participantID + ",";
+				data = data + SessionInfo.gender + ",";
+				data = data + SessionInfo.age + ",";
+				data = data + Counterbalance.getCounterbalancingCell();
+
+				PHP.UpdateStatus("finished");
+				PHP.logData("finish", data, true);
+				break;
+			case 27:
+				ClickPage.Run(Instructions.Get(10), "nobutton");
 				break;
 			}
 			break;
@@ -193,11 +333,11 @@ public class SequenceHandler {
 				// first check if the block has ended. If so return control to the main sequence
 				// handler
 				IOtask2Block block = IOtask2BlockContext.getContext();
-
+				
 				if (block.currentTrial == block.nTrials) {
 					SequenceHandler.SetLoop(0,  false);
 				}
-
+				
 				SequenceHandler.Next();
 				break;
 			case 2:
@@ -208,59 +348,40 @@ public class SequenceHandler {
 				if (IOtask2BlockContext.currentTargetValue() > -1) {
 					IOtask2PreTrial.Run();
 				} else { //otherwise just skip to the start of the block
-					if (IOtask2BlockContext.getAnnouncePoints()) {
-						int trialNum = IOtask2BlockContext.getTrialNum();
-
-						String msg = "This time, the PINK circles will be worth <b>";
-
-						if (((trialNum+Counterbalance.getFactorLevel("conditionOrder")) % 2) == 0) {
-							int[] pointValues = {0,Params.mediumValuePoints,Params.lowValuePoints,0};
-
-							IOtask2BlockContext.setPointValues(pointValues);	
-
-							msg += "" + Params.lowValuePoints + "</b> ";
-							
-							if (Params.lowValuePoints==1) {
-								msg += "point";
-							} else {
-								msg += "points";
-							}
-						} else {
-							int[] pointValues = {0,Params.mediumValuePoints,Params.highValuePoints,0};
-
-							IOtask2BlockContext.setPointValues(pointValues);	
-
-							msg += "" + Params.highValuePoints + "</b> points";
-						}
-
-						msg += ".<br><br>Ready?";	
-
-						ClickPage.Run(msg, "Continue");
+					if ((IOtask2BlockContext.getTrialNum() > 0)&&(IOtask2BlockContext.countdownTimer())) {
+						//if we're past the first trial and there's a timer, click to begin
+						ClickPage.Run("Ready?", "Continue");
 					} else {
 						SequenceHandler.Next();
 					}
-				} 
-
+				}
 				break;
 			case 4:
-				//now run the trial
-				IOtask2RunTrial.Run();
-				break;
-			case 5:
-				if (IOtask2BlockContext.showPostTrialFeedback()) {
-					IOtask2Feedback.Run();
-				} else {
+				if (IOtask2BlockContext.getContext().standard24block == true | IOtask2BlockContext.getContext().standard24blockprac == true | IOtask2BlockContext.getContext().standard16block == true) {
+					IOtask2ChoiceOverwrite.Run();
+				}  else {
 					SequenceHandler.Next();
 				}
 				break;
+			case 5:
+				if (IOtask2BlockContext.getNTrials() == -1) { //if nTrials has been set to -1, we quit before running
+					SequenceHandler.SetLoop(0,  false);
+					SequenceHandler.Next();
+				} else {
+					//otherwise, run the trial
+					IOtask2RunTrial.Run();
+				}
+				break;
 			case 6:
+				IOtask2PostTrial.Run();
+				break;
+			case 7:
 				//we have reached the end, so we need to restart the loop
 				SequenceHandler.SetLoop(3,  true);
 				SequenceHandler.Next();
 				break;
 			}
-		
-			break;
+
 		case 4: //IOtask1 thoughtprobe
 			switch (sequencePosition.get(4)) {
 			case 1:

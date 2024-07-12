@@ -12,6 +12,10 @@ import com.sam.webtasks.client.SequenceHandler;
 public class IOtask2InitialiseTrial {
 	public static void Run() {		
 		IOtask2Block block = IOtask2BlockContext.getContext();
+		
+		if (block.nTargetsVariable) {
+			block.nTargets = block.nTargetsList.get(block.currentTrial);
+		}
 
 		block.reminderFlag = -1;
 		block.backupReminderFlag = -1;
@@ -47,7 +51,7 @@ public class IOtask2InitialiseTrial {
 			randomisationCounter++;
 			
 			redosequence=false;
-		    /*	
+
 			while (targetDirections.size() < block.nTargets) {
 				if (block.variablePoints) {
 					// if we have variable points, only set targets for sides of the square
@@ -62,46 +66,79 @@ public class IOtask2InitialiseTrial {
 					targetDirections.add(2);
 					targetDirections.add(3);
 				}
-			}*/
-			
-			targetDirections.add(1);
-			
-			while (targetDirections.size() < block.nTargets) {
-				targetDirections.add(2);
 			}
 
 			// shuffle target directions
 			for (int i = 0; i < targetDirections.size(); i++) {
-				//Collections.swap(targetDirections, i, Random.nextInt(targetDirections.size()));
+				Collections.swap(targetDirections, i, Random.nextInt(targetDirections.size()));
 			}
 
 			// set up where in the sequence of circles the targets appear. We try to
 			// distribute them as evenly as possible
-			
-			int nTargetPositions = block.totalCircles - block.nCircles;
-			int nTargetPositionsDivided = nTargetPositions/block.nTargets;
+
+			for (int i = block.nCircles; i < block.totalCircles; i++) { // start at block.nCircles because none of the
+																		// initial circles on screen can be a target
+				possibleTargetPositions.add(i);
+			}
+
+			int binSize = possibleTargetPositions.size() / block.nTargets;
+			int remainingItems = possibleTargetPositions.size() % block.nTargets;
+
+			ArrayList<Integer> binSizes = new ArrayList<Integer>();
+
+			for (int i = 0; i < remainingItems; i++) {
+				binSizes.add(binSize + 1); // add a bin of minimum size + 1 for each of the remaining items
+			}
+
+			for (int i = 0; i < block.nTargets - remainingItems; i++) {
+				binSizes.add(binSize); // now add the standard bin size for the other items
+			}
+
+			// now shuffle the binSizes
+			for (int i = 0; i < binSizes.size(); i++) {
+				Collections.swap(binSizes, i, Random.nextInt(binSizes.size()));
+			}
 
 			// put actual target positions in this variable
 			ArrayList<Integer> targetPositions = new ArrayList<Integer>();
 
-			// set up positions
+			// set up binpositions variable, collecting all positions within a single bin
+			ArrayList<Integer> binPositions = new ArrayList<Integer>();
+
+			// now loop over the targets and pick middle of corresponding bin
 			for (int i = 0; i < block.nTargets; i++) {
-				targetPositions.add(block.nCircles + (i*nTargetPositionsDivided) + Random.nextInt(nTargetPositionsDivided));
+				for (int ii = 0; ii < binSizes.get(i); ii++) {
+					binPositions.add(possibleTargetPositions.get(0));
+					possibleTargetPositions.remove(0);
+				}
+
+				// get middle item from binPositions
+				int middle = binPositions.size() / 2;
+
+				if ((binPositions.size() % 2) == 0) { // if it's even randomly subtract 1 half the time
+					middle -= Random.nextInt(2);
+				}
+
+				targetPositions.add(binPositions.get(middle));
+
+				// now empty binPositions variable
+				binPositions.clear();
 			}
-						
-			// now assign targets
-
-			// first set default side to zero
-			for (int i = 0; i < block.totalCircles; i++) {
-				block.targetSide[i] = 0;
-			}
-
-			// now add targets
-			for (int i = 0; i < block.nTargets; i++) {
-				block.targetSide[targetPositions.get(0)] = targetDirections.get(0);
-
-				targetPositions.remove(0);
-				targetDirections.remove(0);
+			
+			// now assign targets if they are not being specified manually 
+			if (!block.specifyTargets) {
+				//first initialise all circles as nontargets
+				for (int i = 0; i < block.totalCircles; i++) {
+					block.targetSide[i] = 0;
+				}
+				
+				//then add targets
+				for (int i = 0; i < block.nTargets; i++) {
+					block.targetSide[targetPositions.get(0)] = targetDirections.get(0);
+	
+					targetPositions.remove(0);
+					targetDirections.remove(0);
+				}
 			}
 			
 			if (block.surpriseTest < 999) {

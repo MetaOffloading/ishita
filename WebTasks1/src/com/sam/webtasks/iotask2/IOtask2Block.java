@@ -1,6 +1,7 @@
 package com.sam.webtasks.iotask2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import com.google.gwt.user.client.Random;
@@ -25,6 +26,18 @@ public class IOtask2Block {
 	// run a standard 9-trial block?
 	public boolean standard9block = false;
 	
+	// run a standard 24-trial block?
+	public boolean standard24block = false;
+	
+	// run a practice for a standard 24-trial block?
+	public boolean standard24blockprac = false;
+	
+	// run a standard 16-trial block?
+	public boolean standard16block = false;
+	
+	// reverse the order of the forced internal/external trials?
+	public boolean reverseForcedOrder = false;
+	
 	// run just the choice trials without forced internal/external?
 	public boolean onlyChoiceTrials = false;
 
@@ -36,6 +49,9 @@ public class IOtask2Block {
 	
 	// update the progress bar with progress through the block? 
 	public boolean updateProgress = false;
+	
+	// update the progress text throughout the block? 
+	public boolean updateProgressText = false;
 
 	// allow any circle to be moved? NB this will be overridden by participants'
 	// choice to use reminders or not, if this choice is presented
@@ -64,12 +80,22 @@ public class IOtask2Block {
 
 	// total number of targets to include
 	public int nTargets = 10;
+	
+	public boolean nTargetsVariable = false;
+	public boolean nTargetsShuffle = false;
+	public ArrayList<Integer> nTargetsList = new ArrayList<Integer>();
 
 	// target locations for each circle
-	int[] targetSide = new int[nTargets];
+	public int[] targetSide = new int[nTargets];
+	
+	// are targets set manually?
+	public boolean specifyTargets = false;
 
 	// target values
 	public ArrayList<Integer> targetValues = new ArrayList<Integer>();
+	
+	// overwriteChoice values (0 no, or rather go with choice, 1 FI, 2 FE)
+	public ArrayList<Integer> overwriteChoice = new ArrayList<Integer>();
 	
 	// do different target directions have variable numbers of points?
 	public boolean variablePoints = false;
@@ -94,18 +120,14 @@ public class IOtask2Block {
 	// tell participants how many points they've scored at each PreTrial screen?
 	public boolean showPoints = true;
 	
-	// tell participants the point values at each PreTrial screen?
-	public boolean announcePoints = false;
-
-	
 	//show point values on either side
 	public boolean showPointLabels = false;
 	
 	// tell points how many points they've scored as they perform the task?
 	public boolean showLivePoints = false;
 	
-	// impose a point penalty if a reminder is set?
-	public int reminderPenalty = 0;
+	// how should points be displayed?
+	public int pointDisplay = Names.POINT_STANDARD;
 
 	// check whether the first circle has been double-clicked, if so a double-click
 	// on the final circle exits the task, to help speed up debugging
@@ -113,6 +135,15 @@ public class IOtask2Block {
 	
 	// log drag end data?
 	public boolean logDragData = false;
+	
+	// are we in gain or loss freaming?
+	public int rewardFrame = Names.GAIN_FRAME;
+	
+	// special algorithm for adjusting points in a gain/loss experiment
+	public boolean gainLossExp = false;
+	public int gainLossRememberPoints = 0;
+	public int gainLossForgetPoints = 0;
+	public int gainLossReminderCost = 0; // how much to increment points each time a target is presented
 
 	// if a circle has been dragged out of the box, which side has it been dragged
 	// to?
@@ -131,6 +162,13 @@ public class IOtask2Block {
 
 	// this method actually runs the block
 	public void Run() { 
+		//shuffle the various difficulty levels?
+		if (nTargetsShuffle) {
+			for (int i = 0; i < nTargetsList.size(); i++) {
+				Collections.swap(nTargetsList, i, Random.nextInt(nTargetsList.size()));
+			}
+		}
+		
 		if (standard9block) {
 			nTrials=9;
 			
@@ -162,6 +200,20 @@ public class IOtask2Block {
 				forcedA = 10;
 				forcedB = 0;
 			}
+			
+			if (reverseForcedOrder) {
+				if (forcedA == 0) {
+					forcedA = 10;
+				} else {
+					forcedA = 0;
+				}
+				
+				if (forcedB == 0) {
+					forcedB = 10;
+				} else {
+					forcedB = 0;
+				}
+			}
 
 			// now put the whole list of target values together
 			targetValues.add(choiceValues.get(0));
@@ -178,10 +230,10 @@ public class IOtask2Block {
 		if (standard13block) {
 			nTrials=13;
 			
-			// 17 trials is the standard number of trials for 4 of each forced condition
-			// plus 9 choice trials
+			// 13 trials is the standard number of trials for 3 of each forced condition
+			// plus 7 choice trials
 
-			// first set up and shuffle the 9 choice values
+			// first set up and shuffle the 7 choice values
 			ArrayList<Integer> choiceValues = new ArrayList<Integer>();
 
 			// add numbers 2-8
@@ -189,7 +241,7 @@ public class IOtask2Block {
 				choiceValues.add(i);
 			}
 
-			// now shuffle
+			// now shuffle so that they come in a random sequence
 			for (int i = 0; i < choiceValues.size(); i++) {
 				Collections.swap(choiceValues, i, Random.nextInt(choiceValues.size()));
 			}
@@ -203,6 +255,20 @@ public class IOtask2Block {
 																		// switch these around
 				forcedA = 10;
 				forcedB = 0;
+			}
+			
+			if (reverseForcedOrder) {
+				if (forcedA == 0) {
+					forcedA = 10;
+				} else {
+					forcedA = 0;
+				}
+				
+				if (forcedB == 0) {
+					forcedB = 10;
+				} else {
+					forcedB = 0;
+				}
 			}
 
 			// now put the whole list of target values together
@@ -250,6 +316,20 @@ public class IOtask2Block {
 				forcedA = 10;
 				forcedB = 0;
 			}
+			
+			if (reverseForcedOrder) {
+				if (forcedA == 0) {
+					forcedA = 10;
+				} else {
+					forcedA = 0;
+				}
+				
+				if (forcedB == 0) {
+					forcedB = 10;
+				} else {
+					forcedB = 0;
+				}
+			}
 
 			// now put the whole list of target values together
 			targetValues.add(choiceValues.get(0));
@@ -270,6 +350,166 @@ public class IOtask2Block {
 			targetValues.add(forcedB);
 			targetValues.add(choiceValues.get(8));
 		}
+		
+		if (standard24block) {
+			nTrials=24;
+			
+			// 24 trials is the standard number of trials for 8 of each forced condition
+			// plus 8 additional choice trials (but all 24 trials start with choices)
+
+			// first set up and shuffle the 8 choice values
+			ArrayList<Integer> choiceValues = new ArrayList<Integer>();
+			ArrayList<Integer> condValues = new ArrayList<Integer>();
+			
+			// add numbers 2-9 and do this 3 times; also add the condition values (0-2)
+			for (int i = 2; i < 10; i++) {
+				choiceValues.add(i);
+				condValues.add(-1);
+			}
+			for (int i = 2; i < 10; i++) {
+				choiceValues.add(i);
+				condValues.add(-1);
+			}
+			for (int i = 2; i < 10; i++) {
+				choiceValues.add(i);
+				condValues.add(-1);
+			}
+
+			// now shuffle so that they come in a random sequence but do so that
+			// participants don't get all high/low numbers in a row
+			for (int i = 0; i < 8; i++) {
+				int whereto =  Random.nextInt(8)+0;
+				Collections.swap(choiceValues, i, whereto);
+			}
+			for (int i = 8; i < 16; i++) {
+				int whereto =  Random.nextInt(8)+8;
+				Collections.swap(choiceValues, i, whereto);
+			}		
+			for (int i = 16; i < 24; i++) {
+				int whereto =  Random.nextInt(8)+16;
+				Collections.swap(choiceValues, i, whereto);
+			}				
+			// now we need to shuffle the conditions as well but keep them linked to
+			// the values
+			for (int i = 2; i < 10; i++) {
+				ArrayList<Integer> scrambledconds = new ArrayList<Integer>();
+				scrambledconds.add(0);
+				scrambledconds.add(1);
+				scrambledconds.add(2);
+				for (int j = 0; j < 3; j++) {
+					int whereto =  Random.nextInt(3);
+					Collections.swap(scrambledconds, j, whereto);
+				}
+				int whichswap = 0;
+				for (int k = 0; k < 24; k++) {
+					if(choiceValues.get(k)==i) {
+						condValues.set(k,scrambledconds.get(whichswap));
+						whichswap = whichswap + 1; 
+					}
+				}
+				
+			}
+
+			// now put the whole list of target values together
+			for (int i = 0; i < 24; i++) {
+				targetValues.add(choiceValues.get(i));
+				overwriteChoice.add(condValues.get(i));
+			}
+			
+		}
+		
+		
+		if (standard24blockprac) {
+			nTrials=1;
+			targetValues.add(1);
+			overwriteChoice.add(2);
+			
+		}
+		
+		if (standard16block) {
+			nTrials=16;
+			
+			// 16 trials is the standard number of trials for 4 of each forced condition
+			// plus 8 additional choice trials (but all 16 trials start with choices)
+
+			// first set up and shuffle the 8 choice values
+			ArrayList<Integer> choiceValues = new ArrayList<Integer>();
+			ArrayList<Integer> condValues = new ArrayList<Integer>();
+			
+			// add numbers 2-9 and do this 3 times; also add the condition values (0-2)
+			for (int i = 2; i < 10; i++) {
+				choiceValues.add(i);
+				condValues.add(-1);
+			}
+			for (int i = 2; i < 10; i++) {
+				condValues.add(-1);
+			}
+			choiceValues.add(2);
+			choiceValues.add(4);
+			choiceValues.add(6);
+			choiceValues.add(8);
+			choiceValues.add(3);
+			choiceValues.add(5);
+			choiceValues.add(7);
+			choiceValues.add(9);
+
+			// now shuffle so that they come in a random sequence but do so that
+			// participants don't get all high/low numbers in a row
+			for (int i = 0; i < 8; i++) {
+				int whereto =  Random.nextInt(8)+0;
+				Collections.swap(choiceValues, i, whereto);
+			}
+			for (int i = 8; i < 12; i++) {
+				int whereto =  Random.nextInt(4)+8;
+				Collections.swap(choiceValues, i, whereto);
+			}		
+			for (int i = 12; i < 16; i++) {
+				int whereto =  Random.nextInt(4)+12;
+				Collections.swap(choiceValues, i, whereto);
+			}				
+			// now we need to shuffle the conditions as well but keep them linked to
+			// the values
+			for (int i = 2; i < 10; i++) {
+				ArrayList<Integer> scrambledconds = new ArrayList<Integer>();
+				scrambledconds.add(0);
+				if (Counterbalance.getFactorLevel("counterbtargetvals") == 0) {
+					if (i % 2 == 0) {
+						scrambledconds.add(1);
+					} else {
+						scrambledconds.add(2);
+					}
+				} else {
+					if (i % 2 == 0) {
+						scrambledconds.add(2);
+					} else {
+						scrambledconds.add(1);
+					}				
+				}
+				for (int j = 0; j < 2; j++) {
+					int whereto =  Random.nextInt(2);
+					Collections.swap(scrambledconds, j, whereto);
+				}
+				int whichswap = 0;
+				for (int k = 0; k < 16; k++) {
+					if(choiceValues.get(k)==i) {
+						condValues.set(k,scrambledconds.get(whichswap));
+						whichswap = whichswap + 1; 
+					}
+				}
+				
+			}
+
+			// now put the whole list of target values together
+			for (int i = 0; i < 16; i++) {
+				targetValues.add(choiceValues.get(i));
+				overwriteChoice.add(condValues.get(i));
+			}
+			
+			
+			
+			
+		}
+		
 		
 		if (onlyChoiceTrials) {
 			nTrials=9;
@@ -325,9 +565,6 @@ public class IOtask2Block {
 
 	// how many hits (just considering the most recent trial)
 	public int nHits = 0;
-	
-	// how many high-value hits?
-	public int nHighValHits = 0;
 
 	// did the participant choose to set reminders (1) or not (0)?
 	public int reminderChoice = -1;

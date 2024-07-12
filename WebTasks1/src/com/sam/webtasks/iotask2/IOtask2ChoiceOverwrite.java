@@ -24,8 +24,8 @@ public class IOtask2ChoiceOverwrite {
 		final HorizontalPanel horizontalPanel = new HorizontalPanel();
 		final VerticalPanel verticalPanel = new VerticalPanel();
 		final HorizontalPanel buttonPanel = new HorizontalPanel();
-		String overwriteString = "";
-		
+		String overwriteString = "" ;
+		 
 		int overwriteState = IOtask2BlockContext.currentOverwriteChoice();
 		
 		String remindInstruction = "You must do the task <b>without</b> setting any reminders.<br><br>";
@@ -43,7 +43,7 @@ public class IOtask2ChoiceOverwrite {
 			IOtask2BlockContext.setOffloadCondition(Names.REMINDERS_MANDATORY_TARGETONLY);
 			IOtask2BlockContext.setActualPoints(IOtask2BlockContext.currentTargetValue());
 		} else {
-			overwriteString = "We will stick with <b>your choice</b> this time.<br><br>";
+			overwriteString = "The computer will stick with <b>your choice</b> this time.<br><br>";
 			
 			if (IOtask2BlockContext.getReminderChoice() == 0) {
 				overwriteString = overwriteString + remindInstruction;

@@ -8,115 +8,128 @@ public class Instructions {
 		String i = "";
 
 		switch (index) {
-		case 1:
-			i="In this experiment you will have a simple task to do.<br><br>"
-                  + "You will see several yellow circles inside a box. "
-                  + "Inside each circle will be a number. <br><br>"
-                  + "Using your mouse, you can click on these circles to "
-                  + "move them around. Your task is to drag them to the bottom "
-                  + "of the box in sequence. "
-                  + "Please start by dragging 1 all the way to the bottom. "
-                  + "This will make it disappear. Then drag 2 to the bottom, then 3, "
-                  + "and so on.<br><br>"
-                  + "Click below to practise the task.";
-			break;
-		case 2:
+		case 0:
+            i = "This experiment will be in two parts. First you will complete <b>a web-based task</b> "
+            		+ "that will take approximately 20 minutes.<br><br>"
+            		+ "In the second part, will be asked to complete five brief questionnaires.<br><br>"
+            		+ "After this, you will receive a link that you can click to obtain payment from Prolific.<br><br>"
+            		+ "Please only continue when you think "
+                    + "you will be free from distractions for the next 20 minutes.";
+            break;
+        case 1:
+        	i="In this part of the experiment you will have a simple task to do.<br><br>"
+                    + "You will see </b>several yellow circles</b> inside a box. "
+                    + "Inside each circle will be a number. <br><br>"
+                    + "You can move them around using your mouse, or drag them with your finger if "
+                    + "you are using a touchscreen. </b>Your task is to drag them to the bottom "
+                    + "of the box in sequence.</b> "
+                    + "Please start by dragging 1 all the way to the bottom. "
+                    + "This will make it disappear. Then drag 2 to the bottom, then 3, "
+                    + "and so on.<br><br>Click below to practise the task.";
+
+            break;
+        case 2:
 			i="Now you will continue the same task, but sometimes there will be something else to "
-					+ "do.<br><br>As well as dragging each circle in turn to the "
-					+ "bottom of the screen, you will be instructed to drag one or more "
-					+ "of the circles to another part of the box. For "
-					+ "instance, you might be told that you should drag number 11 "
-					+ "to the left of the box instead of "
-					+ "the bottom.<br><br>You will still be able to drag any "
-					+ "circle to the bottom of the box, but you should try to "
-					+ "remember to drag these special circles to the instructed "
-					+ "location. ";
+                    + "do.<br><br>As well as dragging each circle in turn to the "
+                    + "bottom of the screen, there will sometimes be special "
+                    + "circles that initially appear in a different colour. You should drag these "
+                    + "special circles, in another direction (left, top, or right) instead of towards the bottom.<br><br>"
+                    + "Each circle's initial colour is an instruction telling you where they should go.<br><br>"
+                    + "For example, suppose that the circle with 7 in it was first shown in blue "
+                    + "when it appeared on the screen. That would be an instruction that "
+                    + "when you get to 7 in the sequence, you should drag that circle "
+                    + "to the blue side of the box (left) instead of the bottom.<br><br>"
+                    + "You will still be able to drag any "
+                    + "circle to the bottom of the box, but you should try to "
+                    + "remember to drag these special circles to the instructed "
+                    + "location instead.<br><br>"
+                    + "Click below to practise the task.";
+            break;
+        case 3:
+			i = "Well done. Now it will get more difficult.<br><br>There will be a total of 15 "
+	        			+ "circles and " + Params.nTargets + " of them will be special ones that should go to one of the "
+	        			+ "coloured sides of the box.<br><br> "
+	        			+ "Don't worry if you do not remember all of them. That's fine - "
+	        			+ "just try to remember as many as you can.<br><br>"
+	        			+ "Click below to practise the task.";
+            break;
+        case 4:
+        	i="Now that you have had some practice with the experiment, we would like you to tell us "
+                    + "how <b>confident</b> you are that you can accurately perform the task.<br><br>"
+                    + "Please use the scale below to indicate what percentage of "
+                    + "the special circles you can correctly drag to the instructed side of the square, on average. 100% "
+                    + "would mean that you always get every single one correct. 0% would mean that you can never "
+                    + "get any of them correct.";
+            break;
+        case 5:
+        	i="Now we are going to explain a strategy that can make the task easier.<br><br>"
+                    + "When you see a special circle, you can </b>set a reminder by immediately dragging it to a "
+                    + "different part of the box</b>. For example, if a circle initially appeared in blue, you "
+                    + "could immediately drag it next to the blue (left) side of the box. Then, when "
+                    + "you get to that circle in the sequence its location would remind you where it is supposed "
+                    + "to go.<br><br>Please now try the task again, using this strategy to help you.";
+            break;
+        case 6:
+        	i = "From now on, you will score points every time you drag one of the special circles "  
+					+ "to the correct border.<br><br>You should try to score as many points as you can.<br><br>"
+					+ "The top 50% of participants will receive an additional bonus payment of £0.50.<br><br>";
+        	break;
+        case 61:
+        	i = "Each time you do the task, you will have a choice between two options. One option will be to "
+        	        + "do the task <b>without reminders</b>. If you choose this option, you will always score "
+        	        + "10 points for every special circle you remember.<br><br>The other option will be to do the task "
+        	        + "<b>with reminders</b>. If you choose this option, each special circle will be worth fewer "
+        	        + "points. For example, you might be told that if you want to use reminders, each special "
+        	        + "circle will be worth only 5 points.<br><br>You should choose whichever option you think will "
+        	        + "score you the most points.<br><br>So if, for example, you thought you would earn more "
+        	        + "points by setting reminders and scoring 5 points for each special circle, you should choose "
+        	        + "this option. But if you thought you would score more points by just using your own memory "
+        	        + "and earning 10 points for each special circle, you should choose this option instead.";
+        	break;
+        case 62:
+        	i = "When you are presented with a choice like this, it is completely up to you. "
+                    + "You should do whatever you think will allow you to score the highest number of points. "
+                    + "Please keep in mind not only the points, but also how many special circles you are likely to "
+                    + "drag to the correct border with/without reminders.<br><br>"
+        			+ "If you use reminders, the exact number of points you can win for each special circle will vary, "
+        			+ "but it will always be less than 10. You will always be told exactly "
+        			+ "how many points the special circles are worth, before you make your choice.<br><br>"
+        			+ "Please make your decisions carefully to make sure you score as many points as possible. This "
+        			+ "will give you the best chance to earn the additional £0.50 bonus payment.<br><br>"
+        			+ "Click below for some more practice.";
+        	break;
+        case 7:
+        	i = "There is one last element to this task, which is that on a random number of blocks, "
+        			+ "the computer will overwrite your choices. Regardless of the choice you just "
+        			+ "made you will then be told whether reminders are <b>forbidden</b> or whether "
+        			+ "they are <b>mandatory</b>. Please pay attention to when this happens and "
+        			+ "carefully follow the instructions.<br><br>"
+        			+ "Click below to complete one last practice block.";
+        	break;
+        case 8:
+            i = "Now this task will start for real.<br><br>"
+                    + "Please perform the task as quickly and accurately as possible.<br><br>"
+                    + "You are not expected to remember the special circles every time, "
+                    + "just try your best. Please make wise decisions as to whether you would "
+                    + "like to use reminders or not so that you can maximise your points.<br><br>"
+                    + "From now on, a little timer will indicate how much time you have left to "
+                    + "move all circles. Please complete every block within 1 minute.<br><br>"
+                    + "One last thing: Sometimes the task will <b>finish early</b>, before any special "
+                    + "circles appear. This is not a bug, but intended to speed things up a little.<br><br>"
+                    + "You can start the main experiment when you are ready.";
+            break;
+        case 9:
+			i = "You have now completed the experimental blocks, thank you. "
+					+ "In the last part, we ask you to complete a "
+					+ "brief questionnaire.<br><br>"
+					+ "Please start the questionnaire when you are ready.";
 			break;
-		case 3:
-			i="Now you will do the task again, but this time there will be three special "
-                  + "circles to remember.";
-			break;
-		case 4:
-			i="One last thing: the task may interrupt at certain points, and a screen will "
-					+ "appear asking you to tell us how much your attention has drifted from "
-					+ "the circle-dragging memory task.<br><br>You will be asked to respond by dragging a slider "
-					+ "somewhere between the options of On Task (meaning that you were 100% focused "
-					+ "on the circle-dragging memory task, not thinking about anything else) and Off Task "
-					+ "(meaning that you were 100% focused "
-					+ "on other things, like your own thoughts, feelings about the experiment, "
-					+ "or some other distraction in your "
-					+ "environment, rather than focusing on doing the task itself).<br><br>"
-					+ "People usually find that they are somewhere between these two extremes most of the time."
-					+ "<br><br>"
-					+ "<b>Important:</b> When you get this question, you should just answer about "
-					+ "your thoughts in the precise moment before it appeared. ";
-			break;
-		case 5:
-			i="Thank you. After you get the question about being On Task or Off Task, you will "
-					+ "also be asked to estimate whether any Off Task thoughts were <b>intentional</b> "
-					+ "or <b>unintentional</b>. "
-					+ "By <i>intentional</i> we mean when you deliberately engage in "
-					+ "thinking about something unrelated to the current task. By contrast, "
-					+ "<i>unintentional</i> thoughts occur when something pops up into your mind that makes "
-					+ "you drift from the task, but you did not decide to do it deliberately.<br><br>"
-					+ "It's perfectly normal for both these experiences to happen in a task like this, "
-					+ "as it can be quite long and boring, and they don't necessarily indicate anything wrong "
-					+ "with how you are doing the task.<br><br>If your thoughts were completely On Task you can "
-					+ "make any response, in this case it does not matter where you drag the slider.";
-		    break;
-		case 6:
-			i="When you get these questions, please be as honest as possible. It is perfectly normal "
-					+ "for your mind to wander when you do a task like this, so there is nothing wrong "
-					+ "with saying that you were distracted, either intentionally or unintentionally.<br><br>"
-					+ "Given that the task is quite boring, it would be unlikely that anyone will remain totally "
-					+ "focused on it for the entire session. For this reason, we do not expect you to respond "
-					+ "that you are always focused on the task.<br><br>"
-					+ "It is most important to us that you answer as honestly as possible. Whatever you "
-					+ "say to these questions will not affect your approval for taking part in this experiment.";
-			break;
-		case 7:
-			i="One way to make the task easier is dragging the special circles near to the "
-					+ "instructed edge of the box to help you remember.<br><br> " 
-					+ "For example, if you had to remember to drag 12 to the left of the box, "
-					+ "you could drag it near to there at the beginning, before you drag the 1. " 
-					+ "Then when you eventually got to 12, its location would remind you "
-					+ "what to do. Please now try using this strategy to help with the task. ";
-			break;
-		case 8:
-			i="Now the task will start for real. You should try to complete the rest of the experiment "
-					+ "in one session and avoid performing any other tasks with your computer.<br><br>"
-					+ "Any time you get a question about whether "
-					+ "your attention drifted to the task, please answer as accurately as possible and "
-					+ "then the computer will automatically skip forward to the next trial.<br><br>"
-					+ "You will see a countdown timer at the top of the screen. Please try to complete "
-					+ "each trial before the time runs out.<br><br>";
-			
-			if (Counterbalance.getFactorLevel("offloadOrder") == ExtraNames.EXTERNAL_FIRST) {
-				i = i + "You should continue setting reminders by dragging "
-					  + "the instructed circles to the edge at the start of each trial.";
-			}				
-			break;
-		case 9:
-			i="From now on, you will not be able to set reminders any more. For the rest of "
-					+ "the experiment, please just use your memory "
-					+ "to remember the special circles.";
-			break;
-		case 10:
-			i = "From now on you should continue setting reminders by dragging the instructed circles "
-					+ "to the edge at the start of each trial.";
-			break;
-		case 11:
-			/*
-			i = "You have now completed the experiment.<br><br>"
-					+ "Please enter the following completion code on the Mechanical Turk website to claim your "
-					+ "reward:<br><br><b>" + SessionInfo.rewardCode + "</b>"; 
-					*/
-			
+        case 10:
 			i = "You have now completed the experiment. "
-					+ "Please click on the link below to complete the experiment and receive payment via Prolific:<br><br>"
-					+ "<b><a href=\"https://app.prolific.com/submissions/complete?cc=C1IVJN00\">"
+					+ "Please click on the link below to return to the survey and complete the first session:<br><br>"
+					+ "<b><a href=\"" 
+ 					+ SessionInfo.participantID + "\">"
  					+ "CLICK HERE</a></b>";
-			
 			break;
 		}
 
