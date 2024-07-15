@@ -65,7 +65,7 @@ public class Slider {
         slider.setX(sliderHeight).setY(2 * sliderHeight).setFillGradient(gradient).setStrokeColor(ColorName.GRAY.getValue()).setStrokeWidth(1);
 
         final Circle thumbCircle = new Circle(2 * sliderHeight);
-        final Text thumbText = new Text("", "Verdana, sans-serif", null, 12);
+        final Text thumbText = new Text("50%", "Verdana, sans-serif", null, 12);
         final Circle thumbOverlay = new Circle(2 * sliderHeight);
         
         final Group thumb = new Group();
@@ -121,7 +121,7 @@ public class Slider {
                 }
 
                 sliderValue = (int) ((100 * (offset - 2 * sliderHeight)) / sliderRange);
-                //thumbText.setText(sliderValue + "%");
+                thumbText.setText(sliderValue + "%");
             }
         });
 

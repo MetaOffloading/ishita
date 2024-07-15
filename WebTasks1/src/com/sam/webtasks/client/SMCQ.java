@@ -25,7 +25,7 @@ public class SMCQ {
 		qSMCQ.nOptions = 2;
 		
 		//How many items (i.e. questions) does the questionnaire have?
-		qSMCQ.nItems = 13;
+		qSMCQ.nItems = 14;
 		
 		//What is the maximum number of items to be presented on one page? If the questionnaire
 		//has more than this number, it will be presented on two or more page

@@ -137,7 +137,7 @@ public class Instructions {
 	}
 
 	public static String InfoText() {
-		String expDur = "40";
+		String expDur = "25";
 		String eligibility = "All registered users of Prolific ";
 		String nVolunteers = "50";
 		
