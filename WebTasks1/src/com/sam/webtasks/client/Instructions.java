@@ -71,8 +71,7 @@ public class Instructions {
             break;
         case 6:
         	i = "From now on, you will score points every time you drag one of the special circles "  
-					+ "to the correct border.<br><br>You should try to score as many points as you can.<br><br>"
-					+ "The top 50% of participants will receive an additional bonus payment of £0.50.<br><br>";
+					+ "to the correct border.<br><br>You should try to score as many points as you can.<br><br>";
         	break;
         case 61:
         	i = "Each time you do the task, you will have a choice between two options. One option will be to "
@@ -94,8 +93,7 @@ public class Instructions {
         			+ "If you use reminders, the exact number of points you can win for each special circle will vary, "
         			+ "but it will always be less than 10. You will always be told exactly "
         			+ "how many points the special circles are worth, before you make your choice.<br><br>"
-        			+ "Please make your decisions carefully to make sure you score as many points as possible. This "
-        			+ "will give you the best chance to earn the additional £0.50 bonus payment.<br><br>"
+        			+ "Please make your decisions carefully to make sure you score as many points as possible.<br><br>"
         			+ "Click below for some more practice.";
         	break;
         case 7:
@@ -125,10 +123,9 @@ public class Instructions {
 					+ "Please start the questionnaire when you are ready.";
 			break;
         case 10:
-			i = "You have now completed the experiment. "
-					+ "Please click on the link below to return to the survey and complete the first session:<br><br>"
-					+ "<b><a href=\"" 
- 					+ SessionInfo.participantID + "\">"
+			i = "Thank you, that's the end of this task.<br><br>"
+					+ "To finish the experiment, please click on the link below where you will be asked to complete some questionnaires:<br><br>"
+					+ "<b><a href=\"https://fpse.qualtrics.com/jfe/form/SV_abItKYfWRg3ZdIi?PROLIFIC_PID=" + SessionInfo.participantID + "\">"
  					+ "CLICK HERE</a></b>";
 			break;
 		}
@@ -137,9 +134,9 @@ public class Instructions {
 	}
 
 	public static String InfoText() {
-		String expDur = "25";
+		String expDur = "30";
 		String eligibility = "All registered users of Prolific ";
-		String nVolunteers = "50";
+		String nVolunteers = "100";
 		
 		return ("We would like to invite you to participate in this research project. "
 				+ "You should only participate if you want to; choosing not to take part "
